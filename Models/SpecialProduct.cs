@@ -1,6 +1,6 @@
 ﻿namespace Grupp3Hattmakaren.Models
 {
-    public class SpecialProduct
+    public class SpecialProduct : Product
     {
     }
 }
