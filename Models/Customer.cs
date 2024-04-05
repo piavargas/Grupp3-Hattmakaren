@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
-    //hej hej
+    //hejdå 
     public class Customer
     {
         [Key]
