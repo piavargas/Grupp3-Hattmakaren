@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
     public class Order
     {
+        [Key]
         public int OrderId { get; set; }
         public double price { get; set; }
 

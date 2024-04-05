@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
     public class Enquiry
     {
+        [Key]
         public int EnquiryId { get; set; }
         public bool expressDelivery { get; set; }
 

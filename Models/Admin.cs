@@ -4,6 +4,7 @@ namespace Grupp3Hattmakaren.Models
 {
     public class Admin
     {
+        [Key]   
         public int adminId { get; set; }    
         public string firstName { get; set; }
         public string lastName { get; set; }

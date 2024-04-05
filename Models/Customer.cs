@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
     public class Customer
     {
+        [Key]
         public int CustomerId { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
