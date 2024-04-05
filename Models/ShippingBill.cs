@@ -9,6 +9,6 @@ namespace Grupp3Hattmakaren.Models
 
         public int OrderId { get; set; }
         [ForeignKey(nameof(OrderId))]
-        public Order order { get; set; }
+        public virtual Order order { get; set; }
     }
 }

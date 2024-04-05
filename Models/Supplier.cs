@@ -5,10 +5,12 @@ namespace Grupp3Hattmakaren.Models
     public class Supplier
     {
         public int SupplierId { get; set; }
+        public int MaterialId { get; set; }
         //Ändra länk om det behövs
         public string link { get; set; }
+
         [ForeignKey(nameof(MaterialId))]
 
-        public Material MaterialId { get; set; }
+        public virtual Material Material { get; set; }
     }
 }

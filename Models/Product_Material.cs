@@ -4,15 +4,17 @@ namespace Grupp3Hattmakaren.Models
 {
     public class Product_Material {
         //Kolla upp
-        public int productId { get; set; }
-        public int materialId { get; set; }
+        public int ProductId { get; set; }
+        public int MaterialId { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        public Product ProductId { get; set; }
+        public virtual Product Product { get; set; }
 
 
-        [ForeignKey(nameof(MaterialId))]
-        public Material MaterialId { get; set; }
+        [ForeignKey(nameof(MaterialId))] 
+        public virtual Material Material { get; set; }
+
+
 
     }
 }

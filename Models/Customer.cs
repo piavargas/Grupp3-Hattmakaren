@@ -10,10 +10,8 @@ namespace Grupp3Hattmakaren.Models
         public string email { get; set; }
         public string headSize { get; set; }
 
-        public int AddressId { get; set; }
-        [ForeignKey(nameof(AddressId))]
- 
-        public ICollection<Address> addresses { get; set; }
+        public virtual ICollection<Order> orders { get; set; }
+        public virtual ICollection<Address> addresses { get; set; }
 
     }
 }

@@ -1,13 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
     public class Address
     {
+        [Key]
         public int AddressId { get; set; }
+        public int CustomerId {  get; set; }
         [ForeignKey(nameof(CustomerId))]
 
-        public Customer CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
 
         public string addressType { get; set; }
         public string streetName { get; set; }

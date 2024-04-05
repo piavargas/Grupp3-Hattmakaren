@@ -12,7 +12,8 @@ namespace Grupp3Hattmakaren.Models
         public string description { get; set; }
         public string referenceImage { get; set; }
 
+        public int CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
-        public Customer CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }
