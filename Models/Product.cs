@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
@@ -11,5 +12,7 @@ namespace Grupp3Hattmakaren.Models
         public double size { get; set; }
         public virtual ICollection<Order> orders { get; set; }
         public virtual ICollection<Material> materials { get; set; }
+        public virtual IEnumerable<Product> products { get; set; } = new List<Product>();
+
     }
 }

@@ -1,0 +1,93 @@
+﻿@model List<Grupp3Hattmakaren.Models.Product>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Products</h1>
+
+        @foreach (var product in Model)
+        {
+            <div class="product">
+                <h2>@product.productName</h2>
+                <p>@product.description</p>
+                <p>Price: $@product.size</p>
+            </div>
+        }
+        <table class=" table table-light">
+            <!-- Formulär för att lägga till en ny produkt -->
+            <form asp-action="AddProduct" method="post">
+
+                <h2>Add New Product</h2>
+                <tr>
+                    <td>
+                    <label for="productName">Name:</label>
+                    <input type="text" id="productName" name="productName"><br>
+                    </td>
+                </tr>
+            <tr>
+                <td>
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="size">Size:</label>
+                    <input type="text" id="size" name="size"><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Lägg till" class="btn-primary" />
+                </td>
+            </tr>
+            </form>
+        </table>
+    </div>
+
+</body>
+</html>
