@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240405113244_init")]
-    partial class init
+    [Migration("20240405120723_enitial")]
+    partial class enitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

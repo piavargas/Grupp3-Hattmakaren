@@ -5,7 +5,7 @@
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class enitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
