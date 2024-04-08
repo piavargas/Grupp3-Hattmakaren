@@ -64,32 +64,92 @@ namespace Grupp3Hattmakaren.Migrations
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Admin", b =>
                 {
-                    b.Property<int>("adminId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("firstName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("adminId"));
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("firstName")
-                        .IsRequired()
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("lastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("passWord")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("adminId");
+                    b.HasKey("firstName");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            firstName = "Otto",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "80a96cb9-1336-4ab3-b563-e28de9742e5a",
+                            EmailConfirmed = false,
+                            Id = "eb16ffc3-b369-4959-a8f4-de6ea751d27c",
+                            LockoutEnabled = false,
+                            PasswordHash = "otto1",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ccb99d71-4256-4abc-a8a5-1714560e2f57",
+                            TwoFactorEnabled = false,
+                            UserName = "otto1",
+                            lastName = "Hattrikson"
+                        },
+                        new
+                        {
+                            firstName = "Judith",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2a7c6c08-9955-4534-9f35-afe2d1edd2db",
+                            EmailConfirmed = false,
+                            Id = "454aa0a8-49ee-4837-8930-8de5d4b1c318",
+                            LockoutEnabled = false,
+                            PasswordHash = "judith1",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dd907e93-06e9-4add-809a-d52e120d877d",
+                            TwoFactorEnabled = false,
+                            UserName = "judith1",
+                            lastName = "Hattrikson"
+                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Customer", b =>

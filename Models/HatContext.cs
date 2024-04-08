@@ -41,24 +41,22 @@ namespace Grupp3Hattmakaren.Models
                 .WithMany(p => p.orders)
                 .UsingEntity(j => j.ToTable("OrderProduct"));
 
-
-
-            //modelBuilder.Entity<Enquiry>()
-            //    .HasOne()
-
-
-
-
-            //modelBuilder.Entity<Address>()
-            //    .HasOne(a => a.Customer)
-            //    .WithMany(cs => cs.addresses)
-            //    .HasForeignKey(cs => cs.CustomerId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-
-
-
-
+            modelBuilder.Entity<Admin>().HasData(
+                new Admin
+                {   
+                    firstName = "Otto",
+                    lastName = "Hattrikson",
+                    UserName = "otto1",
+                    PasswordHash = "otto1"
+                },
+                new Admin
+                {
+                    firstName = "Judith",
+                    lastName = "Hattrikson",
+                    UserName = "judith1",
+                    PasswordHash = "judith1"
+                }
+            ) ;
 
         }
 
