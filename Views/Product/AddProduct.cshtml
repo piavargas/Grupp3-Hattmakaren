@@ -1,0 +1,34 @@
+﻿<form asp-action="Add" asp-controller="Product"method="post">
+<table class=" table table-light">
+    <!-- Formulär för att lägga till en ny produkt -->
+
+
+    <h2>Add New Product</h2>
+    <tr>
+        <td>
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" name="productName"><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description"><br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="size">Size:</label>
+            <input type="text" id="size" name="size"><br>
+        </td>
+    </tr>
+       
+    <tr>
+        <td>
+            <input type="submit" value="Lägg till" class="btn-primary" />
+        </td>
+    </tr>
+        
+
+</table>
+</form>

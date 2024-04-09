@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240405113244_init")]
-    partial class init
+    [Migration("20240409091247_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,6 +245,15 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Product");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            description = "Denna mysiga nalle tänds när du rör honom.",
+                            productName = "Magisk Nalle Natlampa",
+                            size = 350.0
+                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product_Material", b =>

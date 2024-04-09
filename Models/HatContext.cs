@@ -41,6 +41,21 @@ namespace Grupp3Hattmakaren.Models
                 .WithMany(p => p.orders)
                 .UsingEntity(j => j.ToTable("OrderProduct"));
 
+            modelBuilder.Entity<Product>()
+                .HasKey(p => p.ProductId);
+
+            modelBuilder.Entity<Product>().HasData(
+               new Product
+               {
+                   ProductId = 1,
+                   productName = "Magisk Nalle Natlampa",
+                   description = "Denna mysiga nalle tänds när du rör honom.",
+                   size = 350,
+                  
+               }
+             
+               );
+
 
 
             //modelBuilder.Entity<Enquiry>()

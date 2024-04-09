@@ -1,8 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿     @model List<Product>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<form asp-controller="ProductController" asp-action="Add" method="post">
+<table class="table-bordered">
+  
+    <tbody>
+
+        @foreach (var prod in Model)
+        {
+            <tr>
+                
+                <td>@prod.productName</td>
+                <td>@prod.description</td>
+                <td>@prod.size</td>
+
+                    <td>
+                        <form asp-controller="Product" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@prod.ProductId" />
+                            <button type="submit">Radera</button>
+                        </form>
+                    </td>
+            </tr>
+        }
+    </tbody>
+
+            <tr>
+
+            <a href="Product/AddProduct">Lägg till produkt</a>
+        </tr>
+
+</table>
+</form>

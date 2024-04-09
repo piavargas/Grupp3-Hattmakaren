@@ -242,6 +242,15 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Product");
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            description = "Denna mysiga nalle tänds när du rör honom.",
+                            productName = "Magisk Nalle Natlampa",
+                            size = 350.0
+                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product_Material", b =>
