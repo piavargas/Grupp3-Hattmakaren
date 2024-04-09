@@ -1,7 +1,7 @@
 ﻿     @model List<Product>
 
 
-
+<form asp-controller="ProductController" asp-action="Add" method="post">
 <table class="table-bordered">
   
     <tbody>
@@ -17,5 +17,10 @@
         }
     </tbody>
 
+            <tr>
+
+            <a href="Product/AddProduct">Lägg till produkt</a>
+        </tr>
+
 </table>
-<a asp-controller="Products" asp-action="AddProducts">Lägg till ett ny produkt</a>
+</form>
