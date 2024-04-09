@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+    <Compile Remove="Views\Product.cshtml\**" />
+    <Content Remove="Views\Product.cshtml\**" />
+    <EmbeddedResource Remove="Views\Product.cshtml\**" />
+    <None Remove="Views\Product.cshtml\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>

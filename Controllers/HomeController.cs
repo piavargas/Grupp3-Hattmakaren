@@ -1,22 +1,30 @@
 using Grupp3Hattmakaren.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging; 
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Grupp3Hattmakaren.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly HatContext _context; 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, HatContext context) 
         {
             _logger = logger;
+            _context = context; 
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Product> listAvProdukter = _context.Products.ToList(); 
+            _context.SaveChanges(); 
+            return View(listAvProdukter);
         }
 
         public IActionResult Privacy()
@@ -29,5 +37,7 @@ namespace Grupp3Hattmakaren.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
