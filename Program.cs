@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Configuration;
+
 
 
 
@@ -8,7 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<HatContext>(options => options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
+builder.Services.AddDbContext<HatContext>(options => options.UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
+
+
+builder.Services.AddDbContext<HatContext>(options =>
+          options.UseLazyLoadingProxies()
+            .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
+
+builder.Services.AddIdentity<Admin, IdentityRole>()
+    .AddEntityFrameworkStores<HatContext>().AddDefaultTokenProviders();
+
 
 var app = builder.Build();
 
@@ -20,6 +33,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -30,5 +44,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();

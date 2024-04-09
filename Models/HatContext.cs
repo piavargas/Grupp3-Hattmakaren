@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grupp3Hattmakaren.Models
 {
-    public class HatContext : DbContext
+    public class HatContext : IdentityDbContext<Admin>
     {
 
         public HatContext(DbContextOptions<HatContext> options) : base(options) 
@@ -55,20 +56,6 @@ namespace Grupp3Hattmakaren.Models
                }
              
                );
-
-
-
-            //modelBuilder.Entity<Enquiry>()
-            //    .HasOne()
-
-
-
-
-            //modelBuilder.Entity<Address>()
-            //    .HasOne(a => a.Customer)
-            //    .WithMany(cs => cs.addresses)
-            //    .HasForeignKey(cs => cs.CustomerId)
-            //    .OnDelete(DeleteBehavior.Restrict);
 
 
 
