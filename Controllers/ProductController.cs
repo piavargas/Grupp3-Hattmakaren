@@ -37,8 +37,22 @@ namespace Grupp3Hattmakaren.Controllers
             // Om modellen inte är giltig, visa samma vy med felmeddelanden
             return View(produktObjekt);
         }
-       
-       
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var product = _context.Products.Find(id); // Hitta produkten med det angivna ID:et
+            if (product == null)
+            {
+                return NotFound(); // Om produkten inte hittas, returnera NotFound-resultat
+            }
+
+            _context.Products.Remove(product); // Ta bort produkten från databasen
+            _context.SaveChanges(); // Spara ändringar i databasen
+            return RedirectToAction("Index", "Home"); // Omdirigera till listan över produkter
+        }
+
+
 
     }
 }

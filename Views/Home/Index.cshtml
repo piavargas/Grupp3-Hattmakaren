@@ -13,6 +13,13 @@
                 <td>@prod.productName</td>
                 <td>@prod.description</td>
                 <td>@prod.size</td>
+
+                    <td>
+                        <form asp-controller="Product" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@prod.ProductId" />
+                            <button type="submit">Radera</button>
+                        </form>
+                    </td>
             </tr>
         }
     </tbody>
