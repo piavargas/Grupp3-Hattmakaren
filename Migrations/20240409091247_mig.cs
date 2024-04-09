@@ -5,7 +5,7 @@
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -241,6 +241,11 @@ namespace Grupp3Hattmakaren.Migrations
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Discriminator", "description", "productName", "size" },
+                values: new object[] { 1, "Product", "Denna mysiga nalle tänds när du rör honom.", "Magisk Nalle Natlampa", 350.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CustomerId",
