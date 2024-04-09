@@ -11,15 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<HatContext>(options => options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
+builder.Services.AddDbContext<HatContext>(options => options.UseLazyLoadingProxies()
+    .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
 
 
-//builder.Services.AddIdentity<Admin, IdentityRole>()
-//    .AddEntityFrameworkStores<HatContext>()
-//    .AddDefaultTokenProviders();
 builder.Services.AddDbContext<HatContext>(options =>
-            options.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
-builder.Services.AddIdentity<Admin, IdentityRole>().AddEntityFrameworkStores<HatContext>().AddDefaultTokenProviders();
+          options.UseLazyLoadingProxies()
+            .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
+
+builder.Services.AddIdentity<Admin, IdentityRole>()
+    .AddEntityFrameworkStores<HatContext>().AddDefaultTokenProviders();
 
 
 var app = builder.Build();

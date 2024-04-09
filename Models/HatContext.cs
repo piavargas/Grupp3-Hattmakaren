@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Grupp3Hattmakaren.Models
 {
-    public class HatContext : DbContext
+    public class HatContext : IdentityDbContext<Admin>
     {
 
         public HatContext(DbContextOptions<HatContext> options) : base(options) 
@@ -40,23 +41,6 @@ namespace Grupp3Hattmakaren.Models
                 .HasMany(o => o.products)
                 .WithMany(p => p.orders)
                 .UsingEntity(j => j.ToTable("OrderProduct"));
-
-            modelBuilder.Entity<Admin>().HasData(
-                new Admin
-                {   
-                    firstName = "Otto",
-                    lastName = "Hattrikson",
-                    UserName = "otto1",
-                    PasswordHash = "otto1"
-                },
-                new Admin
-                {
-                    firstName = "Judith",
-                    lastName = "Hattrikson",
-                    UserName = "judith1",
-                    PasswordHash = "judith1"
-                }
-            ) ;
 
         }
 
