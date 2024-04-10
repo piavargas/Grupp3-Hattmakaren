@@ -24,5 +24,11 @@ namespace Grupp3Hattmakaren.Models
 
         [Required(ErrorMessage = "Vänligen fyll i ditt efternamn.")]
         public string lastName { get; set; }
+        [Required(ErrorMessage = "Var vänlig och välj roll")]
+        [Display(Name = "Användarroll")]
+        public string userRole { get; set; }
+
+        public int employerCode { get; set; }
+
     }
 }

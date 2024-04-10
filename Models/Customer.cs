@@ -1,16 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace Grupp3Hattmakaren.Models
 {
     //hejdå 
-    public class Customer
+    public class Customer : IdentityUser
     {
-        [Key]
-        public int CustomerId { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string email { get; set; }
         public string headSize { get; set; }
 
         public virtual ICollection<Order> orders { get; set; }
