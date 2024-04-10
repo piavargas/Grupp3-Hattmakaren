@@ -25,8 +25,9 @@ namespace Grupp3Hattmakaren.Controllers
             List<Product> listAvProdukter = _context.Products.ToList(); 
             _context.SaveChanges(); 
             return View(listAvProdukter);
-        }
 
+        }
+        
         public IActionResult Privacy()
         {
             return View();
