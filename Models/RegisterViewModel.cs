@@ -4,31 +4,33 @@ namespace Grupp3Hattmakaren.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Vänligen skriv ett användarnamn.")]
+        [Required(ErrorMessage = "Please enter a username.")]
         [StringLength(25)]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Vänligen skriv lösenord.")]
+        [Required(ErrorMessage = "Please enter a password.")]
         [DataType(DataType.Password)]
         [Compare("ConfirmPassword")]
         public string PassWord { get; set; }
 
-        [Required(ErrorMessage = "Vänligen bekräfta lösenordet.")]
+        [Required(ErrorMessage = "Please confirm your password.")]
         [DataType(DataType.Password)]
-        [Display(Name = "Bekräfta lösenordet")]
+        [Display(Name = "Confirm password")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Vänligen fyll i ditt förnamn.")]
-
+        [Required(ErrorMessage = "Please enter your first name.")]
         public string firstName { get; set; }
 
-        [Required(ErrorMessage = "Vänligen fyll i ditt efternamn.")]
+        [Required(ErrorMessage = "Please enter your last name.")]
         public string lastName { get; set; }
-        [Required(ErrorMessage = "Var vänlig och välj roll")]
-        [Display(Name = "Användarroll")]
+
+        [Display(Name = "User Role")]
         public string userRole { get; set; }
 
-        public int employerCode { get; set; }
+        [Display(Name = "Employer Code")]
+        public string employerCode { get; set; }
 
+        [Display(Name = "Head size")]
+        public string headSize { get; set; }
     }
 }

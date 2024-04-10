@@ -5,11 +5,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Grupp3Hattmakaren.Models
 {
-    //hejdå 
-    public class Customer : IdentityUser
+    public class Customer : User
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+
         public string headSize { get; set; }
 
         public virtual ICollection<Order> orders { get; set; }

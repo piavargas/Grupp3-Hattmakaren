@@ -1,42 +1,4 @@
-﻿@* @model RegisterViewModel
-@{
-    ViewBag.Title = "Registrera en ny kund";
-}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/css/LogIn.css" rel="stylesheet">
-</head>
-
-<body class="text-center login-page">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <form class="form-signin" method="post" asp-action="Register">
-        <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
-
-        <input type="boxSpace" asp-for="UserName" class="form-control" placeholder="Username" />
-        <input type="boxSpace" asp-for="firstName" class="form-control" placeholder="First name" />
-        <input type="boxSpace" asp-for="lastName" class="form-control" placeholder="Last name" />
-        <input type="password" asp-for="PassWord" class="form-control" placeholder="Password" />
-        <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
-        <input type="boxSpace" asp-for="employerCode" class="form-control" placeholder="Employer code" />
-
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
-
-    </form>
-</body>
-</html>
- *@
-
-        @model RegisterViewModel
+﻿@model RegisterViewModel
 @{
     ViewBag.Title = "Register a new account";
 }
@@ -69,24 +31,28 @@
         <input type="password" asp-for="PassWord" class="form-control" placeholder="Password" />
         <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
 
-        <!-- Visar fält för arbetsgivarkod endast om användaren väljer att registrera sig som admin -->
-        <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" style="display:none;" />
+        <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" />
+        <input type="text" asp-for="headSize" id="headSize" class="form-control" placeholder="Head Size"  />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
 
     </form>
 
-    <!-- Visa/dölja arbetsgivarkodsfält baserat på användarens rollval -->
-    <script>
+    <!-- Visa/dölja fält baserat på användarens rollval -->
+@*      <script>
         document.getElementById('userRole').addEventListener('change', function () {
             var employerCodeField = document.getElementById('employerCode');
+            var headSizeField = document.getElementById('headSize');
+
             if (this.value === 'Admin') {
                 employerCodeField.style.display = 'block';
+                headSizeField.style.display = 'none';
             } else {
                 employerCodeField.style.display = 'none';
+                headSizeField.style.display = 'block';
             }
         });
-    </script>
+    </script> *@
 </body>
 </html>

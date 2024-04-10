@@ -4,18 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Grupp3Hattmakaren.Models
 {
-    public class HatContext : IdentityDbContext<Admin>
+    public class HatContext : IdentityDbContext<User>
     {
 
         public HatContext(DbContextOptions<HatContext> options) : base(options) 
         { 
         }
         
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<User> users { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Order> Orders { get; set; }
