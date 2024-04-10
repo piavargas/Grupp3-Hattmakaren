@@ -1,0 +1,45 @@
+﻿@model Material;
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <table>
+        <tr>
+            <th>Material</th>
+            <th>Supplier</th>
+            <th>Price</th>
+            <th>In stock</th>
+
+        </tr>
+
+        @foreach (var material in ViewBag.MaterialList)
+        {
+            <tr>
+                <td>@material.name</td>
+                <td>@material.supplier</td>
+                <td>@material.price</td>
+                <td>@material.quantity</td>
+                <td><button type="button">BUTTON1</button></td>
+                <td><button type="button">BUTTON2</button></td>
+            </tr>
+        }
+    </table>
+
+
+    <form asp-action="Material" asp-controller="Material" method="post">
+        <label for="name">Material:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="supplier">Supplier:</label><br>
+        <input type="text" id="supplier" name="supplier"><br>
+
+        <label for="price">Price:</label><br>
+        <input type="text" id="price" name="price"><br><br>
+
+        <label for="quantity">In Stock:</label><br>
+        <input type="text" id="quantity" name="quantity"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+}
