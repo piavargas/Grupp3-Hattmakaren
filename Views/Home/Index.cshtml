@@ -24,7 +24,10 @@
                             <button type="submit">Radera</button>
                         </form>
                     </td>
-            </tr>
+                    <td>
+                    <a asp-action ="EditProduct" asp-controller="Product" asp-route-id="@prod.ProductId">Edit</a>     
+                    </td>
+                       </tr>
         }
     </tbody>
 

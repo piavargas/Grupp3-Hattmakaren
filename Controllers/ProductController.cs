@@ -1,5 +1,6 @@
 ﻿using Grupp3Hattmakaren.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupp3Hattmakaren.Controllers
 {
@@ -50,6 +51,35 @@ namespace Grupp3Hattmakaren.Controllers
             _context.Products.Remove(product); // Ta bort produkten från databasen
             _context.SaveChanges(); // Spara ändringar i databasen
             return RedirectToAction("Index", "Home"); // Omdirigera till listan över produkter
+        }
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            Product product = _context.Products.Find(id);
+           // Product product = _context.Produkter.FirstOrDefault(prod => prod.Id.Equals(id));
+            
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditProduct(Product product)
+        {
+            // Hämta den befintliga produkten från databasen
+            var existingProduct = _context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
+
+            if (existingProduct != null)
+            {
+                // Uppdatera egenskaperna med nya värden
+                existingProduct.productName = product.productName;
+                existingProduct.description = product.description;
+                existingProduct.size = product.size;
+
+                // Uppdatera den befintliga produkten i databasen
+                _context.Products.Update(existingProduct);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
 

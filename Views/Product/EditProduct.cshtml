@@ -1,0 +1,36 @@
+﻿@model Product
+
+<form asp-controller="Product" asp-action="EditProduct" method="post">
+    <table class="table table-light">
+        <div class="form-group">
+        <tr>
+            <td>
+                <label asp-for="productName"></label>:
+                <input asp-for="productName" type="text" />
+            </td>
+        </tr>
+        </div>
+        <div class="form-group">
+        <tr>
+            <td>
+                <label asp-for="description"></label>:
+                <input asp-for="description" type="text" />
+            </td>
+        </tr>
+        </div>
+        <div class="form-group">
+        <tr>
+            <td>
+                <label asp-for="size"></label>:
+                <input asp-for="size" type="text" />
+            </td>
+        </tr>
+        </div>
+  
+        <tr>
+            <td>
+                <input type="submit" value="Edit" class="btn-primary" />
+            </td>
+        </tr>
+    </table>
+</form>
