@@ -93,11 +93,18 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
 
+
         public IActionResult CustomerOrderForm()
         {
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult CustomerOrderForm()
+        {
+
+        }
 
     }
 

@@ -1,15 +1,22 @@
 ﻿.order-form .container {
-    color: #4c4c4c;
     padding: 20px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, .5);
     max-width: 650px;
 }
+
+.container {
+    margin-left: 25%;
+    margin-right: 25%;
+    padding-bottom: 10%;
+}
+
 
 .order-form-label {
     margin: 8px 0 0 0;
     font-size: 14px;
-    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
 }
+
 
 .order-form-input,
 .form-label,
@@ -18,6 +25,44 @@
     font-size: 14px;
 }
 
-.btn-submit:hover {
-    background-color: #0D47A1 !important;
+
+body, h1, span, label, input, .form-check-label, .btn {
+    font-family: 'Poppins', sans-serif;
+    color: black;
 }
+
+.order-form .order-form-input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #ced4da;
+    border-color: #594834;
+    border-radius: 3px;
+    width: 650px;
+}
+
+.btn-submit {
+    background-color: blue;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: none;
+    margin-top: 10px;
+}
+
+    .btn-submit:hover {
+        background-color: rgb(121, 210, 237);
+    }
+
+#form40 {
+    padding-bottom: 100px;
+    width: 650px;
+}
+
+#form100 {
+    padding-right: 180px;
+}
+
+#form {
+    padding-right: 500px;
+}
+
