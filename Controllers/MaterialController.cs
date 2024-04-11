@@ -14,8 +14,7 @@ namespace Grupp3Hattmakaren.Controllers
         public IActionResult Material()
         {
             List<Material> materials = _hatcontext.Materials.ToList();
-            ViewBag.MaterialList = materials;  
-            return View();
+            return View(materials);
         }
 
         [HttpPost]
@@ -35,7 +34,22 @@ namespace Grupp3Hattmakaren.Controllers
             return RedirectToAction("Material");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> IncreaseMaterial(Material model)
+        {
+            var material = await _hatcontext.Materials.FindAsync(model.materialId);
+            if (material != null)
+            {
+                material.quantity = model.quantity;
+                _hatcontext.Update(material);
+            }
+            return RedirectToAction("Material");
 
+        }
 
+        public IActionResult AddNewMaterial()
+        {
+            return View();
+        }
     }
 }
