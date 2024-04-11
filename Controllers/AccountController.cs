@@ -171,7 +171,21 @@ namespace Grupp3Hattmakaren.Controllers
                         await _userManager.AddToRoleAsync(customer, "Customer");
                         await _signInManager.SignInAsync(customer, isPersistent: false);
 
+                        return RedirectToAction("Index", "Home");
+                    }
 
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
+                    }
+                }
+            }
+
+            return View(model);
+        }
 
     }
 }
