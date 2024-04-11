@@ -16,7 +16,7 @@ namespace Grupp3Hattmakaren.Models
         public string font { get; set; }
         public string textOnHat { get; set; }    
 
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; }
     }

@@ -19,8 +19,10 @@ builder.Services.AddDbContext<HatContext>(options =>
           options.UseLazyLoadingProxies()
             .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
 
-builder.Services.AddIdentity<Admin, IdentityRole>()
-    .AddEntityFrameworkStores<HatContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<HatContext>()
+    .AddDefaultTokenProviders();
+
 
 
 var app = builder.Build();

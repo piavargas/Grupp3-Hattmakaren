@@ -7,7 +7,7 @@ namespace Grupp3Hattmakaren.Models
     {
         [Key]
         public int AddressId { get; set; }
-        public int CustomerId {  get; set; }
+        public string CustomerId {  get; set; }
         [ForeignKey(nameof(CustomerId))]
 
         public virtual Customer Customer { get; set; }
