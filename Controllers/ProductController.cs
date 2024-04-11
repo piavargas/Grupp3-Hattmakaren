@@ -73,6 +73,7 @@ namespace Grupp3Hattmakaren.Controllers
                 existingProduct.productName = product.productName;
                 existingProduct.description = product.description;
                 existingProduct.size = product.size;
+                existingProduct.price = product.price;
 
                 // Uppdatera den befintliga produkten i databasen
                 _context.Products.Update(existingProduct);

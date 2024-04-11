@@ -1,23 +1,29 @@
-﻿     @model List<Product>
+﻿@model List<Product>
 
 <div class="text-center">
     <h1 class="display-4">Välkommen till Hattmakaren</h1>
-@*     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
- *@</div>
+</div>
 
 <form asp-controller="ProductController" asp-action="Add" method="post">
-<table class="table-bordered">
-  
-    <tbody>
-
-        @foreach (var prod in Model)
-        {
+    <table class="table-bordered">
+        <thead>
             <tr>
-                
-                <td>@prod.productName</td>
-                <td>@prod.description</td>
-                <td>@prod.size</td>
-
+                <th>Name</th>
+                <th>Description</th>
+                <th>Size(cm)</th>
+                <th>Price(SEK)</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in Model)
+            {
+                <tr>
+                    <td>@prod.productName</td>
+                    <td>@prod.description</td>
+                    <td>@prod.size</td>
+                    <td>@prod.price</td>
                     <td>
                         <form asp-controller="Product" asp-action="Delete" method="post">
                             <input type="hidden" name="id" value="@prod.ProductId" />
@@ -25,16 +31,17 @@
                         </form>
                     </td>
                     <td>
-                    <a asp-action ="EditProduct" asp-controller="Product" asp-route-id="@prod.ProductId">Edit</a>     
+                        <a asp-action="EditProduct" asp-controller="Product" asp-route-id="@prod.ProductId">Edit</a>
                     </td>
-                       </tr>
-        }
-    </tbody>
-
+                </tr>
+            }
+        </tbody>
+        <tfoot>
             <tr>
-
-            <a href="Product/AddProduct">Lägg till produkt</a>
-        </tr>
-
-</table>
+                <td colspan="6">
+                    <a href="Product/AddProduct">Lägg till produkt</a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </form>

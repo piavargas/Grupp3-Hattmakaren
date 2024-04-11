@@ -12,6 +12,8 @@ namespace Grupp3Hattmakaren.Models
         public string description { get; set; }
         public double size { get; set; }
 
+        public double price { get; set; }
+
         public virtual ICollection<Order> ?orders { get; set; }
         public virtual ICollection<Material> ?materials { get; set; }
     }
