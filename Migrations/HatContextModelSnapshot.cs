@@ -183,7 +183,11 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Property<bool>("expressDelivery")
                         .HasColumnType("bit");
 
-                    b.Property<string>("referenceImage")
+                    b.Property<string>("font")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("textOnHat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

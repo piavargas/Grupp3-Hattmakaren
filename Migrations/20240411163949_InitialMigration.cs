@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class IntialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -223,7 +223,8 @@ namespace Grupp3Hattmakaren.Migrations
                     expressDelivery = table.Column<bool>(type: "bit", nullable: false),
                     consentHat = table.Column<bool>(type: "bit", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    referenceImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    font = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

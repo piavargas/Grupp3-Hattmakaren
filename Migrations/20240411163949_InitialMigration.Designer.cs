@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240411095828_IntialMigration")]
-    partial class IntialMigration
+    [Migration("20240411163949_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,7 +186,11 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Property<bool>("expressDelivery")
                         .HasColumnType("bit");
 
-                    b.Property<string>("referenceImage")
+                    b.Property<string>("font")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("textOnHat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

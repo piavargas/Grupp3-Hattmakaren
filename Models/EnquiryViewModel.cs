@@ -1,21 +1,25 @@
 ﻿namespace Grupp3Hattmakaren.Models
 {
-    //Kkdfjifheiofnowehfvo
     public class EnquiryViewModel
     {
-        public bool consentHat { get; set; }
-        public string description { get; set; }
-        public string referenceImage { get; set; }
-        public string addressType { get; set; }
-        public string streetName { get; set; }
-        public int zipCode { get; set; }
-        public string cityName { get; set; }
-        public string countryName { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public string headSize { get; set; }
-        public string name { get; set; }
+        public string headSize { get; set; } // Customer class
         public string color { get; set; }
+        public string materialName { get; set; } // Material class 
+        public string textOnHat { get; set; } // Enquiry class
+        public string font { get; set; }  // Enquiry class
+        public string description { get; set; } // Enquiry class
+
+        //public string referenceImageFile { get; set; } // Enquiry class
+        public bool consentHat { get; set; } // Enquiry class
+        public string firstName { get; set; }  // Customer class
+        public string lastName { get; set; } // Customer class
+        public string email { get; set; } // Customer class
+        public string streetName { get; set; } // Adress class
+        public int zipCode { get; set; } // Adress class
+        public string countryName { get; set; } // Adress class
+
+
+
+
     }
 }
