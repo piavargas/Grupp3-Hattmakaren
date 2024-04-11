@@ -129,10 +129,10 @@ namespace Grupp3Hattmakaren.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName };
-
-                user.firstName = model.firstName;
-                user.lastName = model.lastName;
+                var user = new User { UserName = model.UserName,
+                firstName = model.firstName,
+                lastName = model.lastName
+                };
 
                 if (model.userRole == "Admin")
                 {

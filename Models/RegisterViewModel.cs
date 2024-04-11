@@ -28,9 +28,9 @@ namespace Grupp3Hattmakaren.Models
         public string userRole { get; set; }
 
         [Display(Name = "Employer Code")]
-        public string employerCode { get; set; }
+        public string? employerCode { get; set; }
 
         [Display(Name = "Head size")]
-        public string headSize { get; set; }
+        public string? headSize { get; set; }
     }
 }

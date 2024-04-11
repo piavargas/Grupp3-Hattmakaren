@@ -18,8 +18,8 @@
 <body class="text-center login-page">
     <div asp-validation-summary="All" class="text-danger"></div>
     <form class="form-signin" method="post" asp-action="Register">
-        <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
 
+        <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
         <select asp-for="userRole" id="userRole" class="form-control custom-select">
             <option value="Customer">Customer</option>
             <option value="Admin">Admin</option>
@@ -31,8 +31,16 @@
         <input type="password" asp-for="PassWord" class="form-control" placeholder="Password" />
         <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password" />
 
-        <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" />
-        <input type="text" asp-for="headSize" id="headSize" class="form-control" placeholder="Head Size"  />
+        
+        
+            <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" />
+        
+        
+        
+            <input type="text" asp-for="headSize" id="headSize" class="form-control" placeholder="Head Size" />
+        
+
+        
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
@@ -40,7 +48,7 @@
     </form>
 
     <!-- Visa/dölja fält baserat på användarens rollval -->
-@*      <script>
+      <script>
         document.getElementById('userRole').addEventListener('change', function () {
             var employerCodeField = document.getElementById('employerCode');
             var headSizeField = document.getElementById('headSize');
@@ -53,6 +61,6 @@
                 headSizeField.style.display = 'block';
             }
         });
-    </script> *@
+    </script> 
 </body>
 </html>
