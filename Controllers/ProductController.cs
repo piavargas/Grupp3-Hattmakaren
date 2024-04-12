@@ -62,7 +62,7 @@ namespace Grupp3Hattmakaren.Controllers
             // Hämta den befintliga produkten från databasen
             var existingProduct = _context.Products.FirstOrDefault(p => p.ProductId == product.ProductId);
 
-            if (existingProduct != null)
+            if (ModelState.IsValid)
             {
                 // Uppdatera egenskaperna med nya värden
                 existingProduct.productName = product.productName;
@@ -73,9 +73,11 @@ namespace Grupp3Hattmakaren.Controllers
                 // Uppdatera den befintliga produkten i databasen
                 _context.Products.Update(existingProduct);
                 _context.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
-
-            return RedirectToAction("Index", "Home");
+            return View(product);
+            
+            
         }
 
 

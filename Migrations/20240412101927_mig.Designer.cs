@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240411094228_mig")]
+    [Migration("20240412101927_mig")]
     partial class mig
     {
         /// <inheritdoc />
