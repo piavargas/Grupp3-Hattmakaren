@@ -48,6 +48,18 @@ namespace Grupp3Hattmakaren.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteMaterial(int materialId)
+        {
+            var material = await _hatcontext.Materials.FindAsync(materialId);
+            if (material != null)
+            {
+                _hatcontext.Remove(material);
+                _hatcontext.SaveChanges();
+            }
+            return RedirectToAction("Material");
+
+        }
 
 
         public IActionResult AddNewMaterial()
