@@ -6,8 +6,17 @@ namespace Grupp3Hattmakaren.Models
     {
         [Key]
         public int materialId {  get; set; }
+        [Required]
+
         public string name { get; set; }
-        public string color { get; set; }
+        [Required]
+        public int quantity { get; set; }
+        [Required]
+
+        public string supplier { get; set; }
+        [Required]
+
         public double price { get; set; }
+
     }
 }
