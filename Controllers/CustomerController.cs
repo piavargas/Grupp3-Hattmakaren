@@ -24,20 +24,20 @@ namespace Grupp3Hattmakaren.Controllers
 
 
         [HttpPost]
-        public IActionResult CustomerOrderForm(EnquiryViewModel enquiryViewModel)
+        public IActionResult CustomerOrderForm(Enquiry enquiry)
         {
 
-            var enquiry = new Enquiry
+            var newEnquiry = new Enquiry
             {
-                consentHat = enquiryViewModel.consentHat,
-                description = enquiryViewModel.description,
-                font = enquiryViewModel.font,
-                textOnHat = enquiryViewModel.textOnHat,
+                consentHat = enquiry.consentHat,
+                description = enquiry.description,
+                font = enquiry.font,
+                textOnHat = enquiry.textOnHat,
 
             };
 
             // Lägg till Enquiry-objektet i context och spara ändringar i databasen
-            _context.Enquiries.Add(enquiry);
+            _context.Enquiries.Add(newEnquiry);
             _context.SaveChanges();
 
             // Returnera en vy med det nya enquiry-objektet
