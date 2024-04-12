@@ -18,7 +18,7 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
         [HttpPost]
-        public IActionResult Material(Material material) 
+        public IActionResult AddNewMaterial(Material material) 
         {
             var newMaterial = new Material() 
             { 
@@ -35,17 +35,20 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IncreaseMaterial(Material model)
+        public async Task<IActionResult> IncreaseMaterial(int materialId, int quantity)
         {
-            var material = await _hatcontext.Materials.FindAsync(model.materialId);
+            var material = await _hatcontext.Materials.FindAsync(materialId);
             if (material != null)
             {
-                material.quantity = model.quantity;
+                material.quantity += quantity;
                 _hatcontext.Update(material);
+                _hatcontext.SaveChanges();
             }
             return RedirectToAction("Material");
 
         }
+
+
 
         public IActionResult AddNewMaterial()
         {
