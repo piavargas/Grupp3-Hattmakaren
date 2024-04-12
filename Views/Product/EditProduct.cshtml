@@ -8,6 +8,8 @@
                 <td>
                     <label asp-for="productName"></label>:
                     <input asp-for="productName" type="text" />
+                <span asp-validation-for="productName" class="text-danger"></span>
+
                 </td>
             </tr>
         </div>
@@ -16,6 +18,7 @@
                 <td>
                     <label asp-for="description"></label>:
                     <input asp-for="description" type="text" />
+                <span asp-validation-for="description" class="text-danger"></span>
                 </td>
             </tr>
         </div>
@@ -24,6 +27,7 @@
                 <td>
                     <label asp-for="size"></label>:
                     <input asp-for="size" type="text" />
+                <span asp-validation-for="size" class="text-danger"></span>
                 </td>
             </tr>
         </div>
@@ -32,6 +36,7 @@
             <td>
                 <label asp-for="price"></label>:
                 <input asp-for="price" type="text" />
+                <span asp-validation-for="price" class="text-danger"></span>
             </td>
         </tr>
         </div>

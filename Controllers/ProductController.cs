@@ -20,14 +20,9 @@ namespace Grupp3Hattmakaren.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Add() 
-        { 
-        Product product = new Product();
-            return RedirectToAction("Index", "Home");        
-          }
+ 
         [HttpPost]
-        public IActionResult Add(Product produktObjekt)
+        public IActionResult AddProduct(Product produktObjekt)
         {
             if (ModelState.IsValid) // Kontrollera om modellen är giltig
             {

@@ -1,40 +1,47 @@
-﻿<form asp-action="Add" asp-controller="Product"method="post">
-<table class=" table table-light">
-    <!-- Formulär för att lägga till en ny produkt -->
-
-
+﻿@model Product
+<form asp-action="AddProduct" asp-controller="Product" method="post">
     <h2>Add New Product</h2>
-    <tr>
-        <td>
-            <label for="productName">Name:</label>
-            <input type="text" id="productName" name="productName"><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description"><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label for="size">Size:</label>
-            <input type="text" id="size" name="size"><br>
-        </td>
-    </tr>
+    <table class="table table-light">
         <tr>
             <td>
-                <label for="price">price:</label>
-                <input type="text" id="price" name="price"><br>
+                <div class="form-group">
+                    <label asp-for="productName">Name:</label>
+                    <input asp-for="productName" class="form-control" />
+                    <span asp-validation-for="productName" class="text-danger"></span>
+                </div>
             </td>
         </tr>
-       
-    <tr>
-        <td>
-            <input type="submit" value="Lägg till" class="btn-primary" />
-        </td>
-    </tr>
-        
-
-</table>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="description">Description:</label>
+                    <input asp-for="description" class="form-control" />
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="size">Size:</label>
+                    <input asp-for="size" class="form-control" />
+                    <span asp-validation-for="size" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label asp-for="price">Price:</label>
+                    <input asp-for="price" class="form-control" />
+                    <span asp-validation-for="price" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-primary">Lägg till</button>
+            </td>
+        </tr>
+    </table>
 </form>
