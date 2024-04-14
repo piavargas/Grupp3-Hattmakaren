@@ -29,5 +29,19 @@ namespace Grupp3Hattmakaren.Controllers
             ViewBag.Orders = orders; 
             return View();
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ChangeStatus(int enquiryId)
+        {
+            var enquiry = _hatcontext.Enquiries.FirstOrDefault(e => e.EnquiryId == enquiryId);
+            if (enquiry != null)
+            {
+                enquiry.isInProgress = !enquiry.isInProgress;
+                _hatcontext.SaveChanges();
+            }
+            return RedirectToAction("AdminEnquiries");
+        }
+
     }
 }

@@ -43,6 +43,12 @@
                         <span class="link-name">Print waybill</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Old orders</span>
+                    </a>
+                </li>
         </div>
     </nav>
 
@@ -77,7 +83,20 @@
                                 }
                             </span>
                         </div>
-                        <div class="data status">
+						<div class="data status">
+							<form method="post" action="@Url.Action("ChangeStatus", "Admin")">
+								<input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
+								<button type="submit" name="status" value="toggle">
+									@if (enquiry.isInProgress)
+									{
+										<text>Mark as not handled yet</text>
+									}
+									else
+									{
+										<text>Mark as in progress</text>
+									}
+								</button>
+							</form>
                             <span class="data-title">Status</span>
                             <span class="data-list">
                                 @if (enquiry.isInProgress)
@@ -90,6 +109,7 @@
                                 }
                             </span>
                         </div>
+                       
 
                         <div class="data status">
                             <span class="data-title">Type</span>
