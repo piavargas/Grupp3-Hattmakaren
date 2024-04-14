@@ -4,7 +4,7 @@ namespace Grupp3Hattmakaren.Controllers
 {
     public class AdminController : Controller
     {
-        public IActionResult Index()
+        public IActionResult AdminMyPage()
         {
             return View();
         }
