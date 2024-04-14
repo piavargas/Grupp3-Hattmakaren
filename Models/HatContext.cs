@@ -51,19 +51,63 @@ namespace Grupp3Hattmakaren.Models
                    productName = "Magisk Nalle Natlampa",
                    description = "Denna mysiga nalle tänds när du rör honom.",
                    size = 350,
-                  
                }
              
                );
 
+            modelBuilder.Entity<Enquiry>().HasData(
+               new Enquiry
+               {
+                   EnquiryId = 1,
+                   expressDelivery = true,
+                   consentHat = true,
+                   description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
+                   font = "Arial",
+                   textOnHat = "Jonas är bäst",
+                   isInProgress = true,
+                   isSpecial = true,
+                   CustomerId = "1"
+               }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            );
 
+            modelBuilder.Entity<Order>().HasData(
+               new Order
+               {
+                   OrderId = 1,
+                   price = 150.00,
+                   CustomerId = "1", 
+                   isPayed = true,
+                   AddressId = 1, 
+                   ProductId = 1 
+               }
+            );
 
+            modelBuilder.Entity<Address>().HasData(
+                new Address
+                {
+                    AddressId = 1,
+                    CustomerId = "1", // Länka detta till en befintlig Customer
+                    addressType = "Home",
+                    streetName = "123 Main Street",
+                    zipCode = 12345,
+                    cityName = "Cityville",
+                    countryName = "Countryland"
+                }
+            );
 
-
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                {
+                    Id = "1",
+                    UserName = "jonasmoll", 
+                    Email = "jonasmoll@outlook.com",
+                    firstName = "Jonas",
+                    lastName = "Moll",
+                    headSize = "28cm"
+                }
+            ); 
 
         }
-
-
 
     }
 }

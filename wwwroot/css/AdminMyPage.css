@@ -1,11 +1,11 @@
-﻿/* ===== Google Font Import - Poppins ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap') 
 
-* {
+*
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 :root {
@@ -27,8 +27,8 @@
 }
 
 body {
-    min-height: 100vh;
-    background-color: var(--primary-color);
+    min-height: 119vh;
+    background-color: #f7f8fb;
 }
 
     body.dark {
@@ -44,8 +44,7 @@ body {
         --title-icon-color: #CCC;
     }
 /* === Custom Scroll Bar CSS === */
-::-webkit-scrollbar {
-    width: 8px;
+::-webkit-scrollbar { 
 }
 
 ::-webkit-scrollbar-track {
@@ -68,11 +67,9 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover {
 }
 
 nav {
-    position: fixed;
-    top: 0;
+    position: absolute;
     left: 0;
-    height: 100%;
-    width: 250px;
+    height: 80%;
     padding: 10px 14px;
     background-color: var(--panel-color);
     border-right: 1px solid var(--border-color);
@@ -233,7 +230,7 @@ body.dark .switch:before {
     background-color: var(--panel-color);
     min-height: 100vh;
     width: calc(100% - 250px);
-    padding: 10px 14px;
+    padding: 10px 80px;
     transition: var(--tran-05);
 }
 
@@ -409,119 +406,3 @@ nav.close ~ .dashboard .top {
     color: var(--text-color);
 }
 
-@media (max-width: 1000px) {
-    nav {
-        width: 73px;
-    }
-
-        nav.close {
-            width: 250px;
-        }
-
-        nav .logo_name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav.close .logo_name {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        nav li a .link-name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav.close li a .link-name {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        nav ~ .dashboard {
-            left: 73px;
-            width: calc(100% - 73px);
-        }
-
-        nav.close ~ .dashboard {
-            left: 250px;
-            width: calc(100% - 250px);
-        }
-
-        nav ~ .dashboard .top {
-            left: 73px;
-            width: calc(100% - 73px);
-        }
-
-        nav.close ~ .dashboard .top {
-            left: 250px;
-            width: calc(100% - 250px);
-        }
-
-    .activity .activity-data {
-        overflow-X: scroll;
-    }
-}
-
-@media (max-width: 780px) {
-    .dash-content .boxes .box {
-        width: calc(100% / 2 - 15px);
-        margin-top: 15px;
-    }
-}
-
-@media (max-width: 560px) {
-    .dash-content .boxes .box {
-        width: 100%;
-    }
-}
-
-@media (max-width: 400px) {
-    nav {
-        width: 0px;
-    }
-
-        nav.close {
-            width: 73px;
-        }
-
-        nav .logo_name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav.close .logo_name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav li a .link-name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav.close li a .link-name {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        nav ~ .dashboard {
-            left: 0;
-            width: 100%;
-        }
-
-        nav.close ~ .dashboard {
-            left: 73px;
-            width: calc(100% - 73px);
-        }
-
-        nav ~ .dashboard .top {
-            left: 0;
-            width: 100%;
-        }
-
-        nav.close ~ .dashboard .top {
-            left: 0;
-            width: 100%;
-        }
-}

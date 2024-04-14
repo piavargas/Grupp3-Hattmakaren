@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/AdminMyPage.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Admin Dashboard Panel</title>
+</head>
+<body>
+    <nav>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li>
+                    <a href="AdminEnquiries">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Enquiries</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="AdminOrders">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Order materials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Order summation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Print waybill</span>
+                    </a>
+                </li>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+
+
+        <div class="dash-content">
+            <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Orders</span>
+                </div>
+
+                <div class="activity-data">
+                    @foreach (var order in ViewBag.Orders)
+                    {
+                        <div class="data names">
+                            <span class="data-title">Customer</span>
+                            <span class="data-list">@order.Customer.firstName @order.Customer.lastName</span>
+                        </div>
+                        <div class="data email">
+                            <span class="data-title">Email</span>
+                            <span class="data-list">@order.Customer.Email</span>
+                        </div>
+                        <div class="data type">
+                            <span class="data-title">Address</span>
+                            <span class="data-list">@order.Address.streetName, @order.Address.zipCode @order.Address.cityName</span>
+                        </div>
+                        <div class="data joined">
+                            <span class="data-title">Price</span>
+                            <span class="data-list">@order.price</span>
+                        </div>
+
+                        <div class="data status">
+                            <span class="data-title">Status</span>
+                            <span class="data-list">
+                                @if (order.isPayed)
+                                {
+                                    <text>Payed</text>
+                                }
+                                else
+                                {
+                                    <text>Not Payed</text>
+                                }
+                            </span>
+                        </div>
+                    }
+            </div>
+        </div>
+    </section>
+
+ 
+
+    <script src="~/js/AdminMyPage.js"></script>
+</body>
+</html>
