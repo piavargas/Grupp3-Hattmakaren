@@ -1,4 +1,5 @@
 ﻿using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Grupp3Hattmakaren.Controllers
@@ -18,7 +19,8 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewMaterial(Material material)
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddNewMaterial(Material material) 
         {
             if (ModelState.IsValid)
             {

@@ -13,5 +13,6 @@ namespace Grupp3Hattmakaren.Models
         [DataType(DataType.Password)]
 
         public string PassWord { get; set; }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity @* To use usermanager *@
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,6 +12,9 @@
     <link rel="stylesheet" href="~/Grupp3Hattmakaren.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @* Following line to use usermanager *@
+    @inject UserManager<User> UserManager 
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -23,11 +29,27 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Material" asp-action="Material">Inventory</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminEnquiries">My Page</a>
                         </li>
 
-                        
                     </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                        if (user != null)
+                        {
+
+                            @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                        
+                            {
+                                <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
+                            }
+                            else if (await UserManager.IsInRoleAsync(user, "Customer"))
+                            {
+                                <p class="navbar-text">Hello, @user.firstName @user.lastName</p>
+                            }
+
+
                 </div>
             </div>
         </nav>
@@ -42,11 +64,15 @@
         <div class="container">
             @if (User.Identity.IsAuthenticated)
             {
-                @* <p>&copy; 2024 - Hattmakaren -</p> <a method="post" asp-area="" asp-controller="Account" asp-action="LogOut">Logga ut</a> *@
+                <p>&copy; 2024 - Hattmakaren </p>
+                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut">
+                    <button type="submit" class="btn btn-link">Logga ut</button>
+                </form>
             }
             else
             {
-                <p>&copy; 2024 - Hattmakaren -</p><a asp-area="" asp-controller="Account" asp-action="LogIn">Logga in</a>
+                <p>&copy; 2024 - Hattmakaren </p>
+                <a asp-area="" asp-controller="Account" asp-action="LogIn">Logga in</a>
             }
         </div>
     </footer>
