@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/AdminMyPage.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Admin Dashboard Panel</title>
+</head>
+<body>
+    <nav>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li>
+                    <a href="AdminEnquiries">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Enquiries</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="AdminOrders">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Order materials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Order summation</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Print waybill</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Old orders</span>
+                    </a>
+                </li>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="dash-content">
+            <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Incoming Enquiries</span>
+                </div>
+                <div class="activity-data">
+                    @foreach (var enquiry in Model)
+                    {
+                        <div class="data names">
+                            <span class="data-title">Customer</span>
+                            <span class="data-list">@enquiry.Customer.firstName @enquiry.Customer.lastName</span>
+                        </div>
+                        <div class="data email">
+                            <span class="data-title">Email</span>
+                            <span class="data-list">@enquiry.Customer.Email</span>
+                        </div>
+                        <div class="data joined">
+                            <span class="data-title">Express Delivery</span>
+                            <span class="data-list">
+                                @if (enquiry.expressDelivery)
+                                {
+                                    <text>Yes</text>
+                                }
+                                else
+                                {
+                                    <text>No</text>
+                                }
+                            </span>
+                        </div>
+						<div class="data status">
+							<form method="post" action="@Url.Action("ChangeStatus", "Admin")">
+								<input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
+								<button type="submit" name="status" value="toggle">
+									@if (enquiry.isInProgress)
+									{
+										<text>Mark as not handled yet</text>
+									}
+									else
+									{
+										<text>Mark as in progress</text>
+									}
+								</button>
+							</form>
+                            <span class="data-title">Status</span>
+                            <span class="data-list">
+                                @if (enquiry.isInProgress)
+                                {
+                                    <text>In progress</text>
+                                }
+                                else
+                                {
+                                    <text>Not handled yet</text>
+                                }
+                            </span>
+                        </div>
+                       
+
+                        <div class="data status">
+                            <span class="data-title">Type</span>
+                            <span class="data-list">
+                                @if (enquiry.isSpecial)
+                                {
+                                    <text>Special</text>
+                                }
+                                else
+                                {
+                                    <text>Order</text>
+                                }
+                            </span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/js/AdminMyPage.js"></script>
+</body>
+</html>
