@@ -70,19 +70,6 @@
                             <span class="data-title">Email</span>
                             <span class="data-list">@enquiry.Customer.Email</span>
                         </div>
-                        <div class="data joined">
-                            <span class="data-title">Express Delivery</span>
-                            <span class="data-list">
-                                @if (enquiry.expressDelivery)
-                                {
-                                    <text>Yes</text>
-                                }
-                                else
-                                {
-                                    <text>No</text>
-                                }
-                            </span>
-                        </div>
 						<div class="data status">
 							<form method="post" action="@Url.Action("ChangeStatus", "Admin")">
 								<input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />

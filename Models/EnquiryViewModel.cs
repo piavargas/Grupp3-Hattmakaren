@@ -19,7 +19,7 @@ namespace Grupp3Hattmakaren.Models
         public string streetName { get; set; } // Adress class
         public int zipCode { get; set; } // Adress class
         public string countryName { get; set; } // Adress class
-
+        public bool isSpecial { get; set; }
         public bool isInProgress { get; set; } // Enquiry class
 
 
