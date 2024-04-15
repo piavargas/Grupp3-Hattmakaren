@@ -1,34 +1,33 @@
-﻿<form asp-action="Add" asp-controller="Product"method="post">
-<table class=" table table-light">
-    <!-- Formulär för att lägga till en ny produkt -->
+﻿@* 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <link href="~/css/AddProduct.css" rel="stylesheet">
 
+</head> *@
+<form asp-action="Add" asp-controller="Product" method="post" class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Add New Product</h2>
+            <div class="form-group">
+                <label for="productName">Name:</label>
+                <input type="text" class="form-control" id="productName" name="productName" required>
+            </div>
 
-    <h2>Add New Product</h2>
-    <tr>
-        <td>
-            <label for="productName">Name:</label>
-            <input type="text" id="productName" name="productName"><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description"><br>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label for="size">Size:</label>
-            <input type="text" id="size" name="size"><br>
-        </td>
-    </tr>
-       
-    <tr>
-        <td>
-            <input type="submit" value="Lägg till" class="btn-primary" />
-        </td>
-    </tr>
-        
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
 
-</table>
+            <div class="form-group">
+                <label for="size">Size:</label>
+                <input type="text" class="form-control" id="size" name="size" required>
+            </div>
+
+            <button type="submit" class="btn btn-secondary mb-3">Submit</button>
+        </div>
+    </div>
 </form>
