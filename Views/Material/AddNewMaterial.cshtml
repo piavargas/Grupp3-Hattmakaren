@@ -10,9 +10,11 @@
             <h2>Add New Material</h2>
             <form asp-action="AddNewMaterial" asp-controller="Material" method="post">
                 <div class="form-group">
-                    <label for="name">Material:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <label asp-for="name">Material:</label>
+                    <input asp-for="name" class="form-control" required>
+                    <span asp-validation-for="name" class="text-danger"></span>
                 </div>
+
 
                 <div class="form-group">
                     <label for="supplier">Supplier:</label>
@@ -20,13 +22,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input type="text" class="form-control" id="price" name="price" required>
+                    <label asp-for="price">Price in Swedish Crown:</label>
+                    <input asp-for="price" class="form-control" required>
+                    <span asp-validation-for="price" class="text-danger"></span>
+
                 </div>
 
                 <div class="form-group">
                     <label for="quantity">Quantity:</label>
                     <input type="text" class="form-control" id="quantity" name="quantity" required>
+                    <span asp-validation-for="quantity" class="text-danger"></span>
+
                 </div>
 
                 <button type="submit" class="btn btn-secondary mb-3">Submit</button>
