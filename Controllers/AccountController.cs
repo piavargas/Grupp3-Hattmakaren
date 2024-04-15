@@ -27,35 +27,6 @@ namespace Grupp3Hattmakaren.Controllers
             return View(loginViewmodel);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> LogIn(LoginViewModel loginViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = await _signInManager.PasswordSignInAsync(
-        //            loginViewModel.UserName,
-        //            loginViewModel.PassWord,
-        //            isPersistent: true,
-        //            lockoutOnFailure: false
-        //            );
-
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Wrong username/password.");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Privacy", "Home");
-        //    }
-
-        //    return View(loginViewModel);
-        // }
-
         [HttpPost]
         public async Task<IActionResult> LogIn(LoginViewModel loginViewModel)
         {
