@@ -116,10 +116,23 @@
             }
         </div>
 
-        <div class="text-center mt-5">
-            <a href="Product/AddProduct" class="btn btn-primary">Lägg till produkt</a>
-        </div>
+        @if (User.IsInRole("Admin"))
+    {
+            <tr>
+            <a href="Product/AddProduct">Lägg till produkt</a>
+            <br />
+        </tr>
+    }
+
+    @if (User.IsInRole("Customer"))
+        {
+            <tr>  
+                <a href="Customer/CustomerOrderForm">Place Hat Order</a>
+            </tr>
+        }
     </div>
+  
+  
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
@@ -127,3 +140,4 @@
 
 </body>
 </html>
+

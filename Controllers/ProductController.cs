@@ -1,9 +1,15 @@
 ﻿using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Grupp3Hattmakaren.Controllers
 {
@@ -21,6 +27,14 @@ namespace Grupp3Hattmakaren.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public IActionResult Add() 
+        { 
+        Product product = new Product();
+            return RedirectToAction("Index", "Home");        
+        }
+        
         [HttpPost]
         public IActionResult AddProduct(Product produktObjekt, IFormFile ImagePath)
         {

@@ -8,8 +8,9 @@ namespace Grupp3Hattmakaren.Models
         [Key]
         public int OrderId { get; set; }
         public double price { get; set; }
+        public bool isPayed { get; set; }
 
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
 
         public virtual Customer Customer { get; set; }

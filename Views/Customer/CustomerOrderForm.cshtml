@@ -1,0 +1,165 @@
+﻿@model EnquiryViewModel
+<form asp-action="CustomerOrderForm" method="post">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/CustomerOrderForm.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="~/css/CustomerOrderForm.css">
+        <link rel="stylesheet" href="~/css/CustomerOrderForm_styles.css">
+</head>
+<section class="order-form m-4">
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-12 px-4">
+                <h1>Design your own hat and let your style shine!</h1>
+
+
+                <hr class="mt-1" />
+                <span>Hat Details</span>
+
+                <hr class="mt-1" />
+
+
+                <div class="row mt-3 mx-4">
+                    <div class="col-12">
+                    </div>
+                    <div class="col-12">
+                        <div data-mdb-input-init class="form-outline">
+                            <label @* asp-for="headSize" *@ class="form-label">Head Size</label>
+                            <input type="text" @* asp-for = "headSize" *@ id="form5" class="form-control order-form-input" placeholder="Specify your head perimeter in cm"/>
+                        </div>
+
+                        <div class="col-sm-6 mt-2 pe-sm-2">
+                            <div data-mdb-input-init class="form-outline">
+                                <label @* asp-for="color" *@ class="form-label">Color</label>
+                                    <input type="text" @* asp-for = "color" *@ id="form9" class="form-control order-form-input" placeholder="Hat color" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div data-mdb-input-init class="form-outline">
+                                <label@*  asp-for="materialName" *@ class="form-label">Material</label>
+                               
+                                <select id="form200" class="form-control order-form-input">
+                                  <option value="option1">Choose hat material...</option>
+                                  <option value="option2">Alternativ</option>
+                                  <option value="option3">Alternativ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div data-mdb-input-init class="form-outline">
+                                <label asp-for="textOnHat" class="form-label">Text</label>
+                                <input type="text" asp-for = "textOnHat" id="form10" class="form-control order-form-input" placeholder="Text on hat" />
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div data-mdb-input-init class="form-outline">
+                                <label asp-for="font" class="form-label">Text Font</label>
+                                 <select asp-for ="font" id="form200" class="form-control order-form-input">
+                                  <option value="option1">Choose font...</option>
+                                        <option value="Arial">Arial</option>
+                                        <option value="Helvetica">Helvetica</option>
+                                        <option value="Times New Roman">Times New Roman</option>
+                                        <option value="Georgia">Georgia</option>
+                                        <option value="Courier New">Courier New</option>
+                                        <option value="Verdana">Verdana</option>
+                                        <option value="Tahoma">Tahoma</option>
+                                        <option value="Trebuchet MS">Trebuchet MS</option>
+                                        <option value="Impact">Impact</option>
+                                        <option value="Comic Sans MS">Comic Sans MS</option>
+                                        <option value="Arial Black">Arial Black</option>
+                                        <option value="Courier">Courier</option>
+                                        <option value="Lucida Console">Lucida Console</option>
+                                        <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                                        <option value="Palatino Linotype">Palatino Linotype</option>
+                                        <option value="Book Antiqua">Book Antiqua</option>
+                                        <option value="Palatino">Palatino</option>
+                                        <option value="Garamond">Garamond</option>
+                                        <option value="Century Gothic">Century Gothic</option>
+                                        <option value="Lucida Sans">Lucida Sans</option>
+                                </select> 
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-2 ps-sm-0">
+                            <div data-mdb-input-init class="form-outline">
+                                <label asp-for="description" class="form-label">Additional Requests</label>
+                                    <input type="text" asp-for="description" id="form40" class="form-control order-form-input" placeholder="Comment any additional requests" />
+
+                            </div>
+                        </div>
+
+
+                        <div class="row mt-3 mx-4">
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" asp-for = "consentHat" type="checkbox" id="flexCheckDefault" />
+                                    <label asp-for="consentHat" class="form-check-label">Building upon a finished product?</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            
+
+                    <span>Adress Information</span>
+                    <hr class="mt-1" />
+
+
+
+                    <div class="row mt-3 mx-4">
+                        <div class="col-12">
+                        </div>
+                        <div class="col-12">
+                            <div data-mdb-input-init class="form-outline">
+                                <label asp-for="streetName"  class="form-label">Street Address</label>
+                                <input type="text"  asp-for ="streetName" id="form5" class="form-control order-form-input" />
+                            </div>
+
+                            <div class="col-sm-6 mt-2 pe-sm-2">
+                                <div data-mdb-input-init class="form-outline">
+                                    <label  asp-for="zipCode" *@ class="form-label">Postal Code</label>
+                                    <input type="text" asp-for = "zipCode" id="form9" class="form-control order-form-input" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mt-2 ps-sm-0">
+                                <div data-mdb-input-init class="form-outline">
+                                    <label asp-for="countryName" class="form-label">Country</label>
+                                    <input type="text" asp-for="countryName" id="form10" class="form-control order-form-input" />
+                                </div>
+                            </div>
+
+                            @* <div class="row mt-3 mx-4">
+                                <div class="col-12" hidden>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="isInProgress" type="checkbox" id="flexCheckDefault" value ="false"/>
+                                        <label asp-for="isInProgress" class="form-check-label">Building upon a finished product?</label>
+                                    </div>
+                                </div>
+                            </div> *@
+
+                            <input type ="hidden" asp-for="isInProgress"/>
+                            <input type="hidden" asp-for="isSpecial" />
+
+
+                            <div class="col-12">
+                                <input type="submit" value="Skicka" class="btn-primary"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+</form>
+</section>
+
