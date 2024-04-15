@@ -54,10 +54,15 @@ namespace Grupp3Hattmakaren.Controllers
               _context.SaveChanges();
 
 
-
+            
+            KundOrderFörfråga
             return View(enquiryViewModel);
         }
 
+
     }
+
+
+  
 }
 
