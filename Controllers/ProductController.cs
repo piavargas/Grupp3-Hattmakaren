@@ -30,7 +30,8 @@ namespace Grupp3Hattmakaren.Controllers
         { 
         Product product = new Product();
             return RedirectToAction("Index", "Home");        
-          }
+        }
+
         [HttpPost]
         public IActionResult Add(Product produktObjekt)
         {
