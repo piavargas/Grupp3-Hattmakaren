@@ -1,4 +1,5 @@
 ﻿using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using static System.Net.Mime.MediaTypeNames;
@@ -8,11 +9,12 @@ namespace Grupp3Hattmakaren.Controllers
     public class CustomerController : Controller
     {
         private readonly HatContext _context;
-
-        public CustomerController(HatContext context)
+        private readonly UserManager<User> _userManager;
+        
+        public CustomerController(HatContext context, UserManager<User> userManager)
         {
-
             _context = context;
+            _userManager = userManager;
         }
 
 
@@ -24,26 +26,37 @@ namespace Grupp3Hattmakaren.Controllers
 
 
         [HttpPost]
-        public IActionResult CustomerOrderForm(Enquiry enquiry)
+        public async Task<IActionResult> CustomerOrderForm(EnquiryViewModel enquiryViewModel)
         {
+
 
             var newEnquiry = new Enquiry
             {
-                consentHat = enquiry.consentHat,
-                description = enquiry.description,
-                font = enquiry.font,
-                textOnHat = enquiry.textOnHat,
-
+                consentHat = enquiryViewModel.consentHat,
+                description = enquiryViewModel.description,
+                font = enquiryViewModel.font,
+                textOnHat = enquiryViewModel.textOnHat,
+                CustomerId = _userManager.GetUserId(User)
             };
 
-            // Lägg till Enquiry-objektet i context och spara ändringar i databasen
-            _context.Enquiries.Add(newEnquiry);
-            _context.SaveChanges();
+                _context.Enquiries.Add(newEnquiry);
+                _context.SaveChanges();
 
-            // Returnera en vy med det nya enquiry-objektet
-            return View(enquiry);
+            var newAddress = new Address
+            {
+                streetName = enquiryViewModel.streetName,
+                zipCode = enquiryViewModel.zipCode,
+                countryName = enquiryViewModel.countryName,
+                CustomerId = _userManager.GetUserId(User)
+            };
+
+              _context.Addresses.Add(newAddress);
+              _context.SaveChanges();
+
+
+
+            return View(enquiryViewModel);
         }
-
 
     }
 }

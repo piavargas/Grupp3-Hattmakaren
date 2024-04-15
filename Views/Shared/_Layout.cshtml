@@ -37,14 +37,18 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         var user = await UserManager.FindByNameAsync(User.Identity.Name);
-                        @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                        if (user != null)
                         {
-                            <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
+                            @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                            {
+                                <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
+                            }
+                            else if (await UserManager.IsInRoleAsync(user, "Customer"))
+                            {
+                                <p class="navbar-text">Hello, @user.firstName @user.lastName</p>
+                            }
                         }
-                        else if (await UserManager.IsInRoleAsync(user, "Customer"))
-                        {
-                            <p class="navbar-text">Hello, @user.firstName @user.lastName</p>
-                        }
+                        
                     }
                 </div>
             </div>
