@@ -76,7 +76,6 @@ namespace Grupp3Hattmakaren.Controllers
             Product product = _context.Products.Find(id);
             return View(product);
         }
-
         [HttpPost]
         public IActionResult EditProduct(Product product)
         {
@@ -91,6 +90,34 @@ namespace Grupp3Hattmakaren.Controllers
                 existingProduct.size = product.size;
                 existingProduct.price = product.price;
 
+                // Uppdatera bilden endast om en ny bild har valts
+                if (Request.Form.Files.Count > 0)
+                {
+                    var ImagePath = Request.Form.Files[0];
+                    if (ImagePath != null && ImagePath.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImagePath.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+
+                        // Ta bort den befintliga bilden om det finns en och ersätt den med den nya bilden
+                        if (!string.IsNullOrEmpty(existingProduct.ImagePath))
+                        {
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", Path.GetFileName(existingProduct.ImagePath));
+                            if (System.IO.File.Exists(oldImagePath))
+                            {
+                                System.IO.File.Delete(oldImagePath);
+                            }
+                        }
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            ImagePath.CopyTo(stream);
+                        }
+
+                        existingProduct.ImagePath = "/images/" + fileName;
+                    }
+                }
+
                 // Uppdatera den befintliga produkten i databasen
                 _context.Products.Update(existingProduct);
                 _context.SaveChanges();
@@ -98,5 +125,7 @@ namespace Grupp3Hattmakaren.Controllers
             }
             return View(product);
         }
+
+
     }
 }
