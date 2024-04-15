@@ -1,4 +1,6 @@
-﻿namespace Grupp3Hattmakaren.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Grupp3Hattmakaren.Models
 {
     public class EnquiryViewModel
     {
@@ -18,6 +20,7 @@
         public int zipCode { get; set; } // Adress class
         public string countryName { get; set; } // Adress class
 
+        public bool isInProgress { get; set; } // Enquiry class
 
 
 

@@ -131,16 +131,27 @@
                                     <input type="text" asp-for = "zipCode" id="form9" class="form-control order-form-input" />
                                 </div>
                             </div>
+
                             <div class="col-sm-6 mt-2 ps-sm-0">
                                 <div data-mdb-input-init class="form-outline">
                                     <label asp-for="countryName" class="form-label">Country</label>
-                                    <input type="text" asp-for = "countryName"  *@id="form10" class="form-control order-form-input" />
+                                    <input type="text" asp-for="countryName" id="form10" class="form-control order-form-input" />
                                 </div>
                             </div>
-                        </div>
-                    
+
+                            @* <div class="row mt-3 mx-4">
+                                <div class="col-12" hidden>
+                                    <div class="form-check">
+                                        <input class="form-check-input" asp-for="isInProgress" type="checkbox" id="flexCheckDefault" value ="false"/>
+                                        <label asp-for="isInProgress" class="form-check-label">Building upon a finished product?</label>
+                                    </div>
+                                </div>
+                            </div> *@
+
+                            <input type ="hidden" asp-for="isInProgress"/>
+                        
                             <div class="col-12">
-                                <input type="submit" value="Skicka" class="btn-primary" />
+                                <input type="submit" value="Skicka" class="btn-primary"/>
                             </div>
                         </div>
                     </div>

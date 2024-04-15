@@ -28,14 +28,13 @@ namespace Grupp3Hattmakaren.Controllers
         [HttpPost]
         public async Task<IActionResult> CustomerOrderForm(EnquiryViewModel enquiryViewModel)
         {
-
-
             var newEnquiry = new Enquiry
             {
                 consentHat = enquiryViewModel.consentHat,
                 description = enquiryViewModel.description,
                 font = enquiryViewModel.font,
                 textOnHat = enquiryViewModel.textOnHat,
+                isInProgress = enquiryViewModel.isInProgress,
                 CustomerId = _userManager.GetUserId(User)
             };
 
@@ -54,8 +53,6 @@ namespace Grupp3Hattmakaren.Controllers
               _context.SaveChanges();
 
 
-            
-            KundOrderFörfråga
             return View(enquiryViewModel);
         }
 

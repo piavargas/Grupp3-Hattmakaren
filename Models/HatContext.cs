@@ -58,14 +58,12 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Enquiry>().HasData(
                new Enquiry
                {
-                   EnquiryId = 1,
-                   expressDelivery = true,
+                   EnquiryId = 1,                 
                    consentHat = true,
                    description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
                    font = "Arial",
                    textOnHat = "Jonas är bäst",
-                   isInProgress = true,
-                   isSpecial = true,
+                   isInProgress = true,                  
                    CustomerId = "1"
                }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
             );
@@ -86,11 +84,9 @@ namespace Grupp3Hattmakaren.Models
                 new Address
                 {
                     AddressId = 1,
-                    CustomerId = "1", // Länka detta till en befintlig Customer
-                    addressType = "Home",
+                    CustomerId = "1", // Länka detta till en befintlig Customer                   
                     streetName = "123 Main Street",
-                    zipCode = 12345,
-                    cityName = "Cityville",
+                    zipCode = 12345,                    
                     countryName = "Countryland"
                 }
             );
