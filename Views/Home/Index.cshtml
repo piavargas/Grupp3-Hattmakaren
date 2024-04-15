@@ -1,53 +1,129 @@
-﻿@model List<Product>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Välkommen till Hattmakaren</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Anpassa CSS för att förbättra utseendet */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
 
-<div class="text-center">
-    <h1 class="display-4">Välkommen till Hattmakaren</h1>
-</div>
+        .product-container {
+            margin: 0 auto;
+            max-width: 800px;
+        }
 
-<form asp-controller="ProductController" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
 
-    <table class="table-bordered">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Size(cm)</th>
-                <th>Price(SEK)</th>
-                <th>Image</th> <!-- Lägg till kolumn för bild -->
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+            .product-card:hover {
+                box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+            }
+
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .product-details {
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .btn {
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+                border-color: #bd2130;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container product-container">
+        <h1 class="text-center mb-5">Välkommen till Hattmakaren</h1>
+
+        <div class="row">
             @foreach (var prod in Model)
             {
-                <tr>
-                    <td>@prod.productName</td>
-                    <td>@prod.description</td>
-                    <td>@prod.size</td>
-                    <td>@prod.price</td>
-                    <td>
-                        <!-- Visa bilden för produkten -->
-                        <img src="@prod.ImagePath" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
-                    </td>
-                    <td>
-                        <form asp-controller="Product" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@prod.ProductId" />
-                            <button type="submit">Radera</button>
-                        </form>
-                    </td>
-                    <td>
-                        <a asp-action="EditProduct" asp-controller="Product" asp-route-id="@prod.ProductId">Edit</a>
-                    </td>
-                </tr>
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                        <h2 class="product-name">@prod.productName</h2>
+                        <p class="product-description">@prod.description</p>
+                        <p class="product-details">Storlek: @prod.size cm</p>
+                        <p class="product-price">@prod.price SEK</p>
+                        <div class="text-center">
+                            <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@prod.ProductId" />
+                                <button type="submit" class="btn btn-danger mr-2">Radera</button>
+                            </form>
+                            <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
+                        </div>
+                    </div>
+                </div>
             }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6">
-                    <a href="Product/AddProduct">Lägg till produkt</a>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
-</form>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="Product/AddProduct" class="btn btn-primary">Lägg till produkt</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
