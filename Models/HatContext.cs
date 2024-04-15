@@ -44,6 +44,7 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.ProductId);
 
+
             modelBuilder.Entity<Product>().HasData(
                new Product
                {

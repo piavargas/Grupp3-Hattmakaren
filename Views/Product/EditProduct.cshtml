@@ -1,12 +1,13 @@
-@model Product
-<form asp-action="AddProduct" asp-controller="Product" method="post" enctype="multipart/form-data">
-    <h2>Add New Product</h2>
+﻿@model Product
+
+<form asp-controller="Product" asp-action="EditProduct" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ProductId" />
     <table class="table table-light">
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="productName">Name:</label>
-                    <input asp-for="productName" class="form-control" />
+                    <label asp-for="productName"></label>:
+                    <input asp-for="productName" type="text" class="form-control" />
                     <span asp-validation-for="productName" class="text-danger"></span>
                 </div>
             </td>
@@ -14,8 +15,8 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="description">Description:</label>
-                    <input asp-for="description" class="form-control" />
+                    <label asp-for="description"></label>:
+                    <input asp-for="description" type="text" class="form-control" />
                     <span asp-validation-for="description" class="text-danger"></span>
                 </div>
             </td>
@@ -23,8 +24,8 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="size">Size:</label>
-                    <input asp-for="size" class="form-control" />
+                    <label asp-for="size"></label>:
+                    <input asp-for="size" type="text" class="form-control" />
                     <span asp-validation-for="size" class="text-danger"></span>
                 </div>
             </td>
@@ -32,8 +33,8 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="price">Price:</label>
-                    <input asp-for="price" class="form-control" />
+                    <label asp-for="price"></label>:
+                    <input asp-for="price" type="text" class="form-control" />
                     <span asp-validation-for="price" class="text-danger"></span>
                 </div>
             </td>
@@ -41,16 +42,14 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="ImagePath">Image:</label>
+                    <label asp-for="ImagePath"></label>:
                     <input type="file" name="ImagePath" class="form-control-file" />
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
-                    
                 </div>
             </td>
         </tr>
-        <tr>
+
             <td>
-                <button type="submit" class="btn btn-primary">Lägg till</button>
+                <input type="submit" value="Save" class="btn-primary" />
             </td>
         </tr>
     </table>
