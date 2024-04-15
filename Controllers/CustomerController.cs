@@ -1,4 +1,5 @@
 ﻿using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
@@ -16,8 +17,6 @@ namespace Grupp3Hattmakaren.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-
 
         public IActionResult CustomerOrderForm()
         {
@@ -52,10 +51,23 @@ namespace Grupp3Hattmakaren.Controllers
               _context.Addresses.Add(newAddress);
               _context.SaveChanges();
 
-
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerMessages()
+        {
             return View(enquiryViewModel);
         }
 
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerMyOrders()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerOrderHistory()
+        {
+            return View();
+        }
 
     }
 
