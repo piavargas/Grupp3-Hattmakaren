@@ -1,4 +1,5 @@
 ﻿using Grupp3Hattmakaren.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using static System.Net.Mime.MediaTypeNames;
@@ -14,8 +15,6 @@ namespace Grupp3Hattmakaren.Controllers
 
             _context = context;
         }
-
-
 
         public IActionResult CustomerOrderForm()
         {
@@ -45,8 +44,23 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
 
-        
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerMessages()
+        {
+            return View();
+        }
 
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerMyOrders()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerOrderHistory()
+        {
+            return View();
+        }
 
     }
 

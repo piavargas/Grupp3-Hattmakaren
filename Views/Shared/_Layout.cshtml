@@ -28,10 +28,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminEnquiries">My Page</a>
-                        </li>
 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                            if (user != null)
+                            {
+                                if (await UserManager.IsInRoleAsync(user, "Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminEnquiries">My Page</a>
+                                    </li>
+                                }
+                                else if (await UserManager.IsInRoleAsync(user, "Customer"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="CustomerMessages">My CPage</a>
+                                    </li>
+                                }
+                            }
+                        }
+                    
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
