@@ -1,5 +1,17 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Bill</title>
+    <style>
+        body { font-family: 'Arial'; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Shipping Bill</h1>
+    <p>Product Code: @Model.ProductCode</p>
+    <p>Customer Name: @Model.CustomerName</p>
+    <p>Address: @Model.Address</p>
+</body>
+</html>
