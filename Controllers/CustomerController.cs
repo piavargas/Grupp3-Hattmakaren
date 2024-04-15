@@ -11,7 +11,7 @@ namespace Grupp3Hattmakaren.Controllers
     {
         private readonly HatContext _context;
         private readonly UserManager<User> _userManager;
-        
+
         public CustomerController(HatContext context, UserManager<User> userManager)
         {
             _context = context;
@@ -34,11 +34,12 @@ namespace Grupp3Hattmakaren.Controllers
                 font = enquiryViewModel.font,
                 textOnHat = enquiryViewModel.textOnHat,
                 isInProgress = enquiryViewModel.isInProgress,
+                isSpecial = enquiryViewModel.isSpecial,
                 CustomerId = _userManager.GetUserId(User)
             };
 
-                _context.Enquiries.Add(newEnquiry);
-                _context.SaveChanges();
+            _context.Enquiries.Add(newEnquiry);
+            _context.SaveChanges();
 
             var newAddress = new Address
             {
@@ -48,30 +49,33 @@ namespace Grupp3Hattmakaren.Controllers
                 CustomerId = _userManager.GetUserId(User)
             };
 
-              _context.Addresses.Add(newAddress);
-              _context.SaveChanges();
-
-        [Authorize(Roles = "Customer")]
-        public IActionResult CustomerMessages()
-        {
+            _context.Addresses.Add(newAddress);
+            _context.SaveChanges();
             return View(enquiryViewModel);
+
         }
 
-        [Authorize(Roles = "Customer")]
-        public IActionResult CustomerMyOrders()
-        {
-            return View();
-        }
+            [Authorize(Roles = "Customer")]
+            public IActionResult CustomerMessages()
+            {
+                return View();
+            }
 
-        [Authorize(Roles = "Customer")]
-        public IActionResult CustomerOrderHistory()
-        {
-            return View();
+            [Authorize(Roles = "Customer")]
+            public IActionResult CustomerMyOrders()
+            {
+                return View();
+            }
+
+            [Authorize(Roles = "Customer")]
+            public IActionResult CustomerOrderHistory()
+            {
+                return View();
+            }
+
         }
 
     }
-
-
   
-}
+
 
