@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240412101927_mig")]
+    [Migration("20240415094542_mig")]
     partial class mig
     {
         /// <inheritdoc />
@@ -267,6 +267,10 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired()
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("description")
                         .IsRequired()

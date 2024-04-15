@@ -78,6 +78,7 @@ namespace Grupp3Hattmakaren.Migrations
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     size = table.Column<double>(type: "float", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false)
                 },
                 constraints: table =>

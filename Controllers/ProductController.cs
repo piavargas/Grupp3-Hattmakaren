@@ -1,6 +1,9 @@
 ﻿using Grupp3Hattmakaren.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.IO;
 
 namespace Grupp3Hattmakaren.Controllers
 {
@@ -10,25 +13,42 @@ namespace Grupp3Hattmakaren.Controllers
 
         public ProductController(HatContext context)
         {
-           
             _context = context;
         }
-     
 
         public IActionResult AddProduct()
         {
             return View();
         }
 
- 
         [HttpPost]
-        public IActionResult AddProduct(Product produktObjekt)
+        public IActionResult AddProduct(Product produktObjekt, IFormFile imageFile)
         {
             if (ModelState.IsValid) // Kontrollera om modellen är giltig
             {
-                _context.Add(produktObjekt); // Lägg till produkten i databasen
+                // Ladda upp bildfilen om den har valts
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    // Skapa en unik filnamn för den uppladdade bilden
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+
+                    // Ange sökvägen där bilden ska sparas
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+
+                    // Läs in bildfilen och spara den på servern
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        imageFile.CopyTo(stream);
+                    }
+
+                    // Uppdatera sökvägen till bilden i produktobjektet
+                    produktObjekt.ImagePath = "/images/" + fileName;
+                }
+
+                // Lägg till produkten i databasen
+                _context.Add(produktObjekt);
                 _context.SaveChanges(); // Spara ändringar i databasen
-                return RedirectToAction("Index" , "Home"); // Omdirigera till listan över produkter
+                return RedirectToAction("Index", "Home"); // Omdirigera till listan över produkter
             }
             // Om modellen inte är giltig, visa samma vy med felmeddelanden
             return View(produktObjekt);
@@ -47,12 +67,11 @@ namespace Grupp3Hattmakaren.Controllers
             _context.SaveChanges(); // Spara ändringar i databasen
             return RedirectToAction("Index", "Home"); // Omdirigera till listan över produkter
         }
+
         [HttpGet]
         public IActionResult EditProduct(int id)
         {
             Product product = _context.Products.Find(id);
-           // Product product = _context.Produkter.FirstOrDefault(prod => prod.Id.Equals(id));
-            
             return View(product);
         }
 
@@ -76,11 +95,6 @@ namespace Grupp3Hattmakaren.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(product);
-            
-            
         }
-
-
-
     }
 }

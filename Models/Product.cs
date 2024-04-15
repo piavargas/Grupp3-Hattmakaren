@@ -20,6 +20,8 @@ namespace Grupp3Hattmakaren.Models
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "Price has to be of a numeric value")]
 
         public double price { get; set; }
+        
+        public string ImagePath { get; set; }
 
         public virtual ICollection<Order> ?orders { get; set; }
         public virtual ICollection<Material> ?materials { get; set; }

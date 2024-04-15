@@ -4,7 +4,8 @@
     <h1 class="display-4">Välkommen till Hattmakaren</h1>
 </div>
 
-<form asp-controller="ProductController" asp-action="Product" method="post">
+<form asp-controller="ProductController" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+
     <table class="table-bordered">
         <thead>
             <tr>
@@ -12,6 +13,7 @@
                 <th>Description</th>
                 <th>Size(cm)</th>
                 <th>Price(SEK)</th>
+                <th>Image</th> <!-- Lägg till kolumn för bild -->
                 <th></th>
                 <th></th>
             </tr>
@@ -24,6 +26,10 @@
                     <td>@prod.description</td>
                     <td>@prod.size</td>
                     <td>@prod.price</td>
+                    <td>
+                        <!-- Visa bilden för produkten -->
+                        <img src="@prod.ImagePath" alt="Product Image" style="max-width: 100px; max-height: 100px;" />
+                    </td>
                     <td>
                         <form asp-controller="Product" asp-action="Delete" method="post">
                             <input type="hidden" name="id" value="@prod.ProductId" />
