@@ -1,4 +1,4 @@
-﻿     @model List<Product>
+﻿@model List<Product>
 
 <div class="text-center">
     <h1 class="display-4">Välkommen till Hattmakaren</h1>
@@ -9,8 +9,7 @@
 <table class="table-bordered">
   
     <tbody>
-
-        @foreach (var prod in Model)
+            @foreach (var prod in Model)
         {
             <tr>
                 
@@ -28,13 +27,20 @@
         }
     </tbody>
 
+    @if (User.IsInRole("Admin"))
+    {
             <tr>
-
             <a href="Product/AddProduct">Lägg till produkt</a>
             <br />
-            <a href="Customer/CustomerOrderForm">Place Hat Order</a>
-
         </tr>
+    }
+
+    @if (User.IsInRole("Customer"))
+        {
+            <tr>  
+                <a href="Customer/CustomerOrderForm">Place Hat Order</a>
+            </tr>
+        }
 
 </table>
 </form>
