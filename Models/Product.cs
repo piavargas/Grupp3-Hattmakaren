@@ -21,7 +21,7 @@ namespace Grupp3Hattmakaren.Models
 
         public double price { get; set; }
         
-        public string ImagePath { get; set; }
+        public string ?ImagePath { get; set; }
 
         public virtual ICollection<Order> ?orders { get; set; }
         public virtual ICollection<Material> ?materials { get; set; }

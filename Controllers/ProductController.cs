@@ -22,23 +22,23 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product produktObjekt, IFormFile imageFile)
+        public IActionResult AddProduct(Product produktObjekt, IFormFile ImagePath)
         {
-            if (ModelState.IsValid) // Kontrollera om modellen är giltig
+            if (ModelState.IsValid)
             {
                 // Ladda upp bildfilen om den har valts
-                if (imageFile != null && imageFile.Length > 0)
+                if (ImagePath != null && ImagePath.Length > 0)
                 {
                     // Skapa en unik filnamn för den uppladdade bilden
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ImagePath.FileName);
 
-                    // Ange sökvägen där bilden ska sparas
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+                    // Ange sökvägen där bilden ska sparas i wwwroot/images
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
 
                     // Läs in bildfilen och spara den på servern
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        imageFile.CopyTo(stream);
+                        ImagePath.CopyTo(stream);
                     }
 
                     // Uppdatera sökvägen till bilden i produktobjektet
@@ -50,9 +50,11 @@ namespace Grupp3Hattmakaren.Controllers
                 _context.SaveChanges(); // Spara ändringar i databasen
                 return RedirectToAction("Index", "Home"); // Omdirigera till listan över produkter
             }
+
             // Om modellen inte är giltig, visa samma vy med felmeddelanden
             return View(produktObjekt);
         }
+
 
         [HttpPost]
         public IActionResult Delete(int id)
