@@ -18,22 +18,25 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewMaterial(Material material) 
+        public IActionResult AddNewMaterial(Material material)
         {
-            var newMaterial = new Material() 
-            { 
-                name = material.name,
-                supplier = material.supplier,
-                price = material.price,
-                quantity = material.quantity
-            };
+            if (ModelState.IsValid)
+            {
+                var newMaterial = new Material()
+                {
+                    name = material.name,
+                    supplier = material.supplier,
+                    price = material.price,
+                    quantity = material.quantity
+                };
 
-            _hatcontext.Add(newMaterial);
-            _hatcontext.SaveChanges();
+                _hatcontext.Add(newMaterial);
+                _hatcontext.SaveChanges();
 
-            return RedirectToAction("Material");
+                return RedirectToAction("Material");
+            }
+            return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> IncreaseMaterial(int materialId, int quantity)
         {
