@@ -4,16 +4,71 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="~/css/CustomerOrderForm.css">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="~/css/CustomerOrderForm.css">
-        <link rel="stylesheet" href="~/css/CustomerOrderForm_styles.css">
+    <style>
+        .order-form {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .order-form h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .order-form span {
+            font-weight: bold;
+            font-size: 20px;
+            color: #555;
+        }
+
+        .order-form .form-label {
+            font-size: 16px;
+            color: #777;
+        }
+
+        .order-form .order-form-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        .order-form .order-form-input:focus {
+            border-color: #66afe9;
+            outline: none;
+        }
+
+        .order-form .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-form .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <section class="order-form m-4">
     <div class="container pt-4">
         <div class="row">
             <div class="col-12 px-4">
-                <h1>Design your own hat and let your style shine!</h1>
+                <h1>Design your own special hat and let your style shine!</h1>
 
 
                 <hr class="mt-1" />
@@ -27,28 +82,52 @@
                     </div>
                     <div class="col-12">
                         <div data-mdb-input-init class="form-outline">
-                            <label @* asp-for="headSize" *@ class="form-label">Head Size</label>
-                            <input type="text" @* asp-for = "headSize" *@ id="form5" class="form-control order-form-input" placeholder="Specify your head perimeter in cm"/>
+                            <label asp-for="headSize" class="form-label">Head Size</label>
+                            <input type="text" asp-for = "headSize" *@ id="form5" class="form-control order-form-input" placeholder="Specify your head perimeter in cm"/>
                         </div>
 
                         <div class="col-sm-6 mt-2 pe-sm-2">
                             <div data-mdb-input-init class="form-outline">
-                                <label @* asp-for="color" *@ class="form-label">Color</label>
-                                    <input type="text" @* asp-for = "color" *@ id="form9" class="form-control order-form-input" placeholder="Hat color" />
+                                <label asp-for="color" *@ class="form-label">Color</label>
+                                    <input type="text"  asp-for = "color" id="form9" class="form-control order-form-input" placeholder="Hat color" />
                             </div>
                         </div>
 
                         <div class="col-sm-6 mt-2 ps-sm-0">
                             <div data-mdb-input-init class="form-outline">
-                                <label@*  asp-for="materialName" *@ class="form-label">Material</label>
+                                <label asp-for="fabricMaterial" class="form-label">Hat fabric material</label>
                                
-                                <select id="form200" class="form-control order-form-input">
-                                  <option value="option1">Choose hat material...</option>
-                                  <option value="option2">Alternativ</option>
-                                  <option value="option3">Alternativ</option>
+                                <select asp-for ="fabricMaterial" id="form200" class="form-control order-form-input">
+                                        <option value="option1">Choose hat fabric...</option>
+                                        <option value="Bomull">Bomull</option>
+                                        <option value="Linne">Linne</option>
+                                        <option value="Ull">Ull</option>
+                                        <option value="Silke">Silke</option>
+                                        <option value="Satin">Satin</option>
+                                        <option value="Tweed">Tweed</option>
+                                        <option value="Polyester">Polyester</option>
+
                                 </select>
                             </div>
                         </div>
+
+                            <div class="col-sm-6 mt-2 ps-sm-0">
+                                <div data-mdb-input-init class="form-outline">
+                                    <label asp-for="specialEffectMaterials" class="form-label">Special effect material</label>
+
+                                    <select asp-for ="specialEffectMaterials" id="form200" class="form-control order-form-input">
+                                        <option value="option1">Choose special effect material...</option>
+                                        <option value="Feathers">Feathers</option>
+                                        <option value="Fabric flowers">Fabric flowers</option>
+                                        <option value="Beads">Beads</option>
+                                        <option value="Lace">Lace</option>
+                                        <option value="Glossy Paper">Glossy Paper</option>
+                                        <option value="Lurex thread">Lurex thread</option>
+                                        <option value="Faux fur">Faux fur</option>
+
+                                    </select>
+                                </div>
+                            </div>
 
                         <div class="col-sm-6 mt-2 ps-sm-0">
                             <div data-mdb-input-init class="form-outline">
@@ -139,15 +218,7 @@
                                 </div>
                             </div>
 
-                            @* <div class="row mt-3 mx-4">
-                                <div class="col-12" hidden>
-                                    <div class="form-check">
-                                        <input class="form-check-input" asp-for="isInProgress" type="checkbox" id="flexCheckDefault" value ="false"/>
-                                        <label asp-for="isInProgress" class="form-check-label">Building upon a finished product?</label>
-                                    </div>
-                                </div>
-                            </div> *@
-
+                          
                             <input type ="hidden" asp-for="isInProgress"/>
                             <input type="hidden" asp-for="isSpecial" />
 

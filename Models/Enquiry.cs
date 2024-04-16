@@ -11,6 +11,9 @@ namespace Grupp3Hattmakaren.Models
         public bool consentHat { get; set; } //Samtycke att bygga vidare på en existerande hatt 
         public string description { get; set; }
 
+        public  string fabricMaterial { get; set; } // Enquiry class
+        public  string  specialEffectMaterials { get; set; } // Enquiry class
+
         //public string referenceImage { get; set; }
         public string font { get; set; }
         public string textOnHat { get; set; }
