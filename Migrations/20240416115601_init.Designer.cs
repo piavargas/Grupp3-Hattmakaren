@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240415111317_init")]
+    [Migration("20240416115601_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -210,9 +210,15 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("price")
+                        .HasColumnType("float");
 
                     b.Property<string>("productName")
                         .IsRequired()
@@ -234,6 +240,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             ProductId = 1,
                             description = "Denna mysiga nalle tänds när du rör honom.",
+                            price = 0.0,
                             productName = "Magisk Nalle Natlampa",
                             size = 350.0
                         });
@@ -550,12 +557,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eb8507a2-f100-4409-934e-6114c86fc07f",
+                            ConcurrencyStamp = "0a4b038b-c7fa-456e-bd04-65393f6f5d2e",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4db902bd-db8b-4950-9a67-df76e1559456",
+                            SecurityStamp = "01701724-ca1e-4df7-b671-56fc7afd5964",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
