@@ -6,7 +6,8 @@ namespace Grupp3Hattmakaren.Models
     {
         public string headSize { get; set; } // Customer class
         public string color { get; set; }
-        public string materialName { get; set; } // Material class 
+        public string fabricMaterial { get; set; } // Enquiry class
+        public string specialEffectMaterials { get; set; } // Enquiry class
         public string textOnHat { get; set; } // Enquiry class
         public string font { get; set; }  // Enquiry class
         public string description { get; set; } // Enquiry class
