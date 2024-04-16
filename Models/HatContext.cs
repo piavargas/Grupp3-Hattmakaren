@@ -78,7 +78,25 @@ namespace Grupp3Hattmakaren.Models
                    isPayed = true,
                    AddressId = 1, 
                    ProductId = 1 
-               }
+               },
+                new Order
+                {
+                    OrderId = 2,
+                    price = 130.00,
+                    CustomerId = "2",
+                    isPayed = true,
+                    AddressId = 1,
+                    ProductId = 1
+                },
+                 new Order
+                 {
+                     OrderId = 3,
+                     price = 330.00,
+                     CustomerId = "3",
+                     isPayed = true,
+                     AddressId = 2,
+                     ProductId = 1
+                 }
             );
 
             modelBuilder.Entity<Address>().HasData(
@@ -89,7 +107,15 @@ namespace Grupp3Hattmakaren.Models
                     streetName = "123 Main Street",
                     zipCode = 12345,                    
                     countryName = "Countryland"
-                }
+                },
+                  new Address
+                  {
+                      AddressId = 2,
+                      CustomerId = "2", // Länka detta till en befintlig Customer                   
+                      streetName = "Potatisvägen",
+                      zipCode = 70284,
+                      countryName = "Sweden"
+                  }
             );
 
             modelBuilder.Entity<Customer>().HasData(
@@ -101,6 +127,24 @@ namespace Grupp3Hattmakaren.Models
                     firstName = "Jonas",
                     lastName = "Moll",
                     headSize = "28cm"
+                },
+                new Customer
+                {
+                    Id = "2",
+                    UserName = "tanjahavstorm",
+                    Email = "tanjahavstorm@outlook.com",
+                    firstName = "Tanja",
+                    lastName = "Havstorm",
+                    headSize = "79cm"
+                },
+                new Customer
+                {
+                    Id = "3",
+                    UserName = "maxmaxsson",
+                    Email = "icamaxi@outlook.com",
+                    firstName = "Max",
+                    lastName = "Maxsson",
+                    headSize = "21cm"
                 }
             ); 
 

@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Grupp3Hattmakaren.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Configuration;
-
-
-
+using DinkToPdf;
+using DinkToPdf.Contracts;
+using Grupp3Hattmakaren.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +23,12 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<HatContext>()
     .AddDefaultTokenProviders();
 
+//DinkToPdf IConverter med singleton lifecycle
+builder.Services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));
+
+//ViewRenderService och PDFController (heter controller men är egentligen en service)
+builder.Services.AddTransient<ViewRenderService>();
+builder.Services.AddTransient<PDFController>();
 
 
 var app = builder.Build();
@@ -46,7 +52,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 
 app.Run();

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Grupp3Hattmakaren.Models.Order>
+
+
+@* OrderList.cshtml*@
+ <h1>Orders</h1>
+<table class="table"> 
+    <thead> 
+        <tr> 
+            <th>Order ID</th> 
+            <th>Customer Name</th> 
+            <th>Address</th> 
+            <th>Product</th> 
+            <th>Total Price</th> 
+        </tr> 
+    </thead> 
+ 
+    <tbody> @foreach (var order in Model)
+        {
+            <tr> 
+                <td>@order.OrderId</td> 
+                <td>@order.Customer.firstName @order.Customer.lastName</td>
+                <td>@order.Address.streetName</td>
+                <td>@order.isPayed.ToString().ToUpper()</td>
+                <td>
+                    <a asp-action="PrintWaybill" asp-route-id="@order.OrderId" asp-controller="ShippingBill" class="btn btn-primary">Print Waybill</a>
+                </td>
+            </tr>
+        } </tbody> </table>

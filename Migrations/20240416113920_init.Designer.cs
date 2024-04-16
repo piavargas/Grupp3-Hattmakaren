@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240415111317_init")]
+    [Migration("20240416113920_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -65,6 +65,14 @@ namespace Grupp3Hattmakaren.Migrations
                             countryName = "Countryland",
                             streetName = "123 Main Street",
                             zipCode = 12345
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            CustomerId = "2",
+                            countryName = "Sweden",
+                            streetName = "Potatisvägen",
+                            zipCode = 70284
                         });
                 });
 
@@ -194,6 +202,24 @@ namespace Grupp3Hattmakaren.Migrations
                             ProductId = 1,
                             isPayed = true,
                             price = 150.0
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            AddressId = 1,
+                            CustomerId = "2",
+                            ProductId = 1,
+                            isPayed = true,
+                            price = 130.0
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            AddressId = 2,
+                            CustomerId = "3",
+                            ProductId = 1,
+                            isPayed = true,
+                            price = 330.0
                         });
                 });
 
@@ -210,9 +236,15 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("price")
+                        .HasColumnType("float");
 
                     b.Property<string>("productName")
                         .IsRequired()
@@ -234,6 +266,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             ProductId = 1,
                             description = "Denna mysiga nalle tänds när du rör honom.",
+                            price = 0.0,
                             productName = "Magisk Nalle Natlampa",
                             size = 350.0
                         });
@@ -550,17 +583,49 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eb8507a2-f100-4409-934e-6114c86fc07f",
+                            ConcurrencyStamp = "1931ed10-9a00-48b5-ace1-55a195b87c26",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4db902bd-db8b-4950-9a67-df76e1559456",
+                            SecurityStamp = "84403900-4b73-4cc8-8832-40bb0d4ba73d",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
                             lastName = "Moll",
                             headSize = "28cm"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5f06b112-dc4e-4273-b87f-ea5a61d1c3c0",
+                            Email = "tanjahavstorm@outlook.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6945e0f6-07c4-4554-9cd8-ac1ed5ff3f67",
+                            TwoFactorEnabled = false,
+                            UserName = "tanjahavstorm",
+                            firstName = "Tanja",
+                            lastName = "Havstorm",
+                            headSize = "79cm"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2355b048-8bd8-451d-ab99-1cc2c9d2907a",
+                            Email = "icamaxi@outlook.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f559352-df01-4d47-85de-11631b3393e3",
+                            TwoFactorEnabled = false,
+                            UserName = "maxmaxsson",
+                            firstName = "Max",
+                            lastName = "Maxsson",
+                            headSize = "21cm"
                         });
                 });
 
@@ -634,7 +699,7 @@ namespace Grupp3Hattmakaren.Migrations
             modelBuilder.Entity("Grupp3Hattmakaren.Models.ShippingBill", b =>
                 {
                     b.HasOne("Grupp3Hattmakaren.Models.Order", "order")
-                        .WithMany()
+                        .WithMany("ShippingBills")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -717,6 +782,11 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasForeignKey("productsProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.Order", b =>
+                {
+                    b.Navigation("ShippingBills");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product", b =>
