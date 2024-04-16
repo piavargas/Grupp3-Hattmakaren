@@ -146,7 +146,28 @@ namespace Grupp3Hattmakaren.Models
                     lastName = "Maxsson",
                     headSize = "21cm"
                 }
-            ); 
+            );
+
+            modelBuilder.Entity<ShippingBill>().HasData(
+    new ShippingBill
+    {
+        ShippingBillId = 1,
+        productCode = "SHB001",
+        OrderId = 1
+    },
+    new ShippingBill
+    {
+        ShippingBillId = 2,
+        productCode = "SHB002",
+        OrderId = 2
+    },
+    new ShippingBill
+    {
+        ShippingBillId = 3,
+        productCode = "SHB003",
+        OrderId = 3
+    }
+);
 
         }
 

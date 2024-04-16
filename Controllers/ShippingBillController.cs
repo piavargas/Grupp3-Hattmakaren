@@ -1,92 +1,65 @@
-﻿using Grupp3Hattmakaren.Models;
+﻿using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Grupp3Hattmakaren.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 
 namespace Grupp3Hattmakaren.Controllers
 {
     public class ShippingBillController : Controller
     {
-        private readonly HatContext _hatcontext;
-        private readonly PDFController _pdfController;
-        private readonly ViewRenderService _viewRenderService;
+        private readonly HatContext _context;
 
-        public ShippingBillController(HatContext context, PDFController pdfController, ViewRenderService viewRenderService)
+        public ShippingBillController(HatContext context)
         {
-            _hatcontext = context;
-            _pdfController = pdfController;
-            _viewRenderService = viewRenderService;
+            _context = context;
         }
 
         public IActionResult OrderList()
         {
-            var orders = _hatcontext.Orders.ToList();
+            var orders = _context.Orders.ToList();
             return View(orders);
         }
 
-        public IActionResult PrintShippingBill()
-        {
-            return View();
-        }
 
-        public IActionResult PrintWaybill(int id)
+        public IActionResult PrintShippingBill(int orderId)
         {
-            return RedirectToAction("DownloadPdf", new { id = id });
-        }
-
-
-        // GET: ShippingBill/Details/5
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
+            var order = _context.Orders.Include(o => o.Customer).Include(o => o.Address).FirstOrDefault(o => o.OrderId == orderId);
+         
+            var shippingBill = new ShippingBill
             {
-                return BadRequest(); // Inget ID = Returnera HTTP 400 Bad Request
-            }
+                // Fyll i fraktsedelsinfo
+                //OrderId = order.OrderId,
+                productCode = "6504 00 00"
+            };
 
-            //LINQ query för att extrahera den data vi behöver från relevanta tabeller
-            // Lagras sedan i fälten från ShippingBillViewModel
-            var shippingBillDetails = _hatcontext.ShippingBills
-                .Where(sb => sb.ShippingBillId == id)
-                .Select(sb => new ShippingBillViewModel
-                {
-                    productCode = sb.productCode,
-                    customerFullName = sb.order.Customer.firstName + " " + sb.order.Customer.lastName,
-                    addressDetails = sb.order.Address.streetName + ", " + sb.order.Address.zipCode + ", " + sb.order.Address.countryName
-                }).FirstOrDefault();
+            _context.ShippingBills.Add(shippingBill);
+            _context.SaveChanges();
 
-
-
-            if (shippingBillDetails == null)
+            // Skapa en ny PDF-fil
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                return NotFound(); // Ingen fraktsedel matchar givet ID = Returnera HTTP 404 Not Found
+                Document doc = new Document();
+                PdfWriter.GetInstance(doc, memoryStream);
+                doc.Open();
+
+                //PDF-fil med fraktsedelsinformation
+                doc.Add(new Paragraph($"Shipping Bill ID: {shippingBill.ShippingBillId}"));
+                doc.Add(new Paragraph($"Product Code: {shippingBill.productCode}"));
+                //doc.Add(new Paragraph($"Order ID: {order.OrderId}"));
+                //doc.Add(new Paragraph($"Customer Name: {order.Customer.firstName} {order.Customer.lastName}"));
+                //doc.Add(new Paragraph($"Address: {order.Address.streetName}, {order.Address.zipCode}, {order.Address.countryName}"));
+
+                doc.Close();
+
+                byte[] pdfBytes = memoryStream.ToArray();
+
+                return File(pdfBytes, "application/pdf", "shipping_label.pdf");
             }
-
-            return View(shippingBillDetails); // Skicka data till view
         }
-
-
-        // Metod för att ladda ner PDF (inför utskrivning)
-        public IActionResult DownloadPdf(int id)
-        {
-            //Använder metoden Details som ligger längre upp i denna klass
-            var model = Details(id);
-            if (model == null)
-            {
-                return NotFound(); // Make sure to handle cases where the model is not found.
-            }
-
-            //Generera HTML string från Razor view kallad "PrintShippingBill"
-            var html = _viewRenderService.RenderToString("ShippingBill/PrintShippingBill.cshtml", model);
-
-            //Generera PDF från HTML string
-            var file = _pdfController.GeneratePdf(html);
-
-            //Returnera filen som låter webläsaren ladda ner den
-            return File(file, "application/pdf", "ShippingBill.pdf");
-        }
-
 
     }
-
-
 }
+
