@@ -35,6 +35,8 @@ namespace Grupp3Hattmakaren.Controllers
                 textOnHat = enquiryViewModel.textOnHat,
                 isInProgress = enquiryViewModel.isInProgress,
                 isSpecial = enquiryViewModel.isSpecial,
+                fabricMaterial = enquiryViewModel.fabricMaterial,
+                specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
                 CustomerId = _userManager.GetUserId(User)
             };
 
@@ -51,7 +53,8 @@ namespace Grupp3Hattmakaren.Controllers
 
             _context.Addresses.Add(newAddress);
             _context.SaveChanges();
-            return View(enquiryViewModel);
+            return View("EnquiryConfirmationMessage", enquiryViewModel);
+                
 
         }
 

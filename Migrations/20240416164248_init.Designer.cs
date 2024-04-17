@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240415111317_init")]
+    [Migration("20240416164248_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -87,6 +87,10 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("fabricMaterial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("font")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -97,6 +101,10 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Property<bool>("isSpecial")
                         .HasColumnType("bit");
 
+                    b.Property<string>("specialEffectMaterials")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("textOnHat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -106,19 +114,6 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Enquiries");
-
-                    b.HasData(
-                        new
-                        {
-                            EnquiryId = 1,
-                            CustomerId = "1",
-                            consentHat = true,
-                            description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
-                            font = "Arial",
-                            isInProgress = true,
-                            isSpecial = false,
-                            textOnHat = "Jonas är bäst"
-                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Material", b =>
@@ -210,9 +205,15 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasMaxLength(21)
                         .HasColumnType("nvarchar(21)");
 
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("price")
+                        .HasColumnType("float");
 
                     b.Property<string>("productName")
                         .IsRequired()
@@ -234,6 +235,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             ProductId = 1,
                             description = "Denna mysiga nalle tänds när du rör honom.",
+                            price = 0.0,
                             productName = "Magisk Nalle Natlampa",
                             size = 350.0
                         });
@@ -550,12 +552,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "eb8507a2-f100-4409-934e-6114c86fc07f",
+                            ConcurrencyStamp = "fbeb8009-4bb0-4a15-b683-65a549c3034d",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4db902bd-db8b-4950-9a67-df76e1559456",
+                            SecurityStamp = "41b435b0-ccfe-4adb-866c-ea825091ef7a",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
