@@ -117,12 +117,12 @@
         </div>
 
         @if (User.IsInRole("Admin"))
-    {
+        {
             <tr>
             <a href="Product/AddProduct">Lägg till produkt</a>
             <br />
         </tr>
-    }
+        }
 
     @if (User.IsInRole("Customer"))
         {

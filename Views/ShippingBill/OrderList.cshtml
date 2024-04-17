@@ -9,7 +9,7 @@
             <th>Order ID</th> 
             <th>Customer Name</th> 
             <th>Address</th> 
-            <th>Product</th> 
+            <th>Is Payed</th> 
             <th>Total Price</th> 
         </tr> 
     </thead> 
@@ -20,7 +20,7 @@
                 <td>@order.OrderId</td> 
                 <td>@order.Customer.firstName @order.Customer.lastName</td>
                 <td>@order.Address.streetName</td>
-                <td>@order.isPayed.ToString().ToUpper()</td>
+                <td>@order.isPayed.ToString()</td>
                 <td>
                     <!-- Update OrderList.cshtml -->
                     <a asp-action="PrintShippingBill" asp-controller="ShippingBill" asp-route-id="@order.OrderId" class="btn btn-primary">Print Waybill</a>
