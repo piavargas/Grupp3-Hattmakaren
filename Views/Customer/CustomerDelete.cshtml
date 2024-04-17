@@ -32,7 +32,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="CustomerDelete"> @*Fixa rätt länk till controller*@
+                    <a href="CustomerDelete">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Delete account</span>
                     </a>
@@ -43,32 +43,17 @@
 
     <section class="dashboard">
         <div class="dash-content">
-            <div class="activity">
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Incoming Messages</span>
+            <form asp-action="DeleteAccount" method="post">
+                <h2>Delete Your Account</h2>
+                <p>Please enter your password to confirm:</p>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Enter Password" required />
                 </div>
-                <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">From</span>
-                        <span class="data-list">(Namn på Admin)</span>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">(Admins email)</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Special</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Express</span>
-                        <span class="data-list">Yes</span>
-                    </div>
-                </div>
-            </div>
+                <button type="submit" class="btn-delete">Delete Account</button>
+            </form>
         </div>
     </section>
+
 
     <script src="~/js/AdminMyPage.js"></script>
 </body>
