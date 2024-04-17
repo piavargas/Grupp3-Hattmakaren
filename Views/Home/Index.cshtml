@@ -104,6 +104,12 @@
                         <p class="product-description">@prod.description</p>
                         <p class="product-details">Storlek: @prod.size cm</p>
                         <p class="product-price">@prod.price SEK</p>
+                        @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+                        {
+                            <input type="number" name="productId" id="productId" value="@prod.ProductId" hidden />
+                            <button type="submit" class="delete">Add to Cart</button>
+
+                        }
                         <div class="text-center">
                             <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
                                 <input type="hidden" name="id" value="@prod.ProductId" />

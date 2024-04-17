@@ -15,9 +15,11 @@ namespace Grupp3Hattmakaren.Models
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product_Material> Product_Materials { get; set; }
+        public DbSet<ProductShoppingCart> ProductShoppingCarts { get; set; }
         public DbSet<ShippingBill> ShippingBills { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SpecialProduct> SpecialProducts { get; set; }
@@ -44,6 +46,11 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.ProductId);
 
+            modelBuilder.Entity<ProductShoppingCart>()
+                .HasKey(psc => new { psc.productId, psc.shoppingCartId });
+            //modelBuilder.Entity<Customer>()
+            //    .HasOne(c => c.cart)
+            //    .WithOne(sc => sc.customer);
 
             modelBuilder.Entity<Product>().HasData(
                new Product
