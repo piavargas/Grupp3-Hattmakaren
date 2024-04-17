@@ -31,7 +31,9 @@ builder.Services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools
 //ViewRenderService och PDFController (heter controller men är egentligen en service)
 builder.Services.AddScoped<ViewRenderService>();
 
-builder.Services.AddScoped<PDFController>();
+builder.Services.AddScoped<PdfService>();
+
+builder.Services.AddScoped<OrderService>();
 
 
 var app = builder.Build();

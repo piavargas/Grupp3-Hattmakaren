@@ -54,10 +54,27 @@ namespace Grupp3Hattmakaren.Models
                    size = 350,
                   
                }
-             
                );
 
-
+            modelBuilder.Entity<ShippingBill>().HasData(
+                new ShippingBill
+                {
+                    ShippingBillId = 1,
+                    productCode = "SHB001",
+                    //OrderId = 1
+                },
+                new ShippingBill
+                {
+                    ShippingBillId = 2,
+                    productCode = "SHB002",
+                    //OrderId = 2
+                },
+                new ShippingBill
+                {
+                    ShippingBillId = 3,
+                    productCode = "SHB003",
+                    //OrderId = 3
+                });
 
 
 

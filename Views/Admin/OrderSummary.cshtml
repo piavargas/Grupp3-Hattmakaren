@@ -7,22 +7,23 @@
 </head>
 <body>
     <h1>Order Summary - @Model.OrderId</h1>
-    <p>Name: @Model.Name</p>
-    <p>Phone: @Model.Phone</p>
-    <p>Email: @Model.Email</p>
+    <p>Name: @Model. name</p>
+    @* <p>Phone: @Model.phone</p> *@
+    @*Även bortkommenterad i OrderViewModels - OrderSummaryViewModel*@
+    <p>Email: @Model.email</p>
 
     <h2>Products</h2>
     <ul>
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model.products)
         {
             <li>
-                <strong>@product.ProductName</strong> - @product.Description
-                <br>Materials: @String.Join(", ", product.Materials)
-                <br>Size: @product.Size
-                <br>Price: $@product.Price
+                <strong>@product.productName</strong> - @product.description
+                <br>Materials: @String.Join(", ", product.materials)
+                <br>Size: @product.size
+                <br>Price: $@product.price
             </li>
         }
     </ul>
-    <p>Total Price: $@Model.TotalPrice</p>
+    <p>Total Price: $@Model.totalPrice</p>
 </body>
 </html>

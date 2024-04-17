@@ -3,11 +3,11 @@ using DinkToPdf;
 
 namespace Grupp3Hattmakaren.Controllers
 {
-    public class PDFController
+    public class PdfService
     {
         private readonly IConverter _converter;
 
-        public PDFController(IConverter converter)
+        public PdfService(IConverter converter)
         {
             _converter = converter;
         }

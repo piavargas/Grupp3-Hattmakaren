@@ -6,13 +6,13 @@ namespace Grupp3Hattmakaren.Controllers
     public class OrderController : Controller
     {
         private readonly OrderService _orderService;
-        private readonly PDFController _pdfController;
+        private readonly PdfService _pdfService;
         private readonly ViewRenderService _viewRenderService;
 
-        public OrderController(OrderService orderService,PDFController pdfController, ViewRenderService viewRenderService)
+        public OrderController(OrderService orderService,PdfService pdfService, ViewRenderService viewRenderService)
         {
             _orderService = orderService;
-            _pdfController = pdfController;
+            _pdfService = pdfService;
             _viewRenderService = viewRenderService;
         }
 
@@ -37,7 +37,7 @@ namespace Grupp3Hattmakaren.Controllers
             }
 
             var html = _viewRenderService.RenderToString("OrderSummary", model);
-            var file = _pdfController.GeneratePdf(html);
+            var file = _pdfService.GeneratePdf(html);
 
             return File(file, "application/pdf", $"OrderSummary-{model.OrderId}.pdf");
         }
