@@ -11,11 +11,13 @@ namespace Grupp3Hattmakaren.Controllers
     {
         private readonly HatContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public CustomerController(HatContext context, UserManager<User> userManager)
+        public CustomerController(HatContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult CustomerOrderForm()
@@ -54,11 +56,58 @@ namespace Grupp3Hattmakaren.Controllers
             _context.Addresses.Add(newAddress);
             _context.SaveChanges();
             return View("EnquiryConfirmationMessage", enquiryViewModel);
-                
-
         }
 
-            [Authorize(Roles = "Customer")]
+        [HttpPost]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> DeleteAccount(string password)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Verifiera lösenordet
+            if (!await _userManager.CheckPasswordAsync(user, password))
+            {
+                ModelState.AddModelError("", "Password is incorrect");
+                return View("CustomerDelete");
+            }
+
+            // Kolla om det finns pågående ordrar
+            //var hasOngoingOrders = _context.Orders.Any(o => o.CustomerId == user.Id && o.isPayed == false);
+            //if (hasOngoingOrders)
+            //{
+            //    ModelState.AddModelError("", "Cannot delete account with ongoing orders.");
+            //    return View("CustomerDelete");
+            //}
+
+            // Radera kundens relaterade data
+            var addresses = _context.Addresses.Where(a => a.CustomerId == user.Id);
+            _context.Addresses.RemoveRange(addresses);
+
+            var orders = _context.Orders.Where(o => o.CustomerId == user.Id);
+            _context.Orders.RemoveRange(orders);
+
+            await _context.SaveChangesAsync();
+
+            // Till sist raderas kunden
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignOutAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Failed to delete the account.");
+                return View("CustomerDelete");
+            }
+        }
+
+
+        [Authorize(Roles = "Customer")]
             public IActionResult CustomerMessages()
             {
                 return View();
@@ -76,7 +125,13 @@ namespace Grupp3Hattmakaren.Controllers
                 return View();
             }
 
-        }
+            [Authorize(Roles = "Customer")]
+            public IActionResult CustomerDelete()
+            {
+                return View();
+            }
+
+    }
 
     }
   
