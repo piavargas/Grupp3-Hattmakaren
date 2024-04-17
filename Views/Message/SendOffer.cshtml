@@ -1,0 +1,63 @@
+﻿@using System.Security.Claims
+
+@model SendMessageViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head id="messageHead">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/Message.css" rel="stylesheet">
+</head>
+<body class="text-center login-page">
+    <form class="form-signin" name="contact_form" asp-controller="Message" asp-action="SendOffer" method="post">
+        <h1 class="h3 mb-3 font-weight-normal">Send Message</h1>
+        <div class="mb-5">
+            <div class="col">
+                <label for="sender">Your name: </label>
+                @if (User.Identity.IsAuthenticated != null && User.Identity.IsAuthenticated)
+                {
+                    var username = User.FindFirst(ClaimTypes.Name)?.Value;
+
+                    if (username != null)
+                    {
+                        <input type="text" class="form-control" asp-for="sender" value="@username" readonly>
+                    }
+                    else
+                    {
+                        <span class="text-danger">Error fetching username</span>
+                    }
+                }
+                else
+                {
+                    <input type="text" class="form-control" asp-for="sender">
+                    <span asp-validation-for="sender" class="text-danger"></span>
+                }
+            </div>
+        </div>
+        <div class="mb-5">
+            <label for="recipientName">Recipient's name:</label>
+            @if (ViewBag.Users != null)
+            {
+                <select class="form-control" asp-for="UserId">
+                    <option value="">Select Receiver</option>
+                    @foreach (var user in ViewBag.Users)
+                    {
+                        <option value="@user.Id">@user.firstName</option>
+                    }
+                </select>
+            }
+            else
+            {
+                <span class="text-danger">No users found</span>
+            }
+        </div>
+        <div class="mb-5">
+            <label for="text">Message</label>
+            <textarea class="form-control" id="text" asp-for="messageText" rows="5"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary px-4 btn-lg">Send message</button>
+    </form>
+</body>
+</html>
+

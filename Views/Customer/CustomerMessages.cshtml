@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@* <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,4 +66,71 @@
 
     <script src="~/js/AdminMyPage.js"></script>
 </body>
+</html> *@
+
+@model List<SendMessageViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Grupp7.seeMessages.css" asp-append-version="true" />
+
+    <style>
+        .message-container {
+            margin-top: 20px;
+        }
+
+        .message {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+            .message .sender {
+                font-weight: bold;
+            }
+
+            .message .message-text {
+                margin-top: 5px;
+            }
+
+            .message .mark-as-read {
+                margin-top: 5px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="message-container">
+                @foreach (var message in Model)
+                {
+                    <div class="message">
+                        <div class="sender">@message.sender</div>
+                        <div class="message-text">@message.messageText</div>
+                <form asp-action="MarkAsRead" asp-controller="Message" method="post">
+                <div class="mark-as-read">
+                <input type="checkbox" asp-for="@message.isRead" onchange="this.form.submit()">
+                <span>Mark as read</span>
+                </div>
+                </form>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No messages found.</p>
+        }
+    </div>
+</body>
 </html>
+

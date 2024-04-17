@@ -16,6 +16,7 @@ namespace Grupp3Hattmakaren.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
         public DbSet<Material> Materials { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product_Material> Product_Materials { get; set; }
         public DbSet<ShippingBill> ShippingBills { get; set; }
