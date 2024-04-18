@@ -4,6 +4,7 @@ using Grupp3Hattmakaren.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    partial class HatContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:Migrations/20240417081606_init.Designer.cs
+    [Migration("20240417081606_init")]
+========
+    [Migration("20240416164248_init")]
+>>>>>>>> master:Migrations/20240416164248_init.Designer.cs
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,6 +99,10 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("fabricMaterial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("font")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -102,6 +113,10 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Property<bool>("isSpecial")
                         .HasColumnType("bit");
 
+                    b.Property<string>("specialEffectMaterials")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("textOnHat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -111,19 +126,6 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Enquiries");
-
-                    b.HasData(
-                        new
-                        {
-                            EnquiryId = 1,
-                            CustomerId = "1",
-                            consentHat = true,
-                            description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
-                            font = "Arial",
-                            isInProgress = true,
-                            isSpecial = false,
-                            textOnHat = "Jonas är bäst"
-                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Material", b =>
@@ -600,12 +602,20 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
+<<<<<<<< HEAD:Migrations/20240417081606_init.Designer.cs
                             ConcurrencyStamp = "11f7caed-fbca-4ac6-9588-4fd091df0728",
+========
+                            ConcurrencyStamp = "fbeb8009-4bb0-4a15-b683-65a549c3034d",
+>>>>>>>> master:Migrations/20240416164248_init.Designer.cs
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
+<<<<<<<< HEAD:Migrations/20240417081606_init.Designer.cs
                             SecurityStamp = "3cf300e6-3fbb-46b9-a81a-5d7b42053836",
+========
+                            SecurityStamp = "41b435b0-ccfe-4adb-866c-ea825091ef7a",
+>>>>>>>> master:Migrations/20240416164248_init.Designer.cs
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
