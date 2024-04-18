@@ -37,18 +37,38 @@
                         <p class="product-description">@prod.description</p>
                         <p class="product-details">Storlek: @prod.size cm</p>
                         <p class="product-price">@prod.price SEK</p>
-                        <div class="text-center">
-                            <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@prod.ProductId" />
-                                <button type="submit" class="btn btn-danger mr-2">Radera</button>
-                            </form>
-                            <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
-                        </div>
+                        @if(User.IsInRole("Customer"))
+                        {
+                            //Form för att lägga till en produkt i kundvagnen
+                            using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+                            {
+                                <input type="number" name="productId" id="productId" value="@prod.ProductId" hidden />
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+
+                            }
+                        }
+                        else if(User.IsInRole("Admin"))
+                        {
+                            <div class="text-center">
+                                <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@prod.ProductId" />
+                                    <button type="submit" class="btn btn-danger mr-2">Radera</button>
+                                </form>
+                                <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
+                            </div>
+                        }
                     </div>
                 </div>
             }
         </div>
 
+    @if (User.IsInRole("Admin"))
+    {
+        <tr>
+            <a href="Product/AddProduct">Lägg till produkt</a>
+            <br />
+        </tr>
+    }
 
   
 
