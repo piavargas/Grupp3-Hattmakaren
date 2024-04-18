@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -100,9 +100,9 @@ namespace Grupp3Hattmakaren.Migrations
                     AddressId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    streetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    zipCode = table.Column<int>(type: "int", nullable: false),
-                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    streetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    zipCode = table.Column<int>(type: "int", nullable: true),
+                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,14 +206,17 @@ namespace Grupp3Hattmakaren.Migrations
                 {
                     EnquiryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     consentHat = table.Column<bool>(type: "bit", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     font = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isInProgress = table.Column<bool>(type: "bit", nullable: false),
                     isSpecial = table.Column<bool>(type: "bit", nullable: false),
+                    getInStore = table.Column<bool>(type: "bit", nullable: false),
                     CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -369,7 +372,7 @@ namespace Grupp3Hattmakaren.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
-                values: new object[] { "1", 0, "fbeb8009-4bb0-4a15-b683-65a549c3034d", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "41b435b0-ccfe-4adb-866c-ea825091ef7a", false, "jonasmoll", "Jonas", "28cm", "Moll" });
+                values: new object[] { "1", 0, "94350238-e58d-4c7b-8407-442fd801828b", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "5114cda8-5e2a-454c-ad94-cf4138848ec2", false, "jonasmoll", "Jonas", "28cm", "Moll" });
 
             migrationBuilder.InsertData(
                 table: "Products",
