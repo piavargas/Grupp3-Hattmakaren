@@ -94,7 +94,184 @@ namespace Grupp3Hattmakaren.Models
                 }
             );
 
-        
+            modelBuilder.Entity<Material>().HasData(
+              
+                // Stråhattar
+                new Material
+                {
+                    materialId = 1,
+                    name = "Rishalm",
+                    quantity = 1000,
+                    supplier = "Temu",
+                    price = 599
+                },
+                new Material
+                {
+                    materialId = 2,
+                    name = "Palmlöv",
+                    quantity = 800,
+                    supplier = "Temu",
+                    price = 749
+                },
+                new Material
+                {
+                    materialId = 3,
+                    name = "Majsblad",
+                    quantity = 1200,
+                    supplier = "Wish",
+                    price = 625
+                },
+                new Material
+                {
+                    materialId = 4,
+                    name = "Hampfibrer",
+                    quantity = 1500,
+                    supplier = "Shein",
+                    price = 8.99
+                },
+                // Tyghattar
+                new Material
+                {
+                    materialId = 5,
+                    name = "Bomull",
+                    quantity = 2000,
+                    supplier = "ICA Maxi Bogulundsängen",
+                    price = 499
+                },
+                new Material
+                {
+                    materialId = 6,
+                    name = "Linne",
+                    quantity = 1800,
+                    supplier = "Ikea",
+                    price = 649
+                },
+                new Material
+                {
+                    materialId = 7,
+                    name = "Ull",
+                    quantity = 1600,
+                    supplier = "Får I Närke AB",
+                    price = 999
+                },
+                // Läderhättor
+                new Material
+                {
+                    materialId = 8,
+                    name = "Läder",
+                    quantity = 2200,
+                    supplier = "Läder Byxan AB",
+                    price = 1299
+                },
+                // Fjädrar
+                new Material
+                {
+                    materialId = 9,
+                    name = "Fjädrar från strutsar",
+                    quantity = 300,
+                    supplier = "Lannas Strutsfarm",
+                    price = 399
+                },
+                new Material
+                {
+                    materialId = 10,
+                    name = "Fjädrar från påfåglar",
+                    quantity = 250,
+                    supplier = "Lannas Strutsfarm",
+                    price = 549
+                },
+                new Material
+                {
+                    materialId = 11,
+                    name = "Fjädrar från höns",
+                    quantity = 400,
+                    supplier = "Kronfågeln",
+                    price = 299
+                },
+                // Tygblommor
+                new Material
+                {
+                    materialId = 12,
+                    name = "Tygblommor",
+                    quantity = 500,
+                    supplier = "Majblomman",
+                    price = 799
+                },
+                // Pärlor
+                new Material
+                {
+                    materialId = 13,
+                    name = "Pärlor",
+                    quantity = 600,
+                    supplier = "Förskolan Myrorna",
+                    price = 699
+                },
+                // Spets
+                new Material
+                {
+                    materialId = 14,
+                    name = "Spets",
+                    quantity = 700,
+                    supplier = "Victoria Secret",
+                    price = 849
+                },
+                // Lackerat papper
+                new Material
+                {
+                    materialId = 15,
+                    name = "Lackerat papper",
+                    quantity = 450,
+                    supplier = "Dunder Mifflin",
+                    price = 599
+                },
+                // Lurextråd
+                new Material
+                {
+                    materialId = 16,
+                    name = "Lurextråd",
+                    quantity = 550,
+                    supplier = "Närke Slakteri AB",
+                    price = 449
+                },
+                // Fuskpäls
+                new Material
+                {
+                    materialId = 17,
+                    name = "Fuskpäls",
+                    quantity = 350,
+                    supplier = "MotherLoad AB",
+                    price = 1099
+                },
+                 new Material
+                 {
+                     materialId = 18,
+                     name = "Kaninfilt",
+                     quantity = 10,
+                     supplier = "Kaninens KooperationAB",
+                     price = 105
+                 },
+                 new Material
+              {
+                  materialId = 19,
+                  name = "Ull",
+                  quantity = 200,
+                  supplier = "Kaninens KooperationAB",
+                  price = 200
+              },
+              new Material
+              {
+                  materialId = 20,
+                  name = "Toquillastrå",
+                  quantity = 300,
+                  supplier = "Ecuadour Finest AB",
+                  price = 3075
+              }
+                
+                );
+
+            
+
+
         }
     
     }
