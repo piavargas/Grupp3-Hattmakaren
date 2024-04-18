@@ -13,7 +13,7 @@
 </head>
 <body>
     @* Following line to use usermanager *@
-    @inject UserManager<User> UserManager 
+    @inject UserManager<User> UserManager
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -28,6 +28,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" class="logout-form">
+                                <button type="submit" class="btn btn-link">Logga ut</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Logga in</a>
+                        }
+
 
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -48,7 +59,7 @@
                                 }
                             }
                         }
-                    
+
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -57,7 +68,7 @@
                         {
 
                             @if (await UserManager.IsInRoleAsync(user, "Admin"))
-                        
+
                             {
                                 <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
                             }
@@ -70,7 +81,7 @@
                         else
                         {
                             <p class="navbar-text">No user logged in</p>
-                           
+
                         }
 
                     }
@@ -86,25 +97,12 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" class="logout-form">
-                    <button type="submit" class="btn btn-link">Logga ut</button>
-                </form>
-            }
-            else
-            {
-                <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Logga in</a>
-            }
-        @* </div> *@
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

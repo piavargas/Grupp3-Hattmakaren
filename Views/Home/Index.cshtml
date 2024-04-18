@@ -8,57 +8,62 @@
     <link href="~/css/Index.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container product-container">
+    <div class="container">
         <h1 class="text-center mb-5">Welcome to Otto and Judiths Hattmakaren</h1>
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="admin-panel">
-                <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
-            </div>
-        }
-        @if (User.IsInRole("Customer"))
-        {
-            <div class="customer-panel">
-                <a href="Customer/CustomerOrderForm" class="btn btn-primary">Place Hat Order</a>
-            </div>
-        }
-    </div>
 
-    <div class="row">
-        @foreach (var prod in Model)
-        {
+        <div class="row justify-content-center mb-3">
             <div class="col-md-6">
-                <div class="product-card">
-                    <img src="@prod.ImagePath" alt="Product Image" class="product-image">
-                    <h2 class="product-name">@prod.productName</h2>
-                    <p class="product-description">@prod.description</p>
-                    <p class="product-details">Storlek: @prod.size cm</p>
-                    <p class="product-price">@prod.price SEK</p>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <div class="text-center">
-                            <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
-                                <input type="hidden" name="id" value="@prod.ProductId" />
-                                <button type="submit" class="btn btn-danger mr-2">Radera</button>
-                            </form>
-                            <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
-                        </div>
-                    }
-                    @if (User.IsInRole("Customer"))
-                    {
-                        <div class="text-center">
-                            <button class="btn btn-success">Buy</button>
-                        </div>
-                    }
-                    @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
-                    {
-                        <div class="text-center">
-                            <p>Hej! För att handla denna produkt behöver du vara en registrerad kund. Vänligen skapa ett konto!</p>
-                        </div>
-                    }
-                </div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="text-center">
+                        <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
+                    </div>
+                }
+                @if (User.IsInRole("Customer"))
+                {
+                    <div class="text-center">
+                        <a href="Customer/CustomerOrderForm" class="btn btn-primary">Place Hat Order</a>
+                    </div>
+                }
             </div>
-        }
+        </div>
+
+        <div class="row">
+            @foreach (var prod in Model)
+            {
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                        <h2 class="product-name">@prod.productName</h2>
+                        <p class="product-description">@prod.description</p>
+                        <p class="product-details">Storlek: @prod.size cm</p>
+                        <p class="product-price">@prod.price SEK</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="text-center">
+                                <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                    <input type="hidden" name="id" value="@prod.ProductId" />
+                                    <button type="submit" class="btn btn-danger mr-2">Radera</button>
+                                </form>
+                                <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
+                            </div>
+                        }
+                        @if (User.IsInRole("Customer"))
+                        {
+                            <div class="text-center">
+                                <button class="btn btn-success">Buy</button>
+                            </div>
+                        }
+                        @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
+                        {
+                            <div class="text-center">
+                                <p>Hej! För att handla denna produkt behöver du vara en registrerad kund. Vänligen skapa ett konto!</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
