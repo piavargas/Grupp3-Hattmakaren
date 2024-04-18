@@ -30,8 +30,10 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -53,22 +55,6 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -78,7 +64,7 @@ namespace Grupp3Hattmakaren.Migrations
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     size = table.Column<double>(type: "float", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false)
                 },
                 constraints: table =>
@@ -103,6 +89,28 @@ namespace Grupp3Hattmakaren.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    AddressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    streetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    zipCode = table.Column<int>(type: "int", nullable: false),
+                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.ForeignKey(
+                        name: "FK_Addresses_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -193,49 +201,27 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    AddressId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    addressType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    streetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    zipCode = table.Column<int>(type: "int", nullable: false),
-                    cityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    countryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
-                    table.ForeignKey(
-                        name: "FK_Addresses_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Enquiries",
                 columns: table => new
                 {
                     EnquiryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    expressDelivery = table.Column<bool>(type: "bit", nullable: false),
                     consentHat = table.Column<bool>(type: "bit", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    referenceImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                    font = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isInProgress = table.Column<bool>(type: "bit", nullable: false),
+                    isSpecial = table.Column<bool>(type: "bit", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enquiries", x => x.EnquiryId);
                     table.ForeignKey(
-                        name: "FK_Enquiries_Customers_CustomerId",
+                        name: "FK_Enquiries_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -246,7 +232,8 @@ namespace Grupp3Hattmakaren.Migrations
                     materialId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    supplier = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -267,7 +254,8 @@ namespace Grupp3Hattmakaren.Migrations
                     OrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     price = table.Column<double>(type: "float", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    isPayed = table.Column<bool>(type: "bit", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -281,10 +269,10 @@ namespace Grupp3Hattmakaren.Migrations
                         principalColumn: "AddressId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
+                        name: "FK_Orders_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -375,6 +363,31 @@ namespace Grupp3Hattmakaren.Migrations
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
+                values: new object[] { "1", 0, "44c54a78-f5aa-47d2-af48-8390400b70de", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "2c115044-c70c-482d-ab71-8877bece5b05", false, "jonasmoll", "Jonas", "28cm", "Moll" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Discriminator", "ImagePath", "description", "price", "productName", "size" },
+                values: new object[] { 1, "Product", null, "Denna mysiga nalle tänds när du rör honom.", 0.0, "Magisk Nalle Natlampa", 350.0 });
+
+            migrationBuilder.InsertData(
+                table: "Addresses",
+                columns: new[] { "AddressId", "CustomerId", "countryName", "streetName", "zipCode" },
+                values: new object[] { 1, "1", "Countryland", "123 Main Street", 12345 });
+
+            migrationBuilder.InsertData(
+                table: "Enquiries",
+                columns: new[] { "EnquiryId", "CustomerId", "consentHat", "description", "font", "isInProgress", "isSpecial", "textOnHat" },
+                values: new object[] { 1, "1", true, "Jag är intresserad av att beställa en hatt med speciellt tryck.", "Arial", true, false, "Jonas är bäst" });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "OrderId", "AddressId", "CustomerId", "ProductId", "isPayed", "price" },
+                values: new object[] { 1, 1, "1", 1, true, 150.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CustomerId",
@@ -498,9 +511,6 @@ namespace Grupp3Hattmakaren.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
@@ -513,7 +523,7 @@ namespace Grupp3Hattmakaren.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "AspNetUsers");
         }
     }
 }

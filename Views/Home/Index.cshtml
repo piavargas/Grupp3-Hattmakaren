@@ -16,6 +16,7 @@
         .product-container {
             margin: 0 auto;
             max-width: 800px;
+
         }
 
         .product-card {
@@ -87,13 +88,22 @@
                 background-color: #0056b3;
                 border-color: #0056b3;
             }
+
+        .placehatorder {
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
     <div class="container product-container">
         <h1 class="text-center mb-5">Välkommen till Hattmakaren</h1>
-
+        @if (User.IsInRole("Customer"))
+        {
+            <tr>
+                <a href="Customer/CustomerOrderForm" class="placehatorder">Place Hat Order</a>
+            </tr>
+        }
         <div class="row">
             @foreach (var prod in Model)
             {
@@ -124,12 +134,7 @@
         </tr>
     }
 
-    @if (User.IsInRole("Customer"))
-        {
-            <tr>  
-                <a href="Customer/CustomerOrderForm">Place Hat Order</a>
-            </tr>
-        }
+    
     </div>
   
   

@@ -29,4 +29,5 @@ sidebarToggle.addEventListener("click", () => {
     } else {
         localStorage.setItem("status", "open");
     }
+
 })

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<Grupp3Hattmakaren.Models.Enquiry>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,57 +54,165 @@
             </ul>
         </div>
     </nav>
-
     <section class="dashboard">
-
-
-        <div class="dash-content">
-            <div class="activity">
-                <div class="title">
-                    <i class="uil uil-clock-three"></i>
-                    <span class="text">Orders</span>
-                </div>
-
-                <div class="activity-data">
-                    @foreach (var order in ViewBag.Orders)
-                    {
+        @*         *//ENQUIRY
+        *@
+        <div class="col-md-6 col-12 mb-md-0 mb-4">
+            <h5>Pending orders</h5>
+            <ul class="list-group list-group-flush" id="pending-tasks">
+                @foreach (var enquiry in ViewBag.Enquiries)
+                {
+                    <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
                         <div class="data names">
                             <span class="data-title">Customer</span>
-                            <span class="data-list">@order.Customer.firstName @order.Customer.lastName</span>
+                            <span class="data-list">@enquiry.Customer.firstName @enquiry.Customer.lastName</span>
                         </div>
-                        <div class="data email">
-                            <span class="data-title">Email</span>
-                            <span class="data-list">@order.Customer.Email</span>
-                        </div>
-                        <div class="data type">
-                            <span class="data-title">Address</span>
-                            <span class="data-list">@order.Address.streetName, @order.Address.zipCode</span>
-                        </div>
-                        <div class="data joined">
-                            <span class="data-title">Price</span>
-                            <span class="data-list">@order.price</span>
-                        </div>
-
-                        <div class="data status">
-                            <span class="data-title">Status</span>
-                            <span class="data-list">
-                                @if (order.isPayed)
-                                {
-                                    <text>Payed</text>
-                                }
-                                else
-                                {
-                                    <text>Not Payed</text>
-                                }
-                            </span>
-                        </div>
-                    }
-            </div>
+                        <!-- Fortsätt här med andra detaljer för varje Enquiry -->
+                    </li>
+                }
+            </ul>
         </div>
+
+
+        <div class="col-md-6 col-12 mb-md-0 mb-4">
+            <h5>In progress</h5>
+            <ul class="list-group list-group-flush" id="in-progress">
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>New icons set for an iOS app.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-1" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span> Fix validation bugs and commit.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-2" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span> Help Web developers with HTML integration.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-3" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>Buy antivirus.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-4" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>Answer support tickets.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-5" height="32" width="32" />
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 col-12 mb-md-0 mb-4">
+            <h5>Completed orders</h5>
+            <ul class="list-group list-group-flush" id="completed-tasks">
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>New icons set for an iOS app.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-1" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span> Fix validation bugs and commit.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-2" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span> Help Web developers with HTML integration.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-3" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>Buy antivirus.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-4" height="32" width="32" />
+                </li>
+                <li class="list-group-item drag-item cursor-move d-flex justify-content-between align-items-center">
+                    <span>Answer support tickets.</span>
+                    <img class="rounded-circle" src="..." alt="avatar-5" height="32" width="32" />
+                </li>
+            </ul>
+        </div>
+        </div>
+
     </section>
 
- 
 
-    <script src="~/js/AdminMyPage.js"></script>
+    <script src="@Url.Content("~/js/AdminMyPage.js")"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pendingTasks = document.getElementById('pending-tasks');
+            const completedTasks = document.getElementById('completed-tasks');
+            const inProgress = document.getElementById('in-progress');
+
+            Sortable.create(inProgress, {
+                animation: 150,
+                group: 'taskList',
+                onEnd: function (evt) {
+                    const enquiryId = evt.item.dataset.enquiryId;
+                    updateEnquiryStatus(enquiryId, evt.item); // Skicka förfrågan och det flyttade elementet till funktionen
+                }
+            });
+
+            Sortable.create(pendingTasks, {
+                animation: 150,
+                group: 'taskList',
+                onEnd: function (evt) {
+                    console.log("Sortering avklarad");
+                }
+            });
+
+            Sortable.create(completedTasks, {
+                animation: 150,
+                group: 'taskList',
+                onEnd: function (evt) {
+                    console.log("Sortering avklarad");
+                }
+            });
+
+            function updateEnquiryStatus(enquiryId, movedItem) {
+                fetch(`/Admin/ChangeStatus?enquiryId=${enquiryId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Enquiry status updated successfully:', data);
+                        if (data.success) {
+                            // Om förfrågan uppdaterades framgångsrikt, skapa en order
+                            createOrder(data.enquiry.CustomerId);
+                            // Flytta elementet från "pendingTasks" till "inProgress"
+                            movedItem.remove(); // Ta bort den flyttade förfrågan från "pendingTasks"
+                            inProgress.appendChild(movedItem); // Lägg till den flyttade förfrågan till "inProgress"
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error updating enquiry status:', error);
+                    });
+            }
+
+            function createOrder(customerId) {
+                fetch('/Admin/CreateOrder', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ customerId: customerId })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Order created successfully:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error creating order:', error);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
