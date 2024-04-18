@@ -6,7 +6,8 @@
     <title>Hattmakaren</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="~/css/Index.css" rel="stylesheet">
-
+    <link href="~/css/FormPulseButton.css" rel="stylesheet">
+ 
 </head>
 <body>
 
@@ -20,9 +21,7 @@
         }
         @if (User.IsInRole("Customer"))
         {
-            <tr>
-                <a href="Customer/CustomerOrderForm">Place special hat order</a>
-            </tr>
+           <a href="/Customer/CustomerOrderForm" class="pulse-button">Place special hat order</a>
         }
     </div>
 
