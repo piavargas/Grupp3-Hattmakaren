@@ -85,19 +85,21 @@
     <!--Skapar kundvagnen för en kund-->
     <div id="shoppingCart" hidden>
         <ul>
-            @{
+            @if(User.IsInRole("Customer"))
+            {
                 var customer = await UserManager.FindByNameAsync(User.Identity.Name);
                 var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
-            }
-            @foreach (var cartItem in produtShoppingCart)
-            {
-                if (cartItem.shoppingCart.customerId == customer.Id)
+
+                @foreach (var cartItem in produtShoppingCart)
                 {
-                    <li>
-                        <label>@cartItem.product.productName</label>
-                        <p>Price: @cartItem.product.price kr</p>
-                        <p>In cart: @cartItem.quantity</p>
-                    </li>
+                    if (cartItem.shoppingCart.customerId == customer.Id)
+                    {
+                        <li>
+                            <label>@cartItem.product.productName</label>
+                            <p>Price: @cartItem.product.price kr</p>
+                            <p>In cart: @cartItem.quantity</p>
+                        </li>
+                    }
                 }
             }
         </ul>
