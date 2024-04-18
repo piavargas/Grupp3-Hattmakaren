@@ -110,19 +110,18 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
+
             @if (User.Identity.IsAuthenticated)
             {
-                <p>&copy; 2024 - Hattmakaren </p>
-                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut">
+                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" class="logout-form">
                     <button type="submit" class="btn btn-link">Logga ut</button>
                 </form>
             }
             else
             {
-                <p>&copy; 2024 - Hattmakaren </p>
-                <a asp-area="" asp-controller="Account" asp-action="LogIn">Logga in</a>
+                <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Logga in</a>
             }
-        </div>
+        @* </div> *@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

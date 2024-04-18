@@ -7,10 +7,10 @@ namespace Grupp3Hattmakaren.Models
     public class HatContext : IdentityDbContext<User>
     {
 
-        public HatContext(DbContextOptions<HatContext> options) : base(options) 
-        { 
+        public HatContext(DbContextOptions<HatContext> options) : base(options)
+        {
         }
-        
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
@@ -60,31 +60,21 @@ namespace Grupp3Hattmakaren.Models
                    description = "Denna mysiga nalle tänds när du rör honom.",
                    size = 350,
                }
-             
-               );
 
-            modelBuilder.Entity<Enquiry>().HasData(
-               new Enquiry
-               {
-                   EnquiryId = 1,                 
-                   consentHat = true,
-                   description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
-                   font = "Arial",
-                   textOnHat = "Jonas är bäst",
-                   isInProgress = true,                  
-                   CustomerId = "1"
-               }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-            );
+               ); 
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+
 
             modelBuilder.Entity<Order>().HasData(
                new Order
                {
                    OrderId = 1,
                    price = 150.00,
-                   CustomerId = "1", 
+                   CustomerId = "1",
                    isPayed = true,
-                   AddressId = 1, 
-                   ProductId = 1 
+                   AddressId = 1,
+                   ProductId = 1
                }
             );
 
@@ -94,7 +84,7 @@ namespace Grupp3Hattmakaren.Models
                     AddressId = 1,
                     CustomerId = "1", // Länka detta till en befintlig Customer                   
                     streetName = "123 Main Street",
-                    zipCode = 12345,                    
+                    zipCode = 12345,
                     countryName = "Countryland"
                 }
             );
@@ -103,15 +93,17 @@ namespace Grupp3Hattmakaren.Models
                 new Customer
                 {
                     Id = "1",
-                    UserName = "jonasmoll", 
+                    UserName = "jonasmoll",
                     Email = "jonasmoll@outlook.com",
                     firstName = "Jonas",
                     lastName = "Moll",
                     headSize = "28cm"
                 }
-            ); 
+            );
 
+        
         }
-
+    
     }
 }
+
