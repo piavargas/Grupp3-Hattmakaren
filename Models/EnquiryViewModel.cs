@@ -22,6 +22,8 @@ namespace Grupp3Hattmakaren.Models
         public string countryName { get; set; } // Adress class
         public bool isSpecial { get; set; }
         public bool isInProgress { get; set; } // Enquiry class
+        public bool getInStore { get; set; }
+
 
 
 
