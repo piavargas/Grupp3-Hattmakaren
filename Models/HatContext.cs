@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
@@ -56,6 +57,7 @@ namespace Grupp3Hattmakaren.Models
                }
                );
 
+            //Exempeldata ShippingBill
             modelBuilder.Entity<ShippingBill>().HasData(
                 new ShippingBill
                 {
@@ -75,6 +77,20 @@ namespace Grupp3Hattmakaren.Models
                     productCode = "SHB003",
                     //OrderId = 3
                 });
+
+            //Exempeldata OrderSummary
+            //modelBuilder.Entity<Order>().HasData(
+            //   new Order
+            //   {
+            //       OrderId = 1,
+            //       price = ,
+            //       CustomerId = 1,
+            //       Customer = ,
+            //       AddressId = ,
+            //       Address = ,
+            //       ProductId = ,
+            //       products = ,
+            //   };
 
 
 
