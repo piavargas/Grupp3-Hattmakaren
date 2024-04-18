@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240416164248_init")]
-    partial class init
+    [Migration("20240418095034_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,14 +41,12 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("countryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("streetName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("zipCode")
+                    b.Property<int?>("zipCode")
                         .HasColumnType("int");
 
                     b.HasKey("AddressId");
@@ -80,6 +78,10 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("consentHat")
                         .HasColumnType("bit");
 
@@ -92,6 +94,13 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("font")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("getInStore")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("headSize")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -552,12 +561,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fbeb8009-4bb0-4a15-b683-65a549c3034d",
+                            ConcurrencyStamp = "94350238-e58d-4c7b-8407-442fd801828b",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41b435b0-ccfe-4adb-866c-ea825091ef7a",
+                            SecurityStamp = "5114cda8-5e2a-454c-ad94-cf4138848ec2",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
