@@ -22,8 +22,10 @@ builder.Services.AddDbContext<HatContext>(options =>
           options.UseLazyLoadingProxies()
             .UseSqlServer(builder.Configuration.GetConnectionString("HatContext")));
 
-builder.Services.AddIdentity<Admin, IdentityRole>()
-    .AddEntityFrameworkStores<HatContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<HatContext>()
+    .AddDefaultTokenProviders();
+
 
 //DinkToPdf IConverter med singleton lifecycle
 builder.Services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));

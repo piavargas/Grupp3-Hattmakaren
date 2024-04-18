@@ -5,17 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Grupp3Hattmakaren.Models
 {
-    public class HatContext : IdentityDbContext<Admin>
+    public class HatContext : IdentityDbContext<User>
     {
 
-        public HatContext(DbContextOptions<HatContext> options) : base(options) 
-        { 
+        public HatContext(DbContextOptions<HatContext> options) : base(options)
+        {
         }
-        
-        public DbSet<Customer> Customers { get; set; }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -46,6 +45,7 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.ProductId);
 
+
             modelBuilder.Entity<Product>().HasData(
                new Product
                {
@@ -53,7 +53,6 @@ namespace Grupp3Hattmakaren.Models
                    productName = "Magisk Nalle Natlampa",
                    description = "Denna mysiga nalle tänds när du rör honom.",
                    size = 350,
-                  
                }
                );
 
@@ -92,12 +91,44 @@ namespace Grupp3Hattmakaren.Models
             //       products = ,
             //   };
 
+            modelBuilder.Entity<Order>().HasData(
+               new Order
+               {
+                   OrderId = 1,
+                   price = 150.00,
+                   CustomerId = "1",
+                   isPayed = true,
+                   AddressId = 1,
+                   ProductId = 1
+               }
+            );
 
+            modelBuilder.Entity<Address>().HasData(
+                new Address
+                {
+                    AddressId = 1,
+                    CustomerId = "1", // Länka detta till en befintlig Customer                   
+                    streetName = "123 Main Street",
+                    zipCode = 12345,
+                    countryName = "Countryland"
+                }
+            );
 
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                {
+                    Id = "1",
+                    UserName = "jonasmoll",
+                    Email = "jonasmoll@outlook.com",
+                    firstName = "Jonas",
+                    lastName = "Moll",
+                    headSize = "28cm"
+                }
+            );
 
+        
         }
-
-
-
+    
     }
 }
+

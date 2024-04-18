@@ -1,37 +1,61 @@
-﻿     @model List<Product>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hattmakaren</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="~/css/Index.css" rel="stylesheet">
 
-<div class="text-center">
-    <h1 class="display-4">Välkommen till Hattmakaren</h1>
-@*     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
- *@</div>
+</head>
+<body>
 
-<form asp-controller="ProductController" asp-action="Add" method="post">
-<table class="table-bordered">
-  
-    <tbody>
-
-        @foreach (var prod in Model)
+    <div class="container product-container">
+        <h1 class="text-center mb-5">Welcome to Otto and Judiths Hattmakaren</h1>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="admin-panel">
+                <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
+            </div>
+        }
+        @if (User.IsInRole("Customer"))
         {
             <tr>
-                
-                <td>@prod.productName</td>
-                <td>@prod.description</td>
-                <td>@prod.size</td>
-
-                    <td>
-                        <form asp-controller="Product" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@prod.ProductId" />
-                            <button type="submit">Radera</button>
-                        </form>
-                    </td>
+                <a href="Customer/CustomerOrderForm">Place special hat order</a>
             </tr>
         }
-    </tbody>
+    </div>
 
-            <tr>
 
-            <a href="Product/AddProduct">Lägg till produkt</a>
-        </tr>
+    <div class="row">
+            @foreach (var prod in Model)
+            {
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                        <h2 class="product-name">@prod.productName</h2>
+                        <p class="product-description">@prod.description</p>
+                        <p class="product-details">Storlek: @prod.size cm</p>
+                        <p class="product-price">@prod.price SEK</p>
+                        <div class="text-center">
+                            <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@prod.ProductId" />
+                                <button type="submit" class="btn btn-danger mr-2">Radera</button>
+                            </form>
+                            <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
-</table>
-</form>
+
+  
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

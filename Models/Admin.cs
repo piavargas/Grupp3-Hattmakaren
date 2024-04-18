@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Grupp3Hattmakaren.Models
 {
-    public class Admin : IdentityUser
+    public class Admin : User
     {
-        public string? firstName { get; set; }
-        public string? lastName { get; set; }
-        
+        public string employerCode { get; set; }
+
     }
 }

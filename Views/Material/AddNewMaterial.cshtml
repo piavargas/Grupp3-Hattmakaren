@@ -1,0 +1,42 @@
+﻿@model Material;
+
+@{
+    ViewData["Title"] = "Add New Material";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Add New Material</h2>
+            <form asp-action="AddNewMaterial" asp-controller="Material" method="post">
+                <div class="form-group">
+                    <label asp-for="name">Material:</label>
+                    <input asp-for="name" class="form-control" required>
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="supplier">Supplier:</label>
+                    <input type="text" class="form-control" id="supplier" name="supplier" required>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="price">Price in Swedish Crown:</label>
+                    <input asp-for="price" class="form-control" required>
+                    <span asp-validation-for="price" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                    <span asp-validation-for="quantity" class="text-danger"></span>
+
+                </div>
+
+                <button type="submit" class="btn btn-secondary mb-3">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
