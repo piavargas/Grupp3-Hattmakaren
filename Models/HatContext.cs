@@ -62,34 +62,21 @@ namespace Grupp3Hattmakaren.Models
                 {
                     ShippingBillId = 1,
                     productCode = "SHB001",
-                    //OrderId = 1
-                },
-                new ShippingBill
-                {
-                    ShippingBillId = 2,
-                    productCode = "SHB002",
-                    //OrderId = 2
-                },
-                new ShippingBill
-                {
-                    ShippingBillId = 3,
-                    productCode = "SHB003",
-                    //OrderId = 3
+                    OrderId = 1
                 });
 
-            //Exempeldata OrderSummary
-            //modelBuilder.Entity<Order>().HasData(
-            //   new Order
-            //   {
-            //       OrderId = 1,
-            //       price = ,
-            //       CustomerId = 1,
-            //       Customer = ,
-            //       AddressId = ,
-            //       Address = ,
-            //       ProductId = ,
-            //       products = ,
-            //   };
+                //new ShippingBill
+                //{
+                //    ShippingBillId = 2,
+                //    productCode = "SHB002",
+                //    //OrderId = 2
+                //},
+                //new ShippingBill
+                //{
+                //    ShippingBillId = 3,
+                //    productCode = "SHB003",
+                //    //OrderId = 3
+                //});
 
             modelBuilder.Entity<Order>().HasData(
                new Order

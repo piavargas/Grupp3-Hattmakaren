@@ -18,6 +18,13 @@ namespace Grupp3Hattmakaren.Controllers
             _viewRenderService = viewRenderService;
         }
 
+
+        public IActionResult OrderList()
+        {
+            var orders = _hatcontext.Orders.ToList();
+            return View(orders);
+        }
+
         // GET: ShippingBill/Details/5
         public IActionResult Details(int? id)
         {
@@ -59,7 +66,7 @@ namespace Grupp3Hattmakaren.Controllers
             }
 
             //Generera HTML string från Razor view kallad "PrintShippingBill"
-            var html = _viewRenderService.RenderToString("PrintShippingBill", model);
+            var html = _viewRenderService.RenderToString("/ShippingBill/PrintShippingBill", model);
 
             //Generera PDF från HTML string
             var file = _pdfService.GeneratePdf(html);

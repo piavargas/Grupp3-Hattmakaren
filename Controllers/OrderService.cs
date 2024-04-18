@@ -20,7 +20,6 @@ namespace Grupp3Hattmakaren.Controllers
                     OrderId = o.OrderId,
                     name = o.Customer.firstName + " " + o.Customer.lastName,
                     //Phone = o.Customer.PhoneNumber,  // Hur hämtar man nummer från IdentityUser?
-                    email = o.Customer.email,
                     products = o.products.Select(p => new ProductSummary
                     {
                         productName = p.productName,
@@ -29,7 +28,7 @@ namespace Grupp3Hattmakaren.Controllers
                         size = p.size,
                         price = p.price
                     }).ToList(),
-                    TotalPrice = o.products.Sum(p => p.price)
+                    totalPrice = o.products.Sum(p => p.price)
                 }).SingleOrDefault();
 
             return order;
