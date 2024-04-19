@@ -55,21 +55,31 @@ HÄR ÄR NAVBAR:*/
 }
 
 .shoppingCart {
-    position: fixed;
-    top: 13%;
+    position: absolute;
+    top: 102%;
     /*  left: 50%;*/
-    transform: translateX(-50%);
+    transform: translateX(-90%);
     z-index: 1000;
-    background-color: #fff;
+    background-color: lightblue;
     border: 1px solid #ccc;
     padding: 20px;
-    max-width: 300px;
+    max-width: 360px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-left: 1060px;
-    /*magin-left: 80%;
-    margin-right: 0px;*/
+    margin-left: 1090px;
+    color: green;
+    
+}
+a {
+    color: blue; /* Ange färg för länkar */
+    text-decoration: none; /* Ta bort understrykning från länkar */
 }
 
+    a:hover {
+        color: red; /* Ändra färg när musen är över länken */
+    }
+.label, p {
+    font-weight: bold;
+}
 /*.shoppingCart {   
     background-color: green;
     color: gray;

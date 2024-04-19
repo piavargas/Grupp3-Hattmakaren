@@ -28,7 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
+                        @* <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SummaryCart">SummaryCart</a>
+                        </li> *@
                         @if (User.Identity.IsAuthenticated)
                         {
                             var user = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -89,16 +91,16 @@
                                 {
                                     if (cartItem.shoppingCart.customerId == customer.Id)
                                     {
-                                        <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Go to summary </a>
-
                                         <label>@cartItem.product.productName</label>
                                         <p>Price: @cartItem.product.price kr</p>
                                         <p>In cart: @cartItem.quantity</p>
-                                        <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Go to summary </a>
+
 
                                     }
+
                                 }
                             }
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SummaryCart">Go to summary</a>
                         </ul>
                     </div>
                 </div>

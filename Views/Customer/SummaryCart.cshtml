@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@inject HatContext hatContext
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+        h4 {
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: green;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color:greenyellow;
+            }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .delete-button:hover {
+                background-color: darkred;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Order summary:</h1>
+        <!--Skapar sammanställning för en kund-->
+        <div class="summaryCart">
+            <ul>
+                @if (User.IsInRole("Customer"))
+                {
+                    var customer = await UserManager.FindByNameAsync(User.Identity.Name);
+                    var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
+                    var totalPrice = 0; // Variabel för att hålla den totala summan av priserna
+
+                    foreach (var cartItem in produtShoppingCart)
+                    {
+                        if (cartItem.shoppingCart.customerId == customer.Id)
+                        {
+                            <li>
+                                <h4>@cartItem.product.productName</h4>
+                                <p>Price: @cartItem.product.price kr</p>
+                                <p>In cart: @cartItem.quantity</p>
+
+                                @using (Html.BeginForm("RemoveProductFromCart", "Customer", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="productId" id="productId" value="@cartItem.product.ProductId" />
+                                    <input type="submit" value="Delete" class="delete-button" />
+                                }
+
+                            </li>
+                            
+                            // Lägg till produktens pris till den totala summan med en explicit omvandling till int
+                            totalPrice += (int)(cartItem.product.price * cartItem.quantity);
+                        }
+                    }
+
+                    // Visa den totala summan
+                    <li>
+                        <strong>Total price:</strong> @totalPrice kr
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <button class="button">Send Request</button>
+    </div>
+</body>
+</html>

@@ -75,8 +75,35 @@ namespace Grupp3Hattmakaren.Controllers
             {
                 return View();
             }
+        [HttpPost]
+        public IActionResult RemoveProductFromCart(int productId)
+        {
+            // Hitta kundvagnen för den aktuella användaren (exempelvis genom att använda användarens identitet)
+            var user = _context.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            var customerCart = _context.ShoppingCarts.FirstOrDefault(cart => cart.customerId == user.Id);
 
+            if (customerCart != null)
+            {
+                var productSC = _context.ProductShoppingCarts.FirstOrDefault(pSC => pSC.shoppingCartId == customerCart.Id && pSC.productId == productId);
+                // Hitta den specifika produkten i kundvagnen
+                if(productSC != null)
+                {
+                    _context.ProductShoppingCarts.Remove(productSC);
+                    _context.SaveChanges();
+                }
+            }
+
+            // Redirect tillbaka till sammanställningssidan
+            return RedirectToAction("SummaryCart", "Customer");
         }
+
+        [Authorize(Roles = "Customer")]
+        public IActionResult SummaryCart()
+        {
+            return View();
+        }
+
+    }
 
     }
   
