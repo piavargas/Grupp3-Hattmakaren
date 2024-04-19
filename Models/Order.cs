@@ -28,6 +28,7 @@ namespace Grupp3Hattmakaren.Models
         [ForeignKey(nameof(EnquiryId))]
         public virtual Enquiry Enquiry { get; set; }
 
+        public virtual ICollection<ShippingBill> ShippingBills { get; set; }
 
     }
 }
