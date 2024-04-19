@@ -32,16 +32,21 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Product_Material>()
                 .HasKey(pm => new { pm.ProductId, pm.MaterialId });
 
-            modelBuilder.Entity<Order>()
-              .HasOne(o => o.Customer)
-              .WithMany(c => c.orders)
-              .HasForeignKey(o => o.CustomerId)
-              .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Order>()
+            //  .HasOne(o => o.Customer)
+            //  .WithMany(c => c.orders)
+            //  .HasForeignKey(o => o.CustomerId)
+            //  .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Order>()
-                .HasMany(o => o.products)
-                .WithMany(p => p.orders)
-                .UsingEntity(j => j.ToTable("OrderProduct"));
+                .HasOne(o => o.Enquiry)
+                .WithOne(e => e.Order)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //modelBuilder.Entity<Order>()
+            //    .HasMany(o => o.products)
+            //    .WithMany(p => p.orders)
+            //    .UsingEntity(j => j.ToTable("OrderProduct"));
 
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.ProductId);
