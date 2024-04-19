@@ -16,9 +16,9 @@ namespace Grupp3Hattmakaren.Controllers
             _hatcontext = context;
             _userManager = userManager;
 
-    }
+        }
 
-    [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminEnquiries()
         {
             var enquiries = _hatcontext.Enquiries.ToList();
@@ -29,48 +29,94 @@ namespace Grupp3Hattmakaren.Controllers
         public IActionResult AdminOrders()
         {
             var enquiries = _hatcontext.Enquiries.Include(e => e.Customer).ToList();
-            ViewBag.Enquiries = enquiries != null ? enquiries : new List<Enquiry>();
-            return View();
+            List<Order> orderList = _hatcontext.Orders.ToList();
+            //foreach(Order order in orderList) 
+            //{ 
+            //    if(order.isPayed || !order.Enquiry.isInProgress) 
+            //    { 
+            //        orderList.Remove(order);
+            //    }
+            //}
+            ViewBag.orderList = orderList;
+            return View(enquiries);
         }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public IActionResult ChangeStatus(int enquiryId)
         {
-            try
+            // Hämta Enquiry-objektet från databasen baserat på enquiryId
+            var enquiry = _hatcontext.Enquiries.Find(enquiryId);
+
+            // Om inget Enquiry-objekt hittades, returnera NotFound
+            if (enquiry == null)
             {
-                var enquiry = _hatcontext.Enquiries
-                    .Include(e => e.Customer)
-                    .FirstOrDefault(e => e.EnquiryId == enquiryId);
-
-                if (enquiry != null)
-                {
-                    enquiry.isInProgress = true; // Uppdatera status för förfrågan till "in progress"
-                    _hatcontext.SaveChanges();
-
-                    // Skapa en order för den aktuella förfrågan
-                    var order = new Order
-                    {
-                        CustomerId = enquiry.CustomerId,
-                        // Fyll i andra relevanta egenskaper för ordern, t.ex. pris, betalstatus etc.
-                    };
-
-                    _hatcontext.Orders.Add(order);
-                    _hatcontext.SaveChanges();
-
-                    // Returnera den uppdaterade förfrågan till klienten
-                    return Json(new { success = true, enquiry = enquiry });
-                }
-
-                return Json(new { success = false, error = "Enquiry not found" });
+                return NotFound();
             }
-            catch (Exception ex)
+
+            enquiry.isInProgress = true;
+
+            // Spara ändringarna i databasen
+            _hatcontext.SaveChanges();
+
+
+            var address = _hatcontext.Addresses.FirstOrDefault(a => a.CustomerId == enquiry.CustomerId);
+
+            // Skapa en ny Order baserad på informationen från Enquiry-objektet och den nya produkten
+            var order = new Order
             {
-                return Json(new { success = false, error = ex.Message });
+                price = 5,
+                isPayed = false,
+                CustomerId = enquiry.CustomerId,
+                AddressId = address.AddressId,
+                //ProductId = product.ProductId, // Använd den nya produkten
+                EnquiryId = enquiryId
+            };
+
+            // Lägg till den nya ordern i databasen
+            _hatcontext.Orders.Add(order);
+            _hatcontext.SaveChanges();
+
+
+
+            return RedirectToAction("AdminEnquiries");
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult ChangePaymentStatus(int orderId)
+        {
+            var order = _hatcontext.Orders.Find(orderId);
+
+            if (order == null)
+            {
+                return NotFound();
             }
+
+            // Uppdatera status till "paid"
+            order.isPayed = true;
+
+            _hatcontext.SaveChanges();
+
+            // Återgå till AdminOrders-åtgärden efter att ändringen har gjorts
+            return RedirectToAction("AdminOrders");
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminOldOrders()
+        {
+            // Hämta en lista över alla betalda ordrar
+            var paidOrders = _hatcontext.Orders
+                .Where(order => order.isPayed)
+                .Include(order => order.Customer)
+                .ToList();
 
+            // Skicka den filtrerade listan till vyn
+            ViewBag.oldOrderList = paidOrders;
+            return View();
+
+
+        }
     }
-
 }
 

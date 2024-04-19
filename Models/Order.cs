@@ -23,8 +23,11 @@ namespace Grupp3Hattmakaren.Models
         public int ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
         public virtual ICollection<Product> products { get; set; }
+        public int EnquiryId { get; set; }
 
-  
+        [ForeignKey(nameof(EnquiryId))]
+        public virtual Enquiry Enquiry { get; set; }
+
 
     }
 }

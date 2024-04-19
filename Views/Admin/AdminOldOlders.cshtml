@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <title>Admin Dashboard Panel</title>
 </head>
+<html>
 <body>
     <nav>
         <div class="menu-items">
@@ -57,80 +59,40 @@
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Incoming Enquiries</span>
+                    <span class="text">Orders in progress</span>
                 </div>
                 <div class="activity-data">
-                    @foreach (var enquiry in Model)
+                    @foreach (var order in ViewBag.oldOrderList)
                     {
-                        @if (enquiry != null && !enquiry.isInProgress)
+                        if (!order.isPayed)
                         {
                             <div class="data">
                                 <div class="data-item">
                                     <span class="data-title">Customer</span>
-                                    @if (enquiry.Customer != null)
-                                    {
-                                        <span class="data-list">@enquiry.Customer.firstName @enquiry.Customer.lastName</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="data-list">No customer information available</span>
-                                    }
+                                    <span class="data-list">@order.Customer.firstName @order.Customer.lastName</span>
                                 </div>
-
-                         @*        <div class="data-item">
-                                    <span class="data-title">Status</span>
-                                    <span class="data-list">
-                                        @if (enquiry.isInProgress)
-                                        {
-                                            <text>In progress</text>
-                                        }
-                                        else
-                                        {
-                                            <text>Not handled yet</text>
-                                        }
-                                    </span>
-                                </div>
- *@
                                 <div class="data-item">
-                                    <span class="data-title">Type</span>
-                                    <span class="data-list">
-                                        @if (enquiry.isSpecial)
+                                    <form method="post" action="@Url.Action("ChangePaymentStatus", "Admin")">
+                                        <input type="hidden" name="orderId" value="@order.OrderId" />
+                                        @if (!order.isPayed)
                                         {
-                                            <text>Special</text>
-                                        }
-                                        else
-                                        {
-                                            <text>Order</text>
-                                        }
-                                    </span>
-                                </div>
-
-                                <div class="data-item">
-                                    <form method="post" action="@Url.Action("ChangeStatus", "Admin")">
-                                        <input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
-                                        
-                                            @if (enquiry.isInProgress)
-                                            {
-                                                <text>In progress</text>
-                                            }
-                                            else
-                                           
-                                            {
                                             <button type="submit" name="status" value="toggle">
-                                                <text>Mark as in progress</text>
+                                                <text>Mark as paid </text>
                                             </button>
-
-                                            }
+                                        }
+                                        else
+                                        {
+                                            <text>Paid</text>
+                                        }
                                     </form>
                                 </div>
                             </div>
                         }
                     }
+                    </div>
                 </div>
             </div>
-        </div>
     </section>
-
     <script src="~/js/AdminMyPage.js"></script>
 </body>
 </html>
