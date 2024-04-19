@@ -12,6 +12,7 @@
 <body class="text-center login-page">
     <form class="form-signin" name="contact_form" asp-controller="Message" asp-action="SendOffer" method="post">
         <h1 class="h3 mb-3 font-weight-normal">Send Offer</h1>
+       
         <div class="mb-5">
             <div class="col">
                 <label for="sender">Your name: </label>
@@ -56,6 +57,13 @@
             <label for="text">Message</label>
             <textarea class="form-control" id="text" asp-for="messageText" rows="5"></textarea>
         </div>
+        @if (TempData["MessageSent"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["MessageSent"]
+            </div>
+        }
+
         <button type="submit" class="btn btn-primary px-4 btn-lg">Send message</button>
     </form>
 </body>

@@ -53,3 +53,14 @@ body {
     left: 280px;
 }
 
+header {
+    margin-bottom: 0px;
+}
+
+.mb-3 {
+   margin: 0px;
+}
+
+.nav {
+    margin-bottom: 0px;
+}

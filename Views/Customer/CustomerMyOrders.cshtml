@@ -34,8 +34,7 @@
             </ul>
         </div>
     </nav>
-
-    <section class="dashboard">
+  <section class="dashboard">
         <div class="dash-content">
             <div class="activity">
                 <div class="title">
@@ -43,30 +42,46 @@
                     <span class="text">My Orders</span>
                 </div>
                 <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">(The customers name)</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Address</span>
-                        <span class="data-list">(Address)</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Special</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Products</span>
-                        <span class="data-list">(Ordered products)</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Payed</span>
-                    </div>
+                    @if (Model.Count == 0)
+                    {
+                        <p>No orders found.</p>
+                    }
+                    else
+                    {
+                        @foreach (var order in Model)
+                        {
+                            <div class="data names">
+                                <span class="data-title">Name</span>
+                                <span class="data-list">@order.Customer.UserName</span> 
+                            </div>
+                            <div class="data type">
+                                <span class="data-title">Address</span>
+                                <span class="data-list">@order.Address.streetName, @order.Address.zipCode, @order.Address.countryName</span> 
+                            </div>
+                            <div class="data status">
+                                <span class="data-title">Products</span>
+                                <span class="data-list">
+                                    @foreach (var product in order.products)
+                                    {
+                                        @product.productName <br> 
+                                    }
+                                </span>
+                            </div>
+                            <div class="data type">
+                                <span class="data-title">Price</span>
+                                <span class="data-list">@order.price</span> 
+                            </div>
+                            <div class="data status">
+                                <span class="data-title">Status</span>
+                                <span class="data-list">@((order.isPayed) ? "Paid" : "Not Paid")</span>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
     </section>
+
 
     <script src="~/js/AdminMyPage.js"></script>
 </body>

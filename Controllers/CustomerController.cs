@@ -67,13 +67,19 @@ namespace Grupp3Hattmakaren.Controllers
                 return View();
             }
 
-            [Authorize(Roles = "Customer")]
-            public IActionResult CustomerMyOrders()
-            {
-                return View();
-            }
+        [Authorize(Roles = "Customer")]
+        public IActionResult CustomerMyOrders()
+        {
+            var userId = _userManager.GetUserId(User);
 
-            [Authorize(Roles = "Customer")]
+            var orders = _context.Orders
+                .Where(o => o.CustomerId == userId)
+                .ToList();
+
+            return View(orders);
+        }
+
+        [Authorize(Roles = "Customer")]
             public IActionResult CustomerOrderHistory()
             {
                 return View();

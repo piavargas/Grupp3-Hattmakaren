@@ -44,6 +44,7 @@ namespace Grupp3Hattmakaren.Controllers
 
                 _context.Add(message);
                 _context.SaveChanges();
+                TempData["MessageSent"] = "Message has been sent.";
                 return RedirectToAction("SendOffer", "Message");
             }
 
@@ -82,6 +83,26 @@ namespace Grupp3Hattmakaren.Controllers
         {
             return _logger;
         }
+
+        public IActionResult MakePayment()
+        {
+            TempData["PaymentMessage"] = "Thank you for your payment. We will process your order as soon as possible.";
+            return RedirectToAction("CustomerMessages", "Message");
+        }
+
+        [HttpPost]
+        public IActionResult DeclineOffer(int messageId)
+        {
+            var messageToRemove = _context.Messages.FirstOrDefault(m => m.MessageId == messageId);
+            if (messageToRemove != null)
+            {
+                _context.Messages.Remove(messageToRemove);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("CustomerMessages");
+        }
+
 
         //[HttpPost]
         //public IActionResult MarkAsRead(int messageid)
