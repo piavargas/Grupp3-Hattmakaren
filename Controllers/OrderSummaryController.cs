@@ -26,44 +26,60 @@ namespace Grupp3Hattmakaren.Controllers
 
         public IActionResult PrintOrderSummary(int orderId)
         {
-            var order = _context.Orders.Include(o => o.Customer).Include(o => o.Address).FirstOrDefault(o => o.OrderId == orderId);
 
-            var shippingBill = new ShippingBill
+            // Hämta ordern och tillhörande data
+            var order = _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.Address)
+                .Include(o => o.products)  // Kollektion av produkter i en order 
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
             {
-                // Fyll i fraktsedelsinfo
-                //OrderId = order.OrderId,
-                productCode = "6504 00 00"
-            };
+                return NotFound();
+            }
 
-            //var orderSummary = new OrderSummary
-            //{
-            //    // Fyll i fraktsedelsinfo
-            //    //OrderId = order.OrderId,
-            //    productCode = "6504 00 00"
-            //};
 
-            _context.ShippingBills.Add(shippingBill);
-            _context.SaveChanges();
 
-            // Skapa en ny PDF-fil
+            // Skapa en PDF
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 Document doc = new Document();
                 PdfWriter.GetInstance(doc, memoryStream);
                 doc.Open();
 
-                //PDF-fil med fraktsedelsinformation
-                doc.Add(new Paragraph($"Shipping Bill ID: {shippingBill.ShippingBillId}"));
-                doc.Add(new Paragraph($"Product Code: {shippingBill.productCode}"));
-                //doc.Add(new Paragraph($"Order ID: {order.OrderId}"));
-                //doc.Add(new Paragraph($"Customer Name: {order.Customer.firstName} {order.Customer.lastName}"));
-                //doc.Add(new Paragraph($"Address: {order.Address.streetName}, {order.Address.zipCode}, {order.Address.countryName}"));
+                // Lägg till orderinformation i PDF-filen
+                doc.Add(new Paragraph($"Order ID: {order.OrderId}"));
+                doc.Add(new Paragraph($"Customer Name: {order.Customer.firstName} {order.Customer.lastName}"));
+                doc.Add(new Paragraph($"Address: {order.Address.streetName}, {order.Address.zipCode}, {order.Address.countryName}"));
+
+                //// Information om varje produkt i ordern
+                //foreach (var item in order.products)
+                //{
+                //    doc.Add(new Paragraph($"Product: {item.productName}, Price: {item.price}"));
+                //}
+
+                // Information om varje produkt i ordern
+                foreach (var item in order.products)
+                {
+                    string materialNames = item.materials != null && item.materials.Any()
+                        ? string.Join(", ", item.materials.Select(m => m.name))
+                        : "No materials";
+
+                    doc.Add(new Paragraph($"Product: {item.productName}, Materials: {materialNames}, Price: {item.price}"));
+                }
+
+
+                //Avslutningsvis lägger vi till det totala priset
+                doc.Add(new Paragraph($"Total Price: {order.price}"));
+
+
 
                 doc.Close();
 
                 byte[] pdfBytes = memoryStream.ToArray();
 
-                return File(pdfBytes, "application/pdf", "shipping_label.pdf");
+                return File(pdfBytes, "application/pdf", "order_summary.pdf");
             }
         }
 
