@@ -29,6 +29,7 @@ namespace Grupp3Hattmakaren.Controllers
         {
             var newEnquiry = new Enquiry
             {
+                headSize = enquiryViewModel.headSize,
                 consentHat = enquiryViewModel.consentHat,
                 description = enquiryViewModel.description,
                 font = enquiryViewModel.font,
@@ -37,6 +38,8 @@ namespace Grupp3Hattmakaren.Controllers
                 isSpecial = enquiryViewModel.isSpecial,
                 fabricMaterial = enquiryViewModel.fabricMaterial,
                 specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
+                getInStore = enquiryViewModel.getInStore,
+                color = enquiryViewModel.color,
                 CustomerId = _userManager.GetUserId(User)
             };
 
