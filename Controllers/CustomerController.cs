@@ -76,6 +76,13 @@ namespace Grupp3Hattmakaren.Controllers
                 return View();
             }
 
+
+        //public IActionResult acceptOffer ()
+        //{
+
+        //}
+
+
         }
 
     }

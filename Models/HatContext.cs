@@ -10,7 +10,6 @@ namespace Grupp3Hattmakaren.Models
         public HatContext(DbContextOptions<HatContext> options) : base(options)
         {
         }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
@@ -55,10 +54,7 @@ namespace Grupp3Hattmakaren.Models
                    size = 350,
                }
 
-               ); 
-        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-
+               );                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
             modelBuilder.Entity<Order>().HasData(
                new Order
