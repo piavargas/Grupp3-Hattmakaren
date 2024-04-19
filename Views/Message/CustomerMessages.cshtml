@@ -49,24 +49,24 @@
                 @foreach (var message in Model)
                 {
                     <div class="message-wrapper">
-                    <div class="message-container with-border">
-                    <div class="activity-data">
-                        <div class="data names">
-                            <span class="data-title">From</span>
-                            <span class="data-list">@message.sender</span>
-                        </div>
-                        <div class="data message">
-                            <span class="data-title">Message</span>
-                            <span class="data-list">@message.messageText</span>
-                        </div>
-                        <div class="buttons">
-                            <button class="accept-button">Accept Offer</button>
-                            <button class="decline-button">Decline Offer</button>
-                        </div>
-                        </div>
+                        <div class="message-container with-border">
+                            <div class="activity-data">
+                                <div class="data names">
+                                    <span class="data-title">From</span>
+                                    <span class="data-list">@message.sender</span>
+                                </div>
+                                <div class="data message">
+                                    <span class="data-title">Message</span>
+                                    <span class="data-list">@message.messageText</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="accept-button">Accept Offer</button>
+                                    <button class="decline-button">Decline Offer</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                }                    
+                }
             </div>
         </div>
     </section>
@@ -83,7 +83,8 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
-                        <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        @*                         <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        *@
                     </div>
                 </div>
             </div>
@@ -98,7 +99,8 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
-                        <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        @*                         <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        *@
                     </div>
                 </div>
             </div>
@@ -113,7 +115,8 @@
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
-                        <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        @*                         <small><span class="fw-bold">Name:</span><span>Kumar</span></small>
+                        *@
                     </div>
                 </div>
             </div>
@@ -137,23 +140,12 @@
                         <div class="collapse p-3 pt-0" id="collapseExample">
                             <div class="row">
                                 <div class="col-8">
-                                    <p class="h4 mb-0">Summary</p>
+                                    <p class="h4 mb-0">Invoice Details</p>
                                     <p class="mb-0">
-                                        <span class="fw-bold">Product:</span><span class="c-green">
-                                            : Name of
-                                            product
+                                        <span class="fw-bold">Dear customer,</span><span>
+                                            Please enter your details to make a payment.
+                                            A confirmation will be sent to the given emailaddress.
                                         </span>
-                                    </p>
-                                    <p class="mb-0">
-                                        <span class="fw-bold">Price:</span><span class="c-green">:$452.90</span>
-                                    </p>
-                                    <p class="mb-0">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
-                                        nihil neque
-                                        quisquam aut
-                                        repellendus, dicta vero? Animi dicta cupiditate, facilis provident quibusdam ab
-                                        quis,
-                                        iste harum ipsum hic, nemo qui!
                                     </p>
                                 </div>
                                 <div class="col-lg-7">
@@ -162,31 +154,31 @@
                                             <div class="col-12">
                                                 <div class="form__div">
                                                     <input type="text" class="form-control" placeholder=" ">
-                                                    <label for="" class="form__label">Card Number</label>
+                                                    <label for="" class="form__label">Your fullname</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
                                                     <input type="text" class="form-control" placeholder=" ">
-                                                    <label for="" class="form__label">MM / yy</label>
+                                                    <label for="" class="form__label">City/Town</label>
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form__div">
                                                     <input type="password" class="form-control" placeholder=" ">
-                                                    <label for="" class="form__label">cvv code</label>
+                                                    <label for="" class="form__label">Zip code</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form__div">
                                                     <input type="text" class="form-control" placeholder=" ">
-                                                    <label for="" class="form__label">name on the card</label>
+                                                    <label for="" class="form__label">Email</label>
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div class="btn btn-primary w-100">Sumbit</div>
+                                                <div class="btn btn-primary w-100">Sumbit</div> @* fixa *@
                                             </div>
                                         </div>
                                     </form>
@@ -210,17 +202,13 @@
                         <div class="collapse show p-3 pt-0" id="collapseExample">
                             <div class="row">
                                 <div class="col-lg-5 mb-lg-0 mb-3">
-                                    <p class="h4 mb-0">Summary</p>
+                                    <p class="h4 mb-0">Credit Card Details</p>
                                     <p class="mb-0">
-                                        <span class="fw-bold">Product:</span><span class="c-green">
-                                            : Name of
-                                            product
+                                        <<span class="fw-bold">Dear customer,</span><span>
+                                            Please enter your card details to make a payment.
                                         </span>
                                     </p>
-                                    <p class="mb-0">
-                                        <span class="fw-bold">Price:</span>
-                                        <span class="c-green">:$452.90</span>
-                                    </p>
+  
                                     <p class="mb-0">
                                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
                                         nihil neque
