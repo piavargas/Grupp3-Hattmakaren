@@ -236,10 +236,50 @@ namespace Grupp3Hattmakaren.Migrations
                         new
                         {
                             ProductId = 1,
-                            description = "Denna mysiga nalle tänds när du rör honom.",
+                            description = "A timeless bowler hat made from high-quality wool felt, perfect for both formal and casual occasions.",
                             price = 0.0,
-                            productName = "Magisk Nalle Natlampa",
-                            size = 350.0
+                            productName = "Classic Bowler Hat",
+                            size = 58.0
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            description = "An elegant hat with a wide brim and a decorative silk ribbon. Ideal for sunny days or a stylish outing.",
+                            price = 0.0,
+                            productName = "Elegant Ladies' Hat",
+                            size = 56.0
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            description = "Sturdy and ready for any adventure, this fedora is your faithful companion in all weathers.",
+                            price = 0.0,
+                            productName = "Adventurer's Fedora",
+                            size = 59.0
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            description = "Relive the roaring 1920s with this authentic top hat, perfect for themed parties and gatherings.",
+                            price = 0.0,
+                            productName = "Vintage Top Hat",
+                            size = 60.0
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            description = "A chic beret made of 100% wool, available in various colors. Add a French touch to your wardrobe.",
+                            price = 0.0,
+                            productName = "Modern Beret",
+                            size = 57.0
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            description = "Light and airy, this Panama hat provides sun protection while keeping you cool and stylish.",
+                            price = 0.0,
+                            productName = "Panama-style Sun Hat",
+                            size = 58.0
                         });
                 });
 
@@ -554,12 +594,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a4b038b-c7fa-456e-bd04-65393f6f5d2e",
+                            ConcurrencyStamp = "f135997b-d9bd-4adb-afb2-7bdf34444f33",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01701724-ca1e-4df7-b671-56fc7afd5964",
+                            SecurityStamp = "a42cb457-57da-4d05-9959-e61bf3e67ad2",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",

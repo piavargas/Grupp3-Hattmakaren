@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
@@ -367,12 +369,20 @@ namespace Grupp3Hattmakaren.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
-                values: new object[] { "1", 0, "0a4b038b-c7fa-456e-bd04-65393f6f5d2e", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "01701724-ca1e-4df7-b671-56fc7afd5964", false, "jonasmoll", "Jonas", "28cm", "Moll" });
+                values: new object[] { "1", 0, "f135997b-d9bd-4adb-afb2-7bdf34444f33", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "a42cb457-57da-4d05-9959-e61bf3e67ad2", false, "jonasmoll", "Jonas", "28cm", "Moll" });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "Discriminator", "ImagePath", "description", "price", "productName", "size" },
-                values: new object[] { 1, "Product", null, "Denna mysiga nalle tänds när du rör honom.", 0.0, "Magisk Nalle Natlampa", 350.0 });
+                values: new object[,]
+                {
+                    { 1, "Product", null, "A timeless bowler hat made from high-quality wool felt, perfect for both formal and casual occasions.", 0.0, "Classic Bowler Hat", 58.0 },
+                    { 2, "Product", null, "An elegant hat with a wide brim and a decorative silk ribbon. Ideal for sunny days or a stylish outing.", 0.0, "Elegant Ladies' Hat", 56.0 },
+                    { 3, "Product", null, "Sturdy and ready for any adventure, this fedora is your faithful companion in all weathers.", 0.0, "Adventurer's Fedora", 59.0 },
+                    { 4, "Product", null, "Relive the roaring 1920s with this authentic top hat, perfect for themed parties and gatherings.", 0.0, "Vintage Top Hat", 60.0 },
+                    { 5, "Product", null, "A chic beret made of 100% wool, available in various colors. Add a French touch to your wardrobe.", 0.0, "Modern Beret", 57.0 },
+                    { 6, "Product", null, "Light and airy, this Panama hat provides sun protection while keeping you cool and stylish.", 0.0, "Panama-style Sun Hat", 58.0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
