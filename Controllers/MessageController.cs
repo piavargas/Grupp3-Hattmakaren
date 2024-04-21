@@ -104,44 +104,5 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
 
-        //[HttpPost]
-        //public IActionResult MarkAsRead(int messageid)
-        //{
-        //    var message = _context.Messages.Find(messageid);
-
-        //    if (message != null && !message.isRead)
-        //    {
-        //        message.isRead = true;
-        //        _context.SaveChanges();
-        //    }
-
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var user = _userManager.FindByIdAsync(userId).Result;
-
-        //    if (user != null)
-        //    {
-        //        var receivedMessageQuery = _context.Messages
-        //            .Where(msg => msg.Id == userId); // Query messages for the current user
-
-        //        List<SendMessageViewModel> messageViewModels = receivedMessageQuery
-        //            .Select(msg => new SendMessageViewModel
-        //            {
-        //                MessageId = msg.MessageId,
-        //                messageText = msg.text,
-        //                sender = msg.sender,
-        //                isRead = msg.isRead,
-        //                UserId = msg.Id
-        //            })
-        //            .ToList();
-
-        //        ViewBag.UnreadMessagesCount = receivedMessageQuery.Count(msg => !msg.isRead);
-
-        //        return View("SeeMessages", messageViewModels);
-        //    }
-
-        //    return View("SeeMessages", new List<SendMessageViewModel>());
-        //}
-
-
     }
 }

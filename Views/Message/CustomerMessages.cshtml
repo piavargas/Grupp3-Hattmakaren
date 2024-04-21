@@ -282,8 +282,6 @@
 
         function confirmDelete(messageId) {
             if (confirm("Are you sure you want to decline the offer? This will remove the message from your inbox.")) {
-                // Call server to delete the message using AJAX or submit a form
-                // Here's an example using form submission
                 document.getElementById('deleteMessageForm_' + messageId).submit();
             }
         }
