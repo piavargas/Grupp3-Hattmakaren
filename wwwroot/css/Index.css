@@ -4,7 +4,7 @@
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
-    max-height: calc(100vh - 60px); /* 60px är höjden på footern, subtrahera footerns höjd från fönstrets höjd */
+    max-height: calc(100vh - 60px); 
     overflow-y: auto;
 }
 
@@ -13,8 +13,8 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 20px;
-    max-height: 4000px; /* Justera maxhöjden efter behov, subtrahera footerns höjd två gånger */
-    overflow-y: auto; /* Lägg till ett scrollhjul när innehållet är för långt */
+    max-height: 4000px;
+    overflow-y: auto; 
 }
 
 .product-card {
@@ -24,18 +24,16 @@
     padding: 20px;
     margin-bottom: 20px;
     transition: box-shadow 0.3s ease;
-    flex: 0 1 calc(33.33% - 20px); /* Bredden på varje produkt, anpassa vid behov */
-    max-height: 560px; /* Justera maxhöjden för produkterna så att de inte sträcker sig utanför bodyn */
-    overflow: auto; /* Lägg till en scrollbar om innehållet blir för högt */
 }
 
     .product-card:hover {
-        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.4);
     }
 
 .product-image {
     max-width: 100%;
-    height: auto;
+    height: 200px; 
+    object-fit: cover; 
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -90,9 +88,65 @@
         border-color: #0056b3;
     }
 
-
 .admin-panel {
     position: absolute;
     margin-left: 1200px;
-    z-index: 1000; /* För att säkerställa att det ligger över annat innehåll på sidan
-        }
+    z-index: 1000;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+}
+
+/* Full-width carousel */
+.carousel,
+.carousel-inner,
+.carousel-item,
+.carousel-item img {
+    width: 100%;
+    height: 80vh;
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.logout-form {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    left: 280px;
+}
+
+.login-form {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    left: 280px;
+}
+
+.logout-form button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+    .logout-form button:hover, .logout-form button:focus {
+        color: #0056b3; 
+        text-decoration: underline;
+    }
+
