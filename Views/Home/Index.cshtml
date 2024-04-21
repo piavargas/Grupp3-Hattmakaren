@@ -5,105 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hattmakaren</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="css/site.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet"> <!-- Länk till din index.css-fil -->
 </head>
 <body>
 
-    <div id="productCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#productCarousel" data-slide-to="1"></li>
-            <li data-target="#productCarousel" data-slide-to="2"></li>
-        </ol>
+    <div class="container-fluid">
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#productCarousel" data-slide-to="1" class=""></li>
+                <li data-target="#productCarousel" data-slide-to="2" class=""></li>
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="/NewFolder/hattmakarebild1.jpg" class="d-block w-100" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/NewFolder/hattmakarebild2.jpg" class="d-block w-100" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-                <img src="/NewFolder/hattmakarebild3.jpg" class="d-block w-100" alt="Third slide">
-            </div>
-        </div>
-
-        <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-    <div class="container">
-        <h1 class="text-center mb-5">Welcome to Otto and Judiths Hattmakaren</h1>
-
-        <div class="row justify-content-center mb-3">
-            <div class="col-md-6">
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="text-center">
-                        <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
-                    </div>
-                }
-                @if (User.IsInRole("Customer"))
-                {
-                    <div class="text-center">
-                        <a href="Customer/CustomerOrderForm" class="btn btn-primary">Place Hat Order</a>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div class="row">
-            @foreach (var prod in Model)
-            {
-                <div class="col-md-4">
-                    <div class="product-card">
-                        <img src="@prod.ImagePath" alt="Product Image" class="product-image">
-                        <h2 class="product-name">@prod.productName</h2>
-                        <p class="product-description">@prod.description</p>
-                        <p class="product-details">Storlek: @prod.size cm</p>
-                        <p class="product-price">@prod.price SEK</p>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <div class="text-center">
-                                <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="@prod.ProductId" />
-                                    <button type="submit" class="btn btn-danger mr-2">Radera</button>
-                                </form>
-                                <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
-                            </div>
-                        }
-                        @if (User.IsInRole("Customer"))
-                        {
-                            <div class="text-center">
-                                <button class="btn btn-success">Buy</button>
-                            </div>
-                        }
-                        @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
-                        {
-                            <div class="text-center">
-                                <p>Hej! För att handla denna produkt behöver du vara en registrerad kund. Vänligen skapa ett konto!</p>
-                            </div>
-                        }
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/NewFolder/hattmakarebild1.jpg" class="d-block w-100" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">The Classic Hats by Hattmakaren</h2>
+                        <p class="lead">Explore our collection of timeless hats</p>
                     </div>
                 </div>
-            }
+                <div class="carousel-item">
+                    <img src="/NewFolder/hattmakarebild2.jpg" class="d-block w-100" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">Create Your Own Style</h2>
+                        <p class="lead">Discover our elegant hats for every occasion</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/NewFolder/hattmakarebild3.jpg" class="d-block w-100" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">Our Craft, Your Style</h2>
+                        <p class="lead">Each hat is tailored to fit your personality</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    @foreach (var prod in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                                <div class="product-details">
+                                    <h2 class="product-name">@prod.productName</h2>
+                                    <p class="product-description">@prod.description</p>
+                                    <p class="product-price">@prod.price SEK</p>
+                                </div>
+                                <div class="text-center">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@prod.ProductId" />
+                                            <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                                        </form>
+                                        <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Edit</a>
+                                    }
+                                    @if (User.IsInRole("Customer"))
+                                    {
+                                        <button class="btn btn-success">Buy</button>
+                                    }
+                                    @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
+                                    {
+                                        <p>Hi! To buy this product, you need to be a registered customer. Please create an account!</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-6">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="text-center">
+                            <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
+                        </div>
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <div class="text-center">
+                            <a href="Customer/CustomerOrderForm" class="btn btn-primary">Place Hat Order</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            </div>
+
+
+        <div class="container marketing">
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">"Your career, your creation: <span class="text-muted">Get started on crafting your CV!"</span></h2>
+                    <p class="lead">Highlight Your Skills: WorkWare provides you with the tools to build a professional identity that stands out. By showcasing your skills and achievements in an engaging manner, you'll attract top employers and unlock doors to exciting career opportunities.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" src="/NewFolder/ottoHatt.jpg" alt="Generic placeholder image">
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading">Collaborative Project Showcase:  <span class="text-muted">Unveiling a Tapestry of Success Stories</span></h2>
+                    <p class="lead">
+                        "Dive into a collection of diverse projects crafted and contributed by various users. From innovative initiatives to collaborative endeavors,
+                        this portfolio encapsulates the collective achievements of dynamic teams. Explore the unique challenges overcome, skills honed, and successes celebrated across a spectrum of projects."
+                        <a href="@Url.Action("Project", "Project")">Explore the projects!</a>
+                    </p>
+                </div>
+                <div class="col-md-5 order-md-1">
+                    <img class="featurette-image img-fluid mx-auto" src="/NewFolder/judithHatt.jpg" alt="Generic placeholder image">
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+        </div>
+
     </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-EvrZ9rHxdjWRz8Fz5KU6GAw2sFWLRqU+YnjST6mo2usvbJQLM2/+QZ6jiPb3rK4Z" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-EvrZ9rHxdjWRz8Fz5KU6GAw2sFWLRqU+YnjST6mo2usvbJQLM2/+QZ6jiPb3rK4Z" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

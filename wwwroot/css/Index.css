@@ -24,9 +24,6 @@
     padding: 20px;
     margin-bottom: 20px;
     transition: box-shadow 0.3s ease;
-    flex: 0 1 calc(33.33% - 20px); /* Bredden på varje produkt, anpassa vid behov */
-    max-height: 560px; /* Justera maxhöjden för produkterna så att de inte sträcker sig utanför bodyn */
-    overflow: auto; /* Lägg till en scrollbar om innehållet blir för högt */
 }
 
     .product-card:hover {
@@ -35,7 +32,8 @@
 
 .product-image {
     max-width: 100%;
-    height: auto;
+    height: 200px; /* Justera höjden efter behov */
+    object-fit: cover; /* Klipp bilderna enligt höjden */
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -96,7 +94,6 @@
     z-index: 1000; /* För att säkerställa att det ligger över annat innehåll på sidan */
 }
 
-/* Ensure body and html have no extra padding or margin */
 html, body {
     margin: 0;
     padding: 0;
@@ -111,7 +108,8 @@ html, body {
 .carousel-item,
 .carousel-item img {
     width: 100%;
-    height: auto;
+    height: 80vh;
+    margin: 0;
     /* Adjust the height as needed, or use 'vh' for viewport height */
 }
 
@@ -120,4 +118,37 @@ html, body {
     padding: 0;
     margin: 0;
 }
+
+.container {
+    margin-top: 50px;
+}
+
+.logout-form {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    left: 280px;
+}
+
+.login-form {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    left: 280px;
+}
+
+.logout-form button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+    .logout-form button:hover, .logout-form button:focus {
+        color: #0056b3; /* Adjust the color as needed */
+        text-decoration: underline;
+    }
 
