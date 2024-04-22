@@ -18,6 +18,7 @@ namespace Grupp3Hattmakaren.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public IActionResult CustomerOrderForm()
         {
             return View(new EnquiryViewModel());
@@ -27,39 +28,62 @@ namespace Grupp3Hattmakaren.Controllers
         [HttpPost]
         public async Task<IActionResult> CustomerOrderForm(EnquiryViewModel enquiryViewModel)
         {
-            var newEnquiry = new Enquiry
+            // Validera endast de specifika fälten
+            ModelState.Remove("specialEffectMaterials");
+            ModelState.Remove("textOnHat");
+            ModelState.Remove("font");
+            ModelState.Remove("description");
+            ModelState.Remove("consentHat");
+            ModelState.Remove("firstName");
+            ModelState.Remove("lastName");
+            ModelState.Remove("email");
+            ModelState.Remove("streetName");
+            ModelState.Remove("zipCode");
+            ModelState.Remove("countryName");
+            ModelState.Remove("isInProgress");
+            ModelState.Remove("isSpecial");
+            ModelState.Remove("getInStore");
+
+            if (ModelState.IsValid)
             {
-                headSize = enquiryViewModel.headSize,
-                consentHat = enquiryViewModel.consentHat,
-                description = enquiryViewModel.description,
-                font = enquiryViewModel.font,
-                textOnHat = enquiryViewModel.textOnHat,
-                isInProgress = enquiryViewModel.isInProgress,
-                isSpecial = enquiryViewModel.isSpecial,
-                fabricMaterial = enquiryViewModel.fabricMaterial,
-                specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
-                getInStore = enquiryViewModel.getInStore,
-                color = enquiryViewModel.color,
-                CustomerId = _userManager.GetUserId(User)
-            };
+                var newEnquiry = new Enquiry
+                {
+                    headSize = enquiryViewModel.headSize,
+                    consentHat = enquiryViewModel.consentHat,
+                    description = enquiryViewModel.description,
+                    font = enquiryViewModel.font,
+                    textOnHat = enquiryViewModel.textOnHat,
+                    isInProgress = enquiryViewModel.isInProgress,
+                    isSpecial = enquiryViewModel.isSpecial,
+                    fabricMaterial = enquiryViewModel.fabricMaterial,
+                    specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
+                    getInStore = enquiryViewModel.getInStore,
+                    color = enquiryViewModel.color,
+                    CustomerId = _userManager.GetUserId(User)
+                };
 
-            _context.Enquiries.Add(newEnquiry);
-            _context.SaveChanges();
+                _context.Enquiries.Add(newEnquiry);
+                _context.SaveChanges();
 
-            var newAddress = new Address
+                var newAddress = new Address
+                {
+                    streetName = enquiryViewModel.streetName,
+                    zipCode = enquiryViewModel.zipCode,
+                    countryName = enquiryViewModel.countryName,
+                    CustomerId = _userManager.GetUserId(User)
+                };
+
+                _context.Addresses.Add(newAddress);
+                _context.SaveChanges();
+                return View("EnquiryConfirmationMessage", enquiryViewModel);
+
+            }
+            else
             {
-                streetName = enquiryViewModel.streetName,
-                zipCode = enquiryViewModel.zipCode,
-                countryName = enquiryViewModel.countryName,
-                CustomerId = _userManager.GetUserId(User)
-            };
-
-            _context.Addresses.Add(newAddress);
-            _context.SaveChanges();
-            return View("EnquiryConfirmationMessage", enquiryViewModel);
-                
-
+                return View(enquiryViewModel);
+            }
         }
+
 
         public IActionResult CardPaymentMethod()
         {
