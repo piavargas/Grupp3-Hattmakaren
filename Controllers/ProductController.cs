@@ -140,54 +140,6 @@ namespace Grupp3Hattmakaren.Controllers
             return View(product);
         }
 
-        [HttpPost]
-        //Lägger till en produkt i kundvagnen
-        public IActionResult AddToCart(int productId) 
-        {
-            
-            var product = _context.Products.FirstOrDefault(p => p.ProductId == productId);
-            var user = _context.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-            var cart = _context.ShoppingCarts.FirstOrDefault(sc => sc.customerId == user.Id);
 
-            //Om kunden inte redan har en kundvagn så skapas den här
-            if(cart == null && user != null) 
-            {
-                cart = new ShoppingCart
-                {
-                    customerId = user.Id
-                };
-                _context.ShoppingCarts.Add(cart);
-                _context.SaveChanges();
-            }
-            
-            if(product != null) 
-            {
-                List<ProductShoppingCart> pShoppingCartList = _context.ProductShoppingCarts.ToList();
-
-                //Kollar ifall man redan lagt till en av samma produkt och i sådana fall ökar den mängden med ett
-                foreach(var pShoppingCart in pShoppingCartList) 
-                { 
-                    if(pShoppingCart.productId == productId) 
-                    {
-                        pShoppingCart.quantity++;
-                        _context.Update(pShoppingCart);
-                        _context.SaveChanges();
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-
-                //Skapar produkt till kundvagn
-                var cartItem = new ProductShoppingCart
-                {
-                    productId = productId,
-                    shoppingCartId = cart.Id,
-                    quantity = 1
-                };
-
-                _context.ProductShoppingCarts.Add(cartItem);
-                _context.SaveChanges();
-            }
-            return RedirectToAction("Index", "Home");
-        }
     }
 }

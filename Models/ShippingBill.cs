@@ -7,8 +7,8 @@ namespace Grupp3Hattmakaren.Models
         public int ShippingBillId { get; set; }
         public string productCode { get; set; }
 
-        public int? OrderId { get; set; }
+        public int OrderId { get; set; }
         [ForeignKey(nameof(OrderId))]
-        public virtual Order? order { get; set; }
+        public virtual Order order { get; set; }
     }
 }

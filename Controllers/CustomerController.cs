@@ -29,17 +29,12 @@ namespace Grupp3Hattmakaren.Controllers
         {
             var newEnquiry = new Enquiry
             {
-                headSize = enquiryViewModel.headSize,
                 consentHat = enquiryViewModel.consentHat,
                 description = enquiryViewModel.description,
                 font = enquiryViewModel.font,
                 textOnHat = enquiryViewModel.textOnHat,
                 isInProgress = enquiryViewModel.isInProgress,
                 isSpecial = enquiryViewModel.isSpecial,
-                fabricMaterial = enquiryViewModel.fabricMaterial,
-                specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
-                getInStore = enquiryViewModel.getInStore,
-                color = enquiryViewModel.color,
                 CustomerId = _userManager.GetUserId(User)
             };
 
@@ -56,8 +51,7 @@ namespace Grupp3Hattmakaren.Controllers
 
             _context.Addresses.Add(newAddress);
             _context.SaveChanges();
-            return View("EnquiryConfirmationMessage", enquiryViewModel);
-                
+            return View(enquiryViewModel);
 
         }
 

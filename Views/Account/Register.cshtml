@@ -20,8 +20,8 @@
     <form class="form-signin" method="post" asp-action="Register">
 
         <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
-        <select asp-for="userRole" id="userRole" class="form-control custom-select" onchange="roleChange()">
-            <option value="Customer" selected="selected">Customer</option>
+        <select asp-for="userRole" id="userRole" class="form-control custom-select">
+            <option value="Customer">Customer</option>
             <option value="Admin">Admin</option>
         </select>
 
@@ -33,11 +33,11 @@
 
         
         
-            <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" hidden/>
+            <input type="text" asp-for="employerCode" id="employerCode" class="form-control" placeholder="Employer code" />
         
         
         
-            <input type="text" asp-for="headSize" id="headSize" class="form-control" placeholder="Head Size"/>
+            <input type="text" asp-for="headSize" id="headSize" class="form-control" placeholder="Head Size" />
         
 
         
@@ -54,11 +54,11 @@
             var headSizeField = document.getElementById('headSize');
 
             if (this.value === 'Admin') {
-                employerCodeField.removeAttribute("hidden");
-                headSizeField.setAttribute("hidden", "true");
+                employerCodeField.style.display = 'block';
+                headSizeField.style.display = 'none';
             } else {
-                employerCodeField.setAttribute("hidden", "true");
-                headSizeField.removeAttribute("hidden");
+                employerCodeField.style.display = 'none';
+                headSizeField.style.display = 'block';
             }
         });
     </script> 

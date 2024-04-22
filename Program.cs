@@ -3,7 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Grupp3Hattmakaren.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Configuration;
-using Grupp3Hattmakaren.Controllers;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,8 @@ builder.Services.AddDbContext<HatContext>(options =>
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<HatContext>()
     .AddDefaultTokenProviders();
+
+
 
 var app = builder.Build();
 
@@ -42,6 +46,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 
 app.Run();

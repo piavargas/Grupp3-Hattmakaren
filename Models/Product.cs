@@ -26,6 +26,5 @@ namespace Grupp3Hattmakaren.Models
 
         public virtual ICollection<Order> ?orders { get; set; }
         public virtual ICollection<Material> ?materials { get; set; }
-        public virtual ICollection<ShoppingCart>? ShoppingCarts { get; set; } = new List<ShoppingCart>();
     }
 }
