@@ -91,16 +91,19 @@
                                 {
                                     if (cartItem.shoppingCart.customerId == customer.Id)
                                     {
+                                        <div class="productInCart">
                                         <label>@cartItem.product.productName</label>
                                         <p>Price: @cartItem.product.price kr</p>
                                         <p>In cart: @cartItem.quantity</p>
-
+                                        </div>
 
                                     }
 
                                 }
+                                <form asp-area="" asp-controller="Customer" asp-action="SummaryCart">
+                                    <button type="submit" class="summaryGO success-button">Go to summary</button>
+                                </form>
                             }
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SummaryCart">Go to summary</a>
                         </ul>
                     </div>
                 </div>

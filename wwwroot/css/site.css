@@ -7,84 +7,123 @@
 html {
     font-size: 14px;
 }
+@media screen and (max-width: 768px) {
+    .shoppingCart {
+        top: auto; /* Återställer top till auto för att placera den efter föregående element */
+        bottom: 10px; /* Placera kundvagnen längst ner på skärmen */
+        left: 10px; /* Placera kundvagnen till vänster på skärmen */
+        right: 10px; /* Placera kundvagnen till höger på skärmen */
+        margin-left: 0; /* Återställer margin-left */
+        margin-right: 0; /* Återställer margin-right */
+        width: 90%; /* Bredden på kundvagnen */
+        max-width: none; /* Återställer max-width */
+        padding: 15px; /* Mindre padding för att spara utrymme */
+    }
+
+    .productInCart {
+        border-bottom: 2px solid black;
+        margin-bottom: 13px;
+        font-weight: bold;
+    }
+
+    .success-button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 4.3s ease;
+        margin-bottom: 0px;
+    }
+
+        .success-button:hover {
+            background-color: #218838;
+        }
+}
+
 
 @media (min-width: 768px) {
     html {
         font-size: 16px;
     }
-}
 
-.header {
-    margin-top: 0;
-}
+    .header {
+        margin-top: 0;
+    }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
+    html {
+        position: relative;
+        min-height: 100%;
+    }
 
-body {
-    margin-bottom: 0; /* Tar bort nedre marginal för att anpassa sig till att det inte finns någon footer */
-}
+    body {
+        margin-bottom: 0; /* Tar bort nedre marginal för att anpassa sig till att det inte finns någon footer */
+    }
 
-.navbar {
-    padding: 8px 14px;
-}
+    .navbar {
+        padding: 8px 14px;
+    }
 
-.logout-form {
-    display: flex;
-    position: absolute;
-    bottom: 8px;
-    left: 280px;
-}
+    .logout-form {
+        display: flex;
+        position: absolute;
+        bottom: 8px;
+        left: 280px;
+    }
 
-.login-form {
-    display: flex;
-    position: absolute;
-    bottom: 0px;
-    left: 280px;
-}
-/*
+    .login-form {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+        left: 280px;
+    }
+    /*
 HÄR ÄR NAVBAR:*/
-.container-fluid {
-    /*background-color: blueviolet;*/
-}
+    .container-fluid {
+        /*background-color: blueviolet;*/
+    }
 
-.shoppingCart {
-    position: absolute;
-    top: 102%;
-    /*  left: 50%;*/
-    transform: translateX(-90%);
-    z-index: 1000;
-    background-color: lightblue;
-    border: 1px solid #ccc;
-    padding: 20px;
-    max-width: 360px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-left: 1090px;
-    color: green;
-    
-}
-a {
-    color: blue; /* Ange färg för länkar */
-    text-decoration: none; /* Ta bort understrykning från länkar */
-}
+    .shoppingCart {
+        position: absolute;
+        top: 102%;
+        z-index: 1000;
+        padding: 30px;
+        max-width: 360px;
+        margin-left: 1300px;
+        color: green;
+        border: 2px solid black;
+        background-color: #f8f9fa; /* Justera bakgrundsfärg */
+        border-radius: 10px; /* Runda kanterna på kundvagnen */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Förbättra skuggan */
+    }
+
+    .productInCart {
+        border-bottom: 2px solid black;
+        margin-bottom: 13px;
+        font-weight: bold;
+    }
+
+    .success-button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 4.3s ease;
+        margin-bottom: 0px;
+    }
+
+        .success-button:hover {
+            background-color: #218838;
+        }
 
     a:hover {
         color: red; /* Ändra färg när musen är över länken */
     }
-.label, p {
-    font-weight: bold;
 }
-/*.shoppingCart {   
-    background-color: green;
-    color: gray;
-    margin-left: 1100px;
-    margin-right: 20px;
-    margin-top: 0px;
-}
-*/

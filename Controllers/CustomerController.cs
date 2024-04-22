@@ -29,7 +29,7 @@ namespace Grupp3Hattmakaren.Controllers
         {
             var newEnquiry = new Enquiry
             {
-                consentHat = enquiryViewModel.consentHat,
+                consentHat = enquiryViewModel.consentHat ?? false,
                 description = enquiryViewModel.description,
                 font = enquiryViewModel.font,
                 textOnHat = enquiryViewModel.textOnHat,
@@ -46,7 +46,7 @@ namespace Grupp3Hattmakaren.Controllers
             var newAddress = new Address
             {
                 streetName = enquiryViewModel.streetName,
-                zipCode = enquiryViewModel.zipCode,
+                zipCode = (int)enquiryViewModel.zipCode,
                 countryName = enquiryViewModel.countryName,
                 CustomerId = _userManager.GetUserId(User)
             };
@@ -58,7 +58,25 @@ namespace Grupp3Hattmakaren.Controllers
 
         }
 
-            [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public async Task<IActionResult> DefaultCustomerOrderForm(EnquiryViewModel enquiryViewModel)
+        {
+            var newEnquiry = new Enquiry
+            {
+                CustomerId = _userManager.GetUserId(User),
+                isInProgress = enquiryViewModel.isInProgress
+
+            };
+
+            _context.Enquiries.Add(newEnquiry);
+            _context.SaveChanges();
+
+            return View("EnquiryConfirmationMessage", enquiryViewModel);
+
+
+        }
+
+        [Authorize(Roles = "Customer")]
             public IActionResult CustomerMessages()
             {
                 return View();
