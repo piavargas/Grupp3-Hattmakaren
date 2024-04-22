@@ -10,7 +10,6 @@ namespace Grupp3Hattmakaren.Models
         public HatContext(DbContextOptions<HatContext> options) : base(options) 
         { 
         }
-        
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
@@ -22,6 +21,9 @@ namespace Grupp3Hattmakaren.Models
         public DbSet<ShippingBill> ShippingBills { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SpecialProduct> SpecialProducts { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ProductShoppingCart> ProductShoppingCarts { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -106,35 +108,35 @@ namespace Grupp3Hattmakaren.Models
             //    .HasOne(c => c.cart)
             //    .WithOne(sc => sc.customer);
 
-            modelBuilder.Entity<Order>().HasData(
-               new Order
-               {
-                   OrderId = 1,
-                   price = 150.00,
-                   CustomerId = "1",
-                   isPayed = true,
-                   AddressId = 1, 
-                   ProductId = 1 
-               },
-                new Order
-                {
-                    OrderId = 2,
-                    price = 130.00,
-                    CustomerId = "2",
-                    isPayed = true,
-                    AddressId = 1,
-                    ProductId = 1
-                },
-                 new Order
-                 {
-                     OrderId = 3,
-                     price = 330.00,
-                     CustomerId = "3",
-                     isPayed = true,
-                     AddressId = 2,
-                     ProductId = 1
-                 }
-            );
+            //modelBuilder.Entity<Order>().HasData(
+            //   new Order
+            //   {
+            //       OrderId = 1,
+            //       price = 150.00,
+            //       CustomerId = "1",
+            //       isPayed = true,
+            //       AddressId = 1, 
+            //       ProductId = 1 
+            //   },
+            //    new Order
+            //    {
+            //        OrderId = 2,
+            //        price = 130.00,
+            //        CustomerId = "2",
+            //        isPayed = true,
+            //        AddressId = 1,
+            //        ProductId = 1
+            //    },
+            //     new Order
+            //     {
+            //         OrderId = 3,
+            //         price = 330.00,
+            //         CustomerId = "3",
+            //         isPayed = true,
+            //         AddressId = 2,
+            //         ProductId = 1
+            //     }
+            //);
 
             modelBuilder.Entity<Address>().HasData(
                 new Address
@@ -185,26 +187,26 @@ namespace Grupp3Hattmakaren.Models
                 }
             );
 
-            modelBuilder.Entity<ShippingBill>().HasData(
-    new ShippingBill
-    {
-        ShippingBillId = 1,
-        productCode = "SHB001",
-        OrderId = 1
-    },
-    new ShippingBill
-    {
-        ShippingBillId = 2,
-        productCode = "SHB002",
-        OrderId = 2
-    },
-    new ShippingBill
-    {
-        ShippingBillId = 3,
-        productCode = "SHB003",
-        OrderId = 3
-    }
-);
+//            modelBuilder.Entity<ShippingBill>().HasData(
+//    new ShippingBill
+//    {
+//        ShippingBillId = 1,
+//        productCode = "SHB001",
+//        OrderId = 1
+//    },
+//    new ShippingBill
+//    {
+//        ShippingBillId = 2,
+//        productCode = "SHB002",
+//        OrderId = 2
+//    },
+//    new ShippingBill
+//    {
+//        ShippingBillId = 3,
+//        productCode = "SHB003",
+//        OrderId = 3
+//    }
+//);
             modelBuilder.Entity<Material>().HasData(
               
                 // Stråhattar

@@ -101,22 +101,19 @@ namespace Grupp3Hattmakaren.Controllers
             return RedirectToAction("AdminOrders");
         }
 
-        [HttpPost]
+        [HttpGet] 
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminOldOrders()
+        public IActionResult AdminOrderHistory()
         {
-            // Hämta en lista över alla betalda ordrar
             var paidOrders = _hatcontext.Orders
                 .Where(order => order.isPayed)
                 .Include(order => order.Customer)
                 .ToList();
 
-            // Skicka den filtrerade listan till vyn
             ViewBag.oldOrderList = paidOrders;
             return View();
-
-
         }
+
     }
 }
 

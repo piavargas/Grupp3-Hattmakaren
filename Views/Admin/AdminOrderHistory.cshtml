@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="Material" asp-action="Material">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Order materials</span>
                     </a>
@@ -39,15 +39,21 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Print waybill</span>
                     </a>
                 </li>
                 <li>
-                    <a href="AdminOldOrders">
+                    <a href="AdminOrderHistory">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Old orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Send offer</span>
                     </a>
                 </li>
             </ul>
@@ -59,7 +65,7 @@
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Orders in progress</span>
+                    <span class="text">Order history</span>
                 </div>
                 <div class="activity-data">
                     @foreach (var order in ViewBag.oldOrderList)
