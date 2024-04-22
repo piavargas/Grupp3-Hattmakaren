@@ -9,6 +9,8 @@ namespace Grupp3Hattmakaren.Models
 
         public virtual ICollection<Order> orders { get; set; }
         public virtual ICollection<Address> addresses { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+
     }
 
 }

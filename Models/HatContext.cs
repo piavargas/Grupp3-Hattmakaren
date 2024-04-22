@@ -10,13 +10,13 @@ namespace Grupp3Hattmakaren.Models
         public HatContext(DbContextOptions<HatContext> options) : base(options)
         {
         }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Enquiry> Enquiries { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Material> Materials { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product_Material> Product_Materials { get; set; }
         public DbSet<ProductShoppingCart> ProductShoppingCarts { get; set; }
