@@ -61,6 +61,16 @@ namespace Grupp3Hattmakaren.Controllers
 
         }
 
+        public IActionResult CardPaymentMethod()
+        {
+            return View();
+        }
+
+        public IActionResult PaymentConfirmationMessage()
+        {
+            return View();
+        }
+
             [Authorize(Roles = "Customer")]
             public IActionResult CustomerMessages()
             {
