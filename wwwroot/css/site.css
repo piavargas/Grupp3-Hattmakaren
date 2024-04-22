@@ -8,25 +8,52 @@ html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.header {
+    margin-top: 0;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 0; /* Tar bort nedre marginal f�r att anpassa sig till att det inte finns n�gon footer */
 }
 
 .navbar {
     padding: 8px 14px;
 }
+
+.logout-form {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    left: 280px;
+}
+
+.login-form {
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    left: 280px;
+}
+
+.logout-form button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+    .logout-form button:hover, .logout-form button:focus {
+        color: #0056b3; /* Adjust the color as needed */
+        text-decoration: underline;
+    }

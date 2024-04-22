@@ -13,10 +13,11 @@
 </head>
 <body>
     @* Following line to use usermanager *@
-    @inject UserManager<User> UserManager 
+    @inject UserManager<User> UserManager
+    @inject HatContext hatContext
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-1">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hattmakaren</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,7 +29,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="LogOut" method="post">
+                                    <button type="submit" class="btn btn-link nav-link">Sign out</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Sign in</a>
+							</li>
+                        }
+                        <li class="nav-item">
                         @if (User.Identity.IsAuthenticated)
                         {
                             var user = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -43,13 +58,13 @@
                                 else if (await UserManager.IsInRoleAsync(user, "Customer"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="CustomerMessages">My CPage</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="CustomerMessages">My Page</a>
                                     </li>
                                 }
                             }
                         }
-                    
                     </ul>
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         var user = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -58,6 +73,7 @@
 
                             @if (await UserManager.IsInRoleAsync(user, "Admin"))
                         
+
                             {
                                 <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
                             }
@@ -71,6 +87,7 @@
                         {
                             <p class="navbar-text">No user logged in</p>
                            
+
                         }
 
                     }
@@ -80,32 +97,38 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+   
+    <!--Skapar kundvagnen för en kund-->
+    <div id="shoppingCart" hidden>
+        <ul>
+            @if(User.IsInRole("Customer"))
+            {
+                var customer = await UserManager.FindByNameAsync(User.Identity.Name);
+                var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
+
+                @foreach (var cartItem in produtShoppingCart)
+                {
+                    if (cartItem.shoppingCart.customerId == customer.Id)
+                    {
+                        <li>
+                            <label>@cartItem.product.productName</label>
+                            <p>Price: @cartItem.product.price kr</p>
+                            <p>In cart: @cartItem.quantity</p>
+                        </li>
+                    }
+                }
+            }
+        </ul>
+    </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <p>&copy; 2024 - Hattmakaren </p>
-                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut">
-                    <button type="submit" class="btn btn-link">Logga ut</button>
-                </form>
-            }
-            else
-            {
-                <p>&copy; 2024 - Hattmakaren </p>
-                <a asp-area="" asp-controller="Account" asp-action="LogIn">Logga in</a>
-            }
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

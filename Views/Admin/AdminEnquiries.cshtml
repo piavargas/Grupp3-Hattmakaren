@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Print waybill</span>
                     </a>
@@ -48,7 +48,13 @@
                         <span class="link-name">Old orders</span>
                     </a>
                 </li>
-            </ul>
+                <li>
+                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Send offer</span>
+                    </a>
+                </li>
+                </ul>
         </div>
     </nav>
 
