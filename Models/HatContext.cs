@@ -14,10 +14,10 @@ namespace Grupp3Hattmakaren.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Enquiry> Enquiries { get; set; }
-        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<Material> Materials { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; } 
+        public DbSet<Enquiry> Enquiries { get; set; }
+
         public DbSet<Product_Material> Product_Materials { get; set; }
         public DbSet<ProductShoppingCart> ProductShoppingCarts { get; set; }
         public DbSet<ShippingBill> ShippingBills { get; set; }
@@ -28,6 +28,9 @@ namespace Grupp3Hattmakaren.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<Order>().HasOne(o=> o.Enquiry).WithOne(e=> e.Order).OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Product_Material>()
                 .HasKey(pm => new { pm.ProductId, pm.MaterialId });
@@ -61,9 +64,9 @@ namespace Grupp3Hattmakaren.Models
                    size = 350,
                }
 
-               );
-
-
+               ); 
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
 
             modelBuilder.Entity<Order>().HasData(
@@ -73,8 +76,8 @@ namespace Grupp3Hattmakaren.Models
                    price = 150.00,
                    CustomerId = "1",
                    isPayed = true,
-                   AddressId = 1,
-                   ProductId = 1
+                   AddressId = 1, 
+                   ProductId = 1 
                },
                 new Order
                 {
@@ -95,6 +98,41 @@ namespace Grupp3Hattmakaren.Models
                      ProductId = 1
                  }
             );
+            //modelBuilder.Entity<Product>().HasData(
+            //   new Product
+            //   {
+            //       ProductId = 1,
+            //       productName = "Magisk Nalle Natlampa",
+            //       description = "Denna mysiga nalle tänds när du rör honom.",
+            //       size = 350,
+            //   }
+             
+            //   );
+
+            //modelBuilder.Entity<Enquiry>().HasData(
+            //   new Enquiry
+            //   {
+            //       EnquiryId = 1,                 
+            //       consentHat = true,
+            //       description = "Jag är intresserad av att beställa en hatt med speciellt tryck.",
+            //       font = "Arial",
+            //       textOnHat = "Jonas är bäst",
+            //       isInProgress = true,                  
+            //       CustomerId = "1"
+            //   }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+            //);
+
+            //modelBuilder.Entity<Order>().HasData(
+            //   new Order
+            //   {
+            //       OrderId = 1,
+            //       price = 150.00,
+            //       CustomerId = "1", 
+            //       isPayed = true,
+            //       AddressId = 1, 
+            //       ProductId = 1 
+            //   }
+            //);
 
             modelBuilder.Entity<Address>().HasData(
                 new Address
@@ -114,6 +152,16 @@ namespace Grupp3Hattmakaren.Models
                       countryName = "Sweden"
                   }
             );
+            //modelBuilder.Entity<Address>().HasData(
+            //    new Address
+            //    {
+            //        AddressId = 1,
+            //        CustomerId = "1", // Länka detta till en befintlig Customer                   
+            //        streetName = "123 Main Street",
+            //        zipCode = 12345,                    
+            //        countryName = "Countryland"
+            //    }
+            //);
 
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
@@ -166,7 +214,7 @@ namespace Grupp3Hattmakaren.Models
     }
 );
             modelBuilder.Entity<Material>().HasData(
-
+              
                 // Stråhattar
                 new Material
                 {
@@ -322,13 +370,13 @@ namespace Grupp3Hattmakaren.Models
                      price = 105
                  },
                  new Material
-                 {
-                     materialId = 19,
-                     name = "Ull",
-                     quantity = 200,
-                     supplier = "Kaninens KooperationAB",
-                     price = 200
-                 },
+              {
+                  materialId = 19,
+                  name = "Ull",
+                  quantity = 200,
+                  supplier = "Kaninens KooperationAB",
+                  price = 200
+              },
               new Material
               {
                   materialId = 20,
@@ -337,14 +385,25 @@ namespace Grupp3Hattmakaren.Models
                   supplier = "Ecuadour Finest AB",
                   price = 3075
               }
-
+                
                 );
+            //modelBuilder.Entity<Customer>().HasData(
+            //    new Customer
+            //    {
+            //        Id = "1",
+            //        UserName = "jonasmoll", 
+            //        Email = "jonasmoll@outlook.com",
+            //        firstName = "Jonas",
+            //        lastName = "Moll",
+            //        headSize = "28cm"
+            //    }
+            //); 
 
-
+            
 
 
         }
-
+    
     }
 }
 
