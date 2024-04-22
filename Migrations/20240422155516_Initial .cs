@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -210,12 +210,12 @@ namespace Grupp3Hattmakaren.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     headSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     consentHat = table.Column<bool>(type: "bit", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    font = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    font = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isInProgress = table.Column<bool>(type: "bit", nullable: false),
                     isSpecial = table.Column<bool>(type: "bit", nullable: false),
                     getInStore = table.Column<bool>(type: "bit", nullable: false),
@@ -444,9 +444,9 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
                 values: new object[,]
                 {
-                    { "1", 0, "1a0745ee-5caa-4ded-a978-c1de62f7fa63", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "7f102755-ae96-4113-bf4c-7095eb1f214a", false, "jonasmoll", "Jonas", "28cm", "Moll" },
-                    { "2", 0, "f337016d-9d3e-41fb-a950-ee96a5fe2cbd", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "75a39366-883e-4997-ad03-90ea78d6357a", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
-                    { "3", 0, "227c0beb-a5f3-4746-aa50-ac93ad3e7d0e", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "01fe2f00-1c96-4710-b790-872fa56b1394", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
+                    { "1", 0, "4db9e068-05c2-483a-a4a1-e9bf96a00782", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "912df459-5996-432a-9156-17c595000929", false, "jonasmoll", "Jonas", "28cm", "Moll" },
+                    { "2", 0, "11b9a9a2-387b-4604-9b2b-429250c3da98", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "a9287804-0450-4d82-9d10-f8c63ca9c137", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
+                    { "3", 0, "1cfe64e4-2037-4e81-b433-e9f861215199", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "85f1a0a4-2c81-4ffd-ab12-30a439f05b09", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
                 });
 
             migrationBuilder.InsertData(
@@ -479,7 +479,15 @@ namespace Grupp3Hattmakaren.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "Discriminator", "ImagePath", "description", "price", "productName", "size" },
-                values: new object[] { 1, "Product", null, "Denna mysiga nalle tänds när du rör honom.", 0.0, "Magisk Nalle Natlampa", 350.0 });
+                values: new object[,]
+                {
+                    { 1, "Product", "/NewFolder/produkthatt.jpg", "A timeless bowler hat made from high-quality wool felt, perfect for both formal and casual occasions.", 0.0, "Classic Bowler Hat", 58.0 },
+                    { 2, "Product", "/NewFolder/produkthatt2.png", "An elegant hat with a wide brim and a decorative silk ribbon. Ideal for sunny days or a stylish outing.", 0.0, "Elegant Ladies' Hat", 56.0 },
+                    { 3, "Product", "/NewFolder/produkthatt3.png", "Sturdy and ready for any adventure, this fedora is your faithful companion in all weathers.", 0.0, "Adventurer's Fedora", 59.0 },
+                    { 4, "Product", "/NewFolder/produkthatt4.jpg", "Relive the roaring 1920s with this authentic top hat, perfect for themed parties and gatherings.", 0.0, "Vintage Top Hat", 60.0 },
+                    { 5, "Product", "/NewFolder/produkthatt5.webp", "A chic beret made of 100% wool, available in various colors. Add a French touch to your wardrobe.", 0.0, "Modern Beret", 57.0 },
+                    { 6, "Product", "/NewFolder/produkthatt7.jpg", "Light and airy, this Panama hat provides sun protection while keeping you cool and stylish.", 0.0, "Panama-style Sun Hat", 58.0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Addresses",

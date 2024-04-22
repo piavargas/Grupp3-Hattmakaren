@@ -91,7 +91,6 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fabricMaterial")
@@ -99,7 +98,6 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("font")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("getInStore")
@@ -116,11 +114,9 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("specialEffectMaterials")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("textOnHat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EnquiryId");
@@ -428,10 +424,56 @@ namespace Grupp3Hattmakaren.Migrations
                         new
                         {
                             ProductId = 1,
-                            description = "Denna mysiga nalle tänds när du rör honom.",
+                            ImagePath = "/NewFolder/produkthatt.jpg",
+                            description = "A timeless bowler hat made from high-quality wool felt, perfect for both formal and casual occasions.",
                             price = 0.0,
-                            productName = "Magisk Nalle Natlampa",
-                            size = 350.0
+                            productName = "Classic Bowler Hat",
+                            size = 58.0
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ImagePath = "/NewFolder/produkthatt2.png",
+                            description = "An elegant hat with a wide brim and a decorative silk ribbon. Ideal for sunny days or a stylish outing.",
+                            price = 0.0,
+                            productName = "Elegant Ladies' Hat",
+                            size = 56.0
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ImagePath = "/NewFolder/produkthatt3.png",
+                            description = "Sturdy and ready for any adventure, this fedora is your faithful companion in all weathers.",
+                            price = 0.0,
+                            productName = "Adventurer's Fedora",
+                            size = 59.0
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            ImagePath = "/NewFolder/produkthatt4.jpg",
+                            description = "Relive the roaring 1920s with this authentic top hat, perfect for themed parties and gatherings.",
+                            price = 0.0,
+                            productName = "Vintage Top Hat",
+                            size = 60.0
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            ImagePath = "/NewFolder/produkthatt5.webp",
+                            description = "A chic beret made of 100% wool, available in various colors. Add a French touch to your wardrobe.",
+                            price = 0.0,
+                            productName = "Modern Beret",
+                            size = 57.0
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            ImagePath = "/NewFolder/produkthatt7.jpg",
+                            description = "Light and airy, this Panama hat provides sun protection while keeping you cool and stylish.",
+                            price = 0.0,
+                            productName = "Panama-style Sun Hat",
+                            size = 58.0
                         });
                 });
 
@@ -822,12 +864,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a0745ee-5caa-4ded-a978-c1de62f7fa63",
+                            ConcurrencyStamp = "4db9e068-05c2-483a-a4a1-e9bf96a00782",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f102755-ae96-4113-bf4c-7095eb1f214a",
+                            SecurityStamp = "912df459-5996-432a-9156-17c595000929",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
@@ -838,12 +880,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f337016d-9d3e-41fb-a950-ee96a5fe2cbd",
+                            ConcurrencyStamp = "11b9a9a2-387b-4604-9b2b-429250c3da98",
                             Email = "tanjahavstorm@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "75a39366-883e-4997-ad03-90ea78d6357a",
+                            SecurityStamp = "a9287804-0450-4d82-9d10-f8c63ca9c137",
                             TwoFactorEnabled = false,
                             UserName = "tanjahavstorm",
                             firstName = "Tanja",
@@ -854,12 +896,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "227c0beb-a5f3-4746-aa50-ac93ad3e7d0e",
+                            ConcurrencyStamp = "1cfe64e4-2037-4e81-b433-e9f861215199",
                             Email = "icamaxi@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "01fe2f00-1c96-4710-b790-872fa56b1394",
+                            SecurityStamp = "85f1a0a4-2c81-4ffd-ab12-30a439f05b09",
                             TwoFactorEnabled = false,
                             UserName = "maxmaxsson",
                             firstName = "Max",
