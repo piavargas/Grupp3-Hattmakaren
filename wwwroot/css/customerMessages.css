@@ -174,10 +174,10 @@ nav.close li a .link-name {
 
 .dashboard {
     position: relative;
-    /*    left: 250px;*/
+        left: 250px;
     background-color: var(--panel-color);
     min-height: 89vh;
-    /*    width: calc(100% - 250px);*/
+        width: calc(100% - 250px);
     padding: 10px 80px;
     transition: var(--tran-05);
     margin-bottom: 20px
