@@ -103,7 +103,7 @@ namespace Grupp3Hattmakaren.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult AdminOldOrders()
+        public IActionResult AdminOrderHistory()
         {
             // Hämta en lista över alla betalda ordrar
             var paidOrders = _hatcontext.Orders

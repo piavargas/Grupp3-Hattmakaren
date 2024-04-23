@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class @int : Migration
+    public partial class @in : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -307,7 +307,7 @@ namespace Grupp3Hattmakaren.Migrations
                         column: x => x.EnquiryId,
                         principalTable: "Enquiries",
                         principalColumn: "EnquiryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -451,9 +451,9 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
                 values: new object[,]
                 {
-                    { "1", 0, "38410786-754e-4654-823a-bc7ecaa5f4cc", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "c504cfd2-2cc5-4707-b8d4-ff45720c8006", false, "jonasmoll", "Jonas", "28cm", "Moll" },
-                    { "2", 0, "43e72a78-ed72-466a-8151-4b6f187371d2", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "66314d13-b3a6-4125-a2c6-fd81e368b17b", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
-                    { "3", 0, "4d83c90a-9e60-4bbb-90fb-4e71251f645b", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "c21239d7-92bf-4d48-b860-7d3f5392485a", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
+                    { "1", 0, "4717674f-08f7-4768-b968-c80e045e4ecf", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "329beea4-b087-4fcc-8202-767d962516d8", false, "jonasmoll", "Jonas", "28cm", "Moll" },
+                    { "2", 0, "7c6dd82e-fe12-4652-af73-7042d29b35ac", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "989be9ef-1e52-4688-bc8e-882ab42fec67", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
+                    { "3", 0, "60b8ca81-8e50-460a-9bac-0c754a9f4490", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "0b629104-7621-4e53-9967-2c9c647142e2", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
                 });
 
             migrationBuilder.InsertData(
@@ -498,13 +498,23 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Enquiries",
+                columns: new[] { "EnquiryId", "CustomerId", "color", "consentHat", "description", "fabricMaterial", "font", "getInStore", "headSize", "isInProgress", "isSpecial", "specialEffectMaterials", "textOnHat" },
+                values: new object[,]
+                {
+                    { 1787, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
+                    { 1788, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
+                    { 1789, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "OrderId", "AddressId", "CustomerId", "EnquiryId", "ProductId", "isPayed", "price" },
                 values: new object[,]
                 {
-                    { 1, 1, "1", 0, 1, true, 150.0 },
-                    { 2, 1, "2", 0, 1, true, 130.0 },
-                    { 3, 2, "3", 0, 1, true, 330.0 }
+                    { 1, 1, "1", 1789, 1, true, 150.0 },
+                    { 2, 1, "2", 1788, 1, true, 130.0 },
+                    { 3, 2, "3", 1787, 1, true, 330.0 }
                 });
 
             migrationBuilder.InsertData(

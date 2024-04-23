@@ -128,6 +128,56 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Enquiries");
+
+                    b.HasData(
+                        new
+                        {
+                            EnquiryId = 1789,
+                            CustomerId = "2",
+                            color = "blue",
+                            consentHat = true,
+                            description = "test",
+                            fabricMaterial = "",
+                            font = "Times New Roman",
+                            getInStore = true,
+                            headSize = "22",
+                            isInProgress = true,
+                            isSpecial = true,
+                            specialEffectMaterials = "",
+                            textOnHat = ""
+                        },
+                        new
+                        {
+                            EnquiryId = 1788,
+                            CustomerId = "2",
+                            color = "blue",
+                            consentHat = true,
+                            description = "test",
+                            fabricMaterial = "",
+                            font = "Times New Roman",
+                            getInStore = true,
+                            headSize = "22",
+                            isInProgress = true,
+                            isSpecial = true,
+                            specialEffectMaterials = "",
+                            textOnHat = ""
+                        },
+                        new
+                        {
+                            EnquiryId = 1787,
+                            CustomerId = "2",
+                            color = "blue",
+                            consentHat = true,
+                            description = "test",
+                            fabricMaterial = "",
+                            font = "Times New Roman",
+                            getInStore = true,
+                            headSize = "22",
+                            isInProgress = true,
+                            isSpecial = true,
+                            specialEffectMaterials = "",
+                            textOnHat = ""
+                        });
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Material", b =>
@@ -368,7 +418,7 @@ namespace Grupp3Hattmakaren.Migrations
                             OrderId = 1,
                             AddressId = 1,
                             CustomerId = "1",
-                            EnquiryId = 0,
+                            EnquiryId = 1789,
                             ProductId = 1,
                             isPayed = true,
                             price = 150.0
@@ -378,7 +428,7 @@ namespace Grupp3Hattmakaren.Migrations
                             OrderId = 2,
                             AddressId = 1,
                             CustomerId = "2",
-                            EnquiryId = 0,
+                            EnquiryId = 1788,
                             ProductId = 1,
                             isPayed = true,
                             price = 130.0
@@ -388,7 +438,7 @@ namespace Grupp3Hattmakaren.Migrations
                             OrderId = 3,
                             AddressId = 2,
                             CustomerId = "3",
-                            EnquiryId = 0,
+                            EnquiryId = 1787,
                             ProductId = 1,
                             isPayed = true,
                             price = 330.0
@@ -791,7 +841,7 @@ namespace Grupp3Hattmakaren.Migrations
 
                     b.HasIndex("productsProductId");
 
-                    b.ToTable("OrderProduct", (string)null);
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("ProductShoppingCart", b =>
@@ -831,12 +881,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "38410786-754e-4654-823a-bc7ecaa5f4cc",
+                            ConcurrencyStamp = "4717674f-08f7-4768-b968-c80e045e4ecf",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c504cfd2-2cc5-4707-b8d4-ff45720c8006",
+                            SecurityStamp = "329beea4-b087-4fcc-8202-767d962516d8",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
@@ -847,12 +897,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43e72a78-ed72-466a-8151-4b6f187371d2",
+                            ConcurrencyStamp = "7c6dd82e-fe12-4652-af73-7042d29b35ac",
                             Email = "tanjahavstorm@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "66314d13-b3a6-4125-a2c6-fd81e368b17b",
+                            SecurityStamp = "989be9ef-1e52-4688-bc8e-882ab42fec67",
                             TwoFactorEnabled = false,
                             UserName = "tanjahavstorm",
                             firstName = "Tanja",
@@ -863,12 +913,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d83c90a-9e60-4bbb-90fb-4e71251f645b",
+                            ConcurrencyStamp = "60b8ca81-8e50-460a-9bac-0c754a9f4490",
                             Email = "icamaxi@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c21239d7-92bf-4d48-b860-7d3f5392485a",
+                            SecurityStamp = "0b629104-7621-4e53-9967-2c9c647142e2",
                             TwoFactorEnabled = false,
                             UserName = "maxmaxsson",
                             firstName = "Max",
@@ -923,7 +973,7 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasOne("Grupp3Hattmakaren.Models.Enquiry", "Enquiry")
                         .WithOne("Order")
                         .HasForeignKey("Grupp3Hattmakaren.Models.Order", "EnquiryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Address");

@@ -32,11 +32,11 @@ namespace Grupp3Hattmakaren.Models
             modelBuilder.Entity<Product_Material>()
                 .HasKey(pm => new { pm.ProductId, pm.MaterialId });
 
-            //modelBuilder.Entity<Order>()
-            //  .HasOne(o => o.Customer)
-            //  .WithMany(c => c.orders)
-            //  .HasForeignKey(o => o.CustomerId)
-            //  .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Order>()
+              .HasOne(o => o.Customer)
+              .WithMany(c => c.orders)
+              .HasForeignKey(o => o.CustomerId)
+              .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Enquiry)
@@ -69,7 +69,56 @@ namespace Grupp3Hattmakaren.Models
                );
 
 
-
+            modelBuilder.Entity<Enquiry>().HasData(
+                new Enquiry 
+                { 
+                    EnquiryId = 1789,
+                    description = "test",
+                    color = "blue",
+                    headSize = "22",
+                    font =  "Times New Roman",
+                    textOnHat = "",
+                    isInProgress = true,
+                    isSpecial = true,
+                    getInStore = true,
+                    fabricMaterial = "",
+                    specialEffectMaterials = "",
+                    consentHat = true,
+                    CustomerId = "2"
+                },
+                new Enquiry
+                {
+                    EnquiryId = 1788,
+                    description = "test",
+                    color = "blue",
+                    headSize = "22",
+                    font = "Times New Roman",
+                    textOnHat = "",
+                    isInProgress = true,
+                    isSpecial = true,
+                    getInStore = true,
+                    fabricMaterial = "",
+                    specialEffectMaterials = "",
+                    consentHat = true,
+                    CustomerId = "2"
+                },
+                new Enquiry
+                {
+                    EnquiryId = 1787,
+                    description = "test",
+                    color = "blue",
+                    headSize = "22",
+                    font = "Times New Roman",
+                    textOnHat = "",
+                    isInProgress = true,
+                    isSpecial = true,
+                    getInStore = true,
+                    fabricMaterial = "",
+                    specialEffectMaterials = "",
+                    consentHat = true,
+                    CustomerId = "2"
+                }
+                );
 
             modelBuilder.Entity<Order>().HasData(
                new Order
@@ -79,7 +128,9 @@ namespace Grupp3Hattmakaren.Models
                    CustomerId = "1",
                    isPayed = true,
                    AddressId = 1,
-                   ProductId = 1
+                   ProductId = 1,
+                   EnquiryId = 1789
+
                },
                 new Order
                 {
@@ -88,7 +139,8 @@ namespace Grupp3Hattmakaren.Models
                     CustomerId = "2",
                     isPayed = true,
                     AddressId = 1,
-                    ProductId = 1
+                    ProductId = 1,
+                    EnquiryId = 1788
                 },
                  new Order
                  {
@@ -97,7 +149,8 @@ namespace Grupp3Hattmakaren.Models
                      CustomerId = "3",
                      isPayed = true,
                      AddressId = 2,
-                     ProductId = 1
+                     ProductId = 1,
+                     EnquiryId = 1787
                  }
             );
 
