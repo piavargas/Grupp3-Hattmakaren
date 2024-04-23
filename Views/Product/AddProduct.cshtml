@@ -41,18 +41,20 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label for="materials">Materials:</label>
-                    <select id="materials" name="materials" class="form-control" multiple>
-                        @foreach (var material in ViewBag.Materials)
-                        {
-                            <option value="@material.materialId">@material.name</option>
-                        }
-                    </select>
+                    <label>Materials:</label><br>
+                    @foreach (var material in ViewBag.Materials)
+                    {
+                        <div class="form-check form-check-inline">
+                            <input type="checkbox" id="material-@material.materialId" name="materials" value="@material.materialId" class="form-check-input">
+                            <label class="form-check-label" for="material-@material.materialId">@material.name</label>
+                        </div>
+                    }
                     <span class="text-danger" asp-validation-for="materials"></span>
                 </div>
             </td>
         </tr>
-        <tr>
+
+
             <td>
                 <div class="form-group">
                     <label asp-for="ImagePath">Image:</label>
