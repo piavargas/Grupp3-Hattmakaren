@@ -5,77 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hattmakaren</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="~/css/Index.css" rel="stylesheet">
+
+    <link href="css/index.css" rel="stylesheet"> 
 
 </head>
 <body>
 
-    <div class="container product-container">
-        <h1 class="text-center mb-5">Welcome to Otto and Judiths Hattmakaren</h1>
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="admin-panel">
-                <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
-            </div>
-        }
-        @if (User.IsInRole("Customer"))
-        {
-            <tr>
-                <a href="Customer/CustomerOrderForm">Place special hat order</a>
-            </tr>
-        }
-    </div>
+    <div class="container-fluid">
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#productCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#productCarousel" data-slide-to="1" class=""></li>
+                <li data-target="#productCarousel" data-slide-to="2" class=""></li>
+            </ol>
 
-
-    <div class="row">
-            @foreach (var prod in Model)
-            {
-                <div class="col-md-6">
-                    <div class="product-card">
-                        <img src="@prod.ImagePath" alt="Product Image" class="product-image">
-                        <h2 class="product-name">@prod.productName</h2>
-                        <p class="product-description">@prod.description</p>
-                        <p class="product-details">Storlek: @prod.size cm</p>
-                        <p class="product-price">@prod.price SEK</p>
-                        @if(User.IsInRole("Customer"))
-                        {
-                            //Form för att lägga till en produkt i kundvagnen
-                            using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
-                            {
-                                <input type="number" name="productId" id="productId" value="@prod.ProductId" hidden />
-                                <button type="submit" class="btn btn-success">Add to Cart</button>
-
-                            }
-                        }
-                        else if(User.IsInRole("Admin"))
-                        {
-                            <div class="text-center">
-                                <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
-                                    <input type="hidden" name="id" value="@prod.ProductId" />
-                                    <button type="submit" class="btn btn-danger mr-2">Radera</button>
-                                </form>
-                                <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Redigera</a>
-                            </div>
-                        }
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/NewFolder/hattmakarebild1.jpg" class="d-block w-100" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">The Classic Hats by Hattmakaren</h2>
+                        <p class="lead">Explore our collection of timeless hats</p>
                     </div>
                 </div>
-            }
+                <div class="carousel-item">
+                    <img src="/NewFolder/hattmakarebild2.jpg" class="d-block w-100" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">Create Your Own Style</h2>
+                        <p class="lead">Discover our elegant hats for every occasion</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/NewFolder/hattmakarebild3.jpg" class="d-block w-100" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-3">Our Craft, Your Style</h2>
+                        <p class="lead">Each hat is tailored to fit your personality</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
 
-    @if (User.IsInRole("Admin"))
-    {
-        <tr>
-            <a href="Product/AddProduct">Lägg till produkt</a>
-            <br />
-        </tr>
-        }
+            <div class="container">
+                <div class="row justify-content-center">
+                    @foreach (var prod in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                                <div class="product-details">
+                                    <h2 class="product-name">@prod.productName</h2>
+                                    <p class="product-description">@prod.description</p>
+                                    <p class="product-price">@prod.price SEK</p>
+                                </div>
+                                <div class="text-center">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@prod.ProductId" />
+                                            <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                                        </form>
+                                        <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Edit</a>
+                                    }
+                                    @if (User.IsInRole("Customer"))
+                                    {
+                                        <button class="btn btn-success">Buy</button>
+                                    }
+                                    @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
+                                    {
+                                        <p>Hi! To buy this product, you need to be a registered customer. Please create an account!</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-  
+
+            <div class="row justify-content-center mb-3">
+                <div class="col-md-6">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="text-center">
+                            <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
+                        </div>
+                    }
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <div class="text-center">
+                            <a href="Customer/CustomerOrderForm" class="btn btn-primary">Place Hat Order</a>
+                        </div>
+                    }
+                </div>
+            </div>
+            </div>
+
+
+        <div class="container marketing">
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">"Crafting Excellence for Over 50 Years: <span class="text-muted">Meet Otto, The Master Hatter"</span></h2>
+                    <p class="lead">With over five decades of experience in the industry, Otto brings unparalleled skill and passion to every hat he creates. His craftsmanship is not just a job; it's a lifelong dedication, resulting in hats that stand as timeless symbols of quality and style.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-fluid mx-auto" src="/NewFolder/ottoHatt.jpeg" alt="Image of Otto, the Master Hatter">
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+
+            <div class="row featurette">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="featurette-heading">"A Decade of Creativity and Elegance:  <span class="text-muted">Meet Judith, The Artisan Hatmaker"</span></h2>
+                    <p class="lead">
+                        "Transitioning through various industries, Judith found her true passion in hatmaking over a decade ago. Her journey from diverse backgrounds has enriched her creativity and perspective,
+                        infusing every hat she creates with a unique flair and elegance. Join her in celebrating craftsmanship and individuality with each meticulously crafted piece."
+                    </p>
+                </div>
+                <div class="col-md-5 order-md-1">
+                    <img class="featurette-image img-fluid mx-auto" src="/NewFolder/judithHatt.jpeg" alt="Image of Judith, The Artisan Hatmaker">
+                </div>
+            </div>
+
+            <hr class="featurette-divider">
+        </div>
+
+    </div>
+
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-EvrZ9rHxdjWRz8Fz5KU6GAw2sFWLRqU+YnjST6mo2usvbJQLM2/+QZ6jiPb3rK4Z" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>
-

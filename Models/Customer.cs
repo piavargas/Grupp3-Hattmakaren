@@ -7,7 +7,6 @@ namespace Grupp3Hattmakaren.Models
 {
     public class Customer : User
     {
-
         public string headSize { get; set; }
 
         public virtual ShoppingCart cart { get; set; }
