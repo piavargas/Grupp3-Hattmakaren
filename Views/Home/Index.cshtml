@@ -79,7 +79,11 @@
                                     }
                                     @if (User.IsInRole("Customer"))
                                     {
-                                        <button class="btn btn-success">Buy</button>
+                                        @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="productId" id="productId" value="@prod.ProductId" />
+                                            <input type="submit" value="Buy" class="btn btn-success" />
+                                        }
                                     }
                                     @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
                                     {
