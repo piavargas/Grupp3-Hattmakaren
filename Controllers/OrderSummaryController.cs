@@ -49,7 +49,7 @@ namespace Grupp3Hattmakaren.Controllers
                 // Lägg till orderinformation i PDF-filen
                 //doc.Add(new Paragraph($"Enquiry ID: {enquiry.EnquiryId}"));
                 doc.Add(new Paragraph($"Head Size: {enquiry.headSize}"));
-                doc.Add(new Paragraph($"Consent to Modify Existing Hat: {(enquiry.consentHat ? "Yes" : "No")}"));
+                //doc.Add(new Paragraph($"Consent to Modify Existing Hat: {(enquiry.consentHat ? "Yes" : "No")}"));
                 doc.Add(new Paragraph($"Description: {enquiry.description}"));
                 doc.Add(new Paragraph($"Fabric Material: {enquiry.fabricMaterial}"));
                 doc.Add(new Paragraph($"Special Effect Materials: {enquiry.specialEffectMaterials}"));
