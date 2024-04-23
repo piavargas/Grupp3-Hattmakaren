@@ -9,15 +9,15 @@ html {
 }
 @media screen and (max-width: 768px) {
     .shoppingCart {
-        top: auto; /* Återställer top till auto för att placera den efter föregående element */
-        bottom: 10px; /* Placera kundvagnen längst ner på skärmen */
-        left: 10px; /* Placera kundvagnen till vänster på skärmen */
-        right: 10px; /* Placera kundvagnen till höger på skärmen */
-        margin-left: 0; /* Återställer margin-left */
-        margin-right: 0; /* Återställer margin-right */
-        width: 90%; /* Bredden på kundvagnen */
-        max-width: none; /* Återställer max-width */
-        padding: 15px; /* Mindre padding för att spara utrymme */
+        top: auto; /* ï¿½terstï¿½ller top till auto fï¿½r att placera den efter fï¿½regï¿½ende element */
+        bottom: 10px; /* Placera kundvagnen lï¿½ngst ner pï¿½ skï¿½rmen */
+        left: 10px; /* Placera kundvagnen till vï¿½nster pï¿½ skï¿½rmen */
+        right: 10px; /* Placera kundvagnen till hï¿½ger pï¿½ skï¿½rmen */
+        margin-left: 0; /* ï¿½terstï¿½ller margin-left */
+        margin-right: 0; /* ï¿½terstï¿½ller margin-right */
+        width: 90%; /* Bredden pï¿½ kundvagnen */
+        max-width: none; /* ï¿½terstï¿½ller max-width */
+        padding: 15px; /* Mindre padding fï¿½r att spara utrymme */
     }
 
     .productInCart {
@@ -62,7 +62,7 @@ html {
     }
 
     body {
-        margin-bottom: 0; /* Tar bort nedre marginal för att anpassa sig till att det inte finns någon footer */
+        margin-bottom: 0; /* Tar bort nedre marginal fï¿½r att anpassa sig till att det inte finns nï¿½gon footer */
     }
 
     .navbar {
@@ -83,7 +83,7 @@ html {
         left: 280px;
     }
     /*
-HÄR ÄR NAVBAR:*/
+Hï¿½R ï¿½R NAVBAR:*/
     .container-fluid {
         /*background-color: blueviolet;*/
     }
@@ -97,9 +97,9 @@ HÄR ÄR NAVBAR:*/
         margin-left: 1300px;
         color: green;
         border: 2px solid black;
-        background-color: #f8f9fa; /* Justera bakgrundsfärg */
-        border-radius: 10px; /* Runda kanterna på kundvagnen */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Förbättra skuggan */
+        background-color: #f8f9fa; /* Justera bakgrundsfï¿½rg */
+        border-radius: 10px; /* Runda kanterna pï¿½ kundvagnen */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Fï¿½rbï¿½ttra skuggan */
     }
 
     .productInCart {
@@ -124,6 +124,6 @@ HÄR ÄR NAVBAR:*/
         }
 
     a:hover {
-        color: red; /* Ändra färg när musen är över länken */
+        color: red; /* ï¿½ndra fï¿½rg nï¿½r musen ï¿½r ï¿½ver lï¿½nken */
     }
 }

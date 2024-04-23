@@ -24,7 +24,7 @@ namespace Grupp3Hattmakaren.Models
         [ForeignKey(nameof(ProductId))]
         public virtual ICollection<Product> products { get; set; }
 
-  
+        public virtual ICollection<ShippingBill> ShippingBills { get; set; }
 
     }
 }
