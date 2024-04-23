@@ -59,33 +59,19 @@
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Orders in progress</span>
+                    <span class="text">Order history </span>
                 </div>
                 <div class="activity-data">
                     @foreach (var order in ViewBag.oldOrderList)
                     {
-                        if (!order.isPayed)
+                        if (order.isPayed)
                         {
                             <div class="data">
                                 <div class="data-item">
                                     <span class="data-title">Customer</span>
                                     <span class="data-list">@order.Customer.firstName @order.Customer.lastName</span>
                                 </div>
-                                <div class="data-item">
-                                    <form method="post" action="@Url.Action("ChangePaymentStatus", "Admin")">
-                                        <input type="hidden" name="orderId" value="@order.OrderId" />
-                                        @if (!order.isPayed)
-                                        {
-                                            <button type="submit" name="status" value="toggle">
-                                                <text>Mark as paid </text>
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <text>Paid</text>
-                                        }
-                                    </form>
-                                </div>
+                               
                             </div>
                         }
                     }

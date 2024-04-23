@@ -14,6 +14,7 @@ namespace Grupp3Hattmakaren.Models
 
         public virtual ICollection<Order> orders { get; set; }
         public virtual ICollection<Address> addresses { get; set; }
+        public virtual ICollection<Enquiry> enquiries { get; set; }
 
     }
 }

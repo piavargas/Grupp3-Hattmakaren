@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240423085317_in")]
-    partial class @in
+    [Migration("20240423120327_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,14 @@ namespace Grupp3Hattmakaren.Migrations
                             countryName = "Sweden",
                             streetName = "Potatisvägen",
                             zipCode = 70284
+                        },
+                        new
+                        {
+                            AddressId = 3,
+                            CustomerId = "3",
+                            countryName = "Sweden",
+                            streetName = "Potatisvägen",
+                            zipCode = 70284
                         });
                 });
 
@@ -85,6 +93,9 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Property<string>("CustomerId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("addressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("color")
                         .IsRequired()
@@ -130,6 +141,9 @@ namespace Grupp3Hattmakaren.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("addressId")
+                        .IsUnique();
+
                     b.ToTable("Enquiries");
 
                     b.HasData(
@@ -137,6 +151,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             EnquiryId = 1789,
                             CustomerId = "2",
+                            addressId = 1,
                             color = "blue",
                             consentHat = true,
                             description = "test",
@@ -153,6 +168,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             EnquiryId = 1788,
                             CustomerId = "2",
+                            addressId = 2,
                             color = "blue",
                             consentHat = true,
                             description = "test",
@@ -169,6 +185,7 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             EnquiryId = 1787,
                             CustomerId = "2",
+                            addressId = 3,
                             color = "blue",
                             consentHat = true,
                             description = "test",
@@ -429,7 +446,7 @@ namespace Grupp3Hattmakaren.Migrations
                         new
                         {
                             OrderId = 2,
-                            AddressId = 1,
+                            AddressId = 3,
                             CustomerId = "2",
                             EnquiryId = 1788,
                             ProductId = 1,
@@ -884,12 +901,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4717674f-08f7-4768-b968-c80e045e4ecf",
+                            ConcurrencyStamp = "0441fcfa-b9ba-476f-b36d-f48980b42d5c",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "329beea4-b087-4fcc-8202-767d962516d8",
+                            SecurityStamp = "b4f5c5af-649a-4d20-8e47-52a8cf3983f9",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
@@ -900,12 +917,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c6dd82e-fe12-4652-af73-7042d29b35ac",
+                            ConcurrencyStamp = "2482433b-c9a3-4a59-b09b-f2237ee2555e",
                             Email = "tanjahavstorm@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "989be9ef-1e52-4688-bc8e-882ab42fec67",
+                            SecurityStamp = "3b5ab7da-4362-4ccd-a462-704364398bfd",
                             TwoFactorEnabled = false,
                             UserName = "tanjahavstorm",
                             firstName = "Tanja",
@@ -916,12 +933,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60b8ca81-8e50-460a-9bac-0c754a9f4490",
+                            ConcurrencyStamp = "50c9da6f-5edb-4264-9fbb-f047ce7bbdf1",
                             Email = "icamaxi@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0b629104-7621-4e53-9967-2c9c647142e2",
+                            SecurityStamp = "f9cf2c6d-7db6-48a0-8776-f245c206ee64",
                             TwoFactorEnabled = false,
                             UserName = "maxmaxsson",
                             firstName = "Max",
@@ -944,12 +961,20 @@ namespace Grupp3Hattmakaren.Migrations
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Enquiry", b =>
                 {
                     b.HasOne("Grupp3Hattmakaren.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("enquiries")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Grupp3Hattmakaren.Models.Address", "address")
+                        .WithOne("Enquiry")
+                        .HasForeignKey("Grupp3Hattmakaren.Models.Enquiry", "addressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("address");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Material", b =>
@@ -962,7 +987,7 @@ namespace Grupp3Hattmakaren.Migrations
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Order", b =>
                 {
                     b.HasOne("Grupp3Hattmakaren.Models.Address", "Address")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1136,6 +1161,14 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.Address", b =>
+                {
+                    b.Navigation("Enquiry")
+                        .IsRequired();
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Enquiry", b =>
                 {
                     b.Navigation("Order")
@@ -1158,6 +1191,8 @@ namespace Grupp3Hattmakaren.Migrations
 
                     b.Navigation("cart")
                         .IsRequired();
+
+                    b.Navigation("enquiries");
 
                     b.Navigation("orders");
                 });

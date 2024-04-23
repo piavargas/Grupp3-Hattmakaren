@@ -23,6 +23,14 @@ namespace Grupp3Hattmakaren.Models
         public bool isInProgress { get; set; }
         public bool isSpecial { get; set; }
 
+        // public string? streetName { get; set; } // Adress class
+        //public int? zipCode { get; set; } // Adress class
+        //public string? countryName { get; set; } // Adress class
+
+        public int addressId { get; set; }
+        [ForeignKey(nameof(addressId))]
+        public virtual Address address { get; set; }
+
         public bool getInStore { get; set; }
         public string CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]

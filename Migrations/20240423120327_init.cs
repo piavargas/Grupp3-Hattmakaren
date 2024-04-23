@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class @in : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -203,36 +203,6 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Enquiries",
-                columns: table => new
-                {
-                    EnquiryId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    consentHat = table.Column<bool>(type: "bit", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    font = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isInProgress = table.Column<bool>(type: "bit", nullable: false),
-                    isSpecial = table.Column<bool>(type: "bit", nullable: false),
-                    getInStore = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Enquiries", x => x.EnquiryId);
-                    table.ForeignKey(
-                        name: "FK_Enquiries_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ShoppingCarts",
                 columns: table => new
                 {
@@ -275,38 +245,39 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
+                name: "Enquiries",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    price = table.Column<double>(type: "float", nullable: false),
-                    isPayed = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
                     EnquiryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    consentHat = table.Column<bool>(type: "bit", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    font = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    isInProgress = table.Column<bool>(type: "bit", nullable: false),
+                    isSpecial = table.Column<bool>(type: "bit", nullable: false),
+                    addressId = table.Column<int>(type: "int", nullable: false),
+                    getInStore = table.Column<bool>(type: "bit", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.PrimaryKey("PK_Enquiries", x => x.EnquiryId);
                     table.ForeignKey(
-                        name: "FK_Orders_Addresses_AddressId",
-                        column: x => x.AddressId,
+                        name: "FK_Enquiries_Addresses_addressId",
+                        column: x => x.addressId,
                         principalTable: "Addresses",
                         principalColumn: "AddressId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        name: "FK_Enquiries_AspNetUsers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Orders_Enquiries_EnquiryId",
-                        column: x => x.EnquiryId,
-                        principalTable: "Enquiries",
-                        principalColumn: "EnquiryId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -404,6 +375,42 @@ namespace Grupp3Hattmakaren.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    price = table.Column<double>(type: "float", nullable: false),
+                    isPayed = table.Column<bool>(type: "bit", nullable: false),
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    EnquiryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "AddressId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Enquiries_EnquiryId",
+                        column: x => x.EnquiryId,
+                        principalTable: "Enquiries",
+                        principalColumn: "EnquiryId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderProduct",
                 columns: table => new
                 {
@@ -451,9 +458,9 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
                 values: new object[,]
                 {
-                    { "1", 0, "4717674f-08f7-4768-b968-c80e045e4ecf", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "329beea4-b087-4fcc-8202-767d962516d8", false, "jonasmoll", "Jonas", "28cm", "Moll" },
-                    { "2", 0, "7c6dd82e-fe12-4652-af73-7042d29b35ac", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "989be9ef-1e52-4688-bc8e-882ab42fec67", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
-                    { "3", 0, "60b8ca81-8e50-460a-9bac-0c754a9f4490", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "0b629104-7621-4e53-9967-2c9c647142e2", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
+                    { "1", 0, "0441fcfa-b9ba-476f-b36d-f48980b42d5c", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "b4f5c5af-649a-4d20-8e47-52a8cf3983f9", false, "jonasmoll", "Jonas", "28cm", "Moll" },
+                    { "2", 0, "2482433b-c9a3-4a59-b09b-f2237ee2555e", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "3b5ab7da-4362-4ccd-a462-704364398bfd", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
+                    { "3", 0, "50c9da6f-5edb-4264-9fbb-f047ce7bbdf1", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "f9cf2c6d-7db6-48a0-8776-f245c206ee64", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
                 });
 
             migrationBuilder.InsertData(
@@ -494,17 +501,18 @@ namespace Grupp3Hattmakaren.Migrations
                 values: new object[,]
                 {
                     { 1, "1", "Countryland", "123 Main Street", 12345 },
-                    { 2, "2", "Sweden", "Potatisvägen", 70284 }
+                    { 2, "2", "Sweden", "Potatisvägen", 70284 },
+                    { 3, "3", "Sweden", "Potatisvägen", 70284 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Enquiries",
-                columns: new[] { "EnquiryId", "CustomerId", "color", "consentHat", "description", "fabricMaterial", "font", "getInStore", "headSize", "isInProgress", "isSpecial", "specialEffectMaterials", "textOnHat" },
+                columns: new[] { "EnquiryId", "CustomerId", "addressId", "color", "consentHat", "description", "fabricMaterial", "font", "getInStore", "headSize", "isInProgress", "isSpecial", "specialEffectMaterials", "textOnHat" },
                 values: new object[,]
                 {
-                    { 1787, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
-                    { 1788, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
-                    { 1789, "2", "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" }
+                    { 1787, "2", 3, "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
+                    { 1788, "2", 2, "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" },
+                    { 1789, "2", 1, "blue", true, "test", "", "Times New Roman", true, "22", true, true, "", "" }
                 });
 
             migrationBuilder.InsertData(
@@ -513,7 +521,7 @@ namespace Grupp3Hattmakaren.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "1", 1789, 1, true, 150.0 },
-                    { 2, 1, "2", 1788, 1, true, 130.0 },
+                    { 2, 3, "2", 1788, 1, true, 130.0 },
                     { 3, 2, "3", 1787, 1, true, 330.0 }
                 });
 
@@ -570,6 +578,12 @@ namespace Grupp3Hattmakaren.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enquiries_addressId",
+                table: "Enquiries",
+                column: "addressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enquiries_CustomerId",
@@ -683,13 +697,13 @@ namespace Grupp3Hattmakaren.Migrations
                 name: "Materials");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
-
-            migrationBuilder.DropTable(
                 name: "Enquiries");
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

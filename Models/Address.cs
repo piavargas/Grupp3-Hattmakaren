@@ -11,6 +11,10 @@ namespace Grupp3Hattmakaren.Models
         [ForeignKey(nameof(CustomerId))]
 
         public virtual Customer Customer { get; set; }
+        
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Enquiry Enquiry { get; set; }
+
         public string? streetName { get; set; }
         public int? zipCode { get; set; }
         public string? countryName { get; set; }
