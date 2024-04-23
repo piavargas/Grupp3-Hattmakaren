@@ -27,6 +27,7 @@ namespace Grupp3Hattmakaren.Models
         public string firstName { get; set; }  // Customer class
         public string lastName { get; set; } // Customer class
         public string email { get; set; } // Customer class
+
         public string? streetName { get; set; } // Adress class
         public int? zipCode { get; set; } // Adress class
         public string? countryName { get; set; } // Adress class
