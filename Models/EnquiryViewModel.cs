@@ -7,7 +7,7 @@ namespace Grupp3Hattmakaren.Models
 
         [RegularExpression(@"^\d+$", ErrorMessage = "Please specify a valid head size (only numbers allowed)")]
         [Required(ErrorMessage ="The head size is required")]
-        public string headSize? { get; set; } // Customer class
+        public string? headSize { get; set; }// Customer class
 
 
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please specify a valid color (only letters allowed)")]

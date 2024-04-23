@@ -28,9 +28,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @* <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SummaryCart">SummaryCart</a>
-                        </li> *@
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -129,28 +127,7 @@
         </nav>
     </header>
    
-    <!--Skapar kundvagnen för en kund-->
-    <div id="shoppingCart" hidden>
-        <ul>
-            @if(User.IsInRole("Customer"))
-            {
-                var customer = await UserManager.FindByNameAsync(User.Identity.Name);
-                var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
 
-                @foreach (var cartItem in produtShoppingCart)
-                {
-                    if (cartItem.shoppingCart.customerId == customer.Id)
-                    {
-                        <li>
-                            <label>@cartItem.product.productName</label>
-                            <p>Price: @cartItem.product.price kr</p>
-                            <p>In cart: @cartItem.quantity</p>
-                        </li>
-                    }
-                }
-            }
-        </ul>
-    </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
