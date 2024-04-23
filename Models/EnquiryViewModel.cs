@@ -27,7 +27,9 @@ namespace Grupp3Hattmakaren.Models
         public bool? consentHat { get; set; } // Enquiry class
         public string firstName { get; set; }  // Customer class
         public string lastName { get; set; } // Customer class
+
         public string? email { get; set; } // Customer class
+
 
         public string? streetName { get; set; } // Adress class
         public int? zipCode { get; set; } // Adress class
