@@ -41,16 +41,30 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <label asp-for="ImagePath">Image:</label>
-                    <input type="file" name="ImagePath" class="form-control-file" />
-                    <span asp-validation-for="ImagePath" class="text-danger"></span>
-                    
+                    <label for="materials">Materials:</label>
+                    <select id="materials" name="materials" class="form-control" multiple>
+                        @foreach (var material in ViewBag.Materials)
+                        {
+                            <option value="@material.materialId">@material.name</option>
+                        }
+                    </select>
+                    <span class="text-danger" asp-validation-for="materials"></span>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="submit" class="btn btn-primary">Lägg till</button>
+                <div class="form-group">
+                    <label asp-for="ImagePath">Image:</label>
+                    <input type="file" name="ImagePath" class="form-control-file" />
+                    <span asp-validation-for="ImagePath" class="text-danger"></span>
+
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-primary">Add</button>
             </td>
         </tr>
     </table>

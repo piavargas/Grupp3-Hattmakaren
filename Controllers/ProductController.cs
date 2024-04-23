@@ -24,6 +24,7 @@ namespace Grupp3Hattmakaren.Controllers
 
         public IActionResult AddProduct()
         {
+            ViewBag.Materials = _context.Materials.ToList();
             return View();
         }
 
