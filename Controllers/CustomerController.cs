@@ -46,7 +46,7 @@ namespace Grupp3Hattmakaren.Controllers
 
             if (ModelState.IsValid)
             {
-                var newEnquiry = new Enquiry
+       var newEnquiry = new Enquiry
                 {
                     headSize = enquiryViewModel.headSize,
                     consentHat = enquiryViewModel.consentHat,
@@ -95,7 +95,25 @@ namespace Grupp3Hattmakaren.Controllers
             return View();
         }
 
-            [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public async Task<IActionResult> DefaultCustomerOrderForm(EnquiryViewModel enquiryViewModel)
+        {
+            var newEnquiry = new Enquiry
+            {
+                CustomerId = _userManager.GetUserId(User),
+                isInProgress = enquiryViewModel.isInProgress
+
+            };
+
+            _context.Enquiries.Add(newEnquiry);
+            _context.SaveChanges();
+
+            return View("EnquiryConfirmationMessage", enquiryViewModel);
+
+
+        }
+
+        [Authorize(Roles = "Customer")]
             public IActionResult CustomerMessages()
             {
                 return View();
@@ -118,15 +136,36 @@ namespace Grupp3Hattmakaren.Controllers
             {
                 return View();
             }
+        [HttpPost]
+        public IActionResult RemoveProductFromCart(int productId)
+        {
+            // Hitta kundvagnen för den aktuella användaren (exempelvis genom att använda användarens identitet)
+            var user = _context.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            var customerCart = _context.ShoppingCarts.FirstOrDefault(cart => cart.customerId == user.Id);
 
+            if (customerCart != null)
+            {
+                var productSC = _context.ProductShoppingCarts.FirstOrDefault(pSC => pSC.shoppingCartId == customerCart.Id && pSC.productId == productId);
+                // Hitta den specifika produkten i kundvagnen
+                if(productSC != null)
+                {
+                    _context.ProductShoppingCarts.Remove(productSC);
+                    _context.SaveChanges();
+                }
+            }
 
-        //public IActionResult acceptOffer ()
-        //{
+            // Redirect tillbaka till sammanställningssidan
+            return RedirectToAction("SummaryCart", "Customer");
+        }
 
-        //}
-
+        [Authorize(Roles = "Customer")]
+        public IActionResult SummaryCart()
+        {
+            return View();
 
         }
+
+    }
 
     }
   
