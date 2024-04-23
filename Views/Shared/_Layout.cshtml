@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hattmakaren</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Grupp3Hattmakaren.styles.css" asp-append-version="true" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     @* Following line to use usermanager *@
@@ -29,6 +28,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @* <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="SummaryCart">SummaryCart</a>
+                        </li> *@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
@@ -94,8 +96,36 @@
 
                         }
                     }
+                    <!--Skapar kundvagnen för en kund-->
+                    <div class="shoppingCart" id="shoppingCart" hidden>
+                        <ul>
+                            @if (User.IsInRole("Customer"))
+                            {
+                                var customer = await UserManager.FindByNameAsync(User.Identity.Name);
+                                var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
+
+                                @foreach (var cartItem in produtShoppingCart)
+                                {
+                                    if (cartItem.shoppingCart.customerId == customer.Id)
+                                    {
+                                        <div class="productInCart">
+                                        <label>@cartItem.product.productName</label>
+                                        <p>Price: @cartItem.product.price kr</p>
+                                        <p>In cart: @cartItem.quantity</p>
+                                        </div>
+
+                                    }
+
+                                }
+                                <form asp-area="" asp-controller="Customer" asp-action="SummaryCart">
+                                    <button type="submit" class="summaryGO success-button">Go to summary</button>
+                                </form>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </nav>
     </header>
    

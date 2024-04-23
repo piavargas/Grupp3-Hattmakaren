@@ -1,59 +1,129 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
-* {
+{
     font-family: "Open Sans", sans-serif;
 }
 
 html {
     font-size: 14px;
 }
-
-.header {
-    margin-top: 0;
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-body {
-    margin-bottom: 0; /* Tar bort nedre marginal f�r att anpassa sig till att det inte finns n�gon footer */
-}
-
-.navbar {
-    padding: 8px 14px;
-}
-
-.logout-form {
-    display: flex;
-    position: absolute;
-    bottom: 8px;
-    left: 280px;
-}
-
-.login-form {
-    display: flex;
-    position: absolute;
-    bottom: 0px;
-    left: 280px;
-}
-
-.logout-form button {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-}
-
-    .logout-form button:hover, .logout-form button:focus {
-        color: #0056b3; /* Adjust the color as needed */
-        text-decoration: underline;
+@media screen and (max-width: 768px) {
+    .shoppingCart {
+        top: auto; /* �terst�ller top till auto f�r att placera den efter f�reg�ende element */
+        bottom: 10px; /* Placera kundvagnen l�ngst ner p� sk�rmen */
+        left: 10px; /* Placera kundvagnen till v�nster p� sk�rmen */
+        right: 10px; /* Placera kundvagnen till h�ger p� sk�rmen */
+        margin-left: 0; /* �terst�ller margin-left */
+        margin-right: 0; /* �terst�ller margin-right */
+        width: 90%; /* Bredden p� kundvagnen */
+        max-width: none; /* �terst�ller max-width */
+        padding: 15px; /* Mindre padding f�r att spara utrymme */
     }
+
+    .productInCart {
+        border-bottom: 2px solid black;
+        margin-bottom: 13px;
+        font-weight: bold;
+    }
+
+    .success-button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 4.3s ease;
+        margin-bottom: 0px;
+    }
+
+        .success-button:hover {
+            background-color: #218838;
+        }
+}
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .header {
+        margin-top: 0;
+    }
+
+    .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    }
+
+    html {
+        position: relative;
+        min-height: 100%;
+    }
+
+    body {
+        margin-bottom: 0; /* Tar bort nedre marginal f�r att anpassa sig till att det inte finns n�gon footer */
+    }
+
+    .navbar {
+        padding: 8px 14px;
+    }
+
+    .logout-form {
+        display: flex;
+        position: absolute;
+        bottom: 8px;
+        left: 280px;
+    }
+
+    .login-form {
+        display: flex;
+        position: absolute;
+        bottom: 0px;
+        left: 280px;
+    }
+    /*
+H�R �R NAVBAR:*/
+    .container-fluid {
+        /*background-color: blueviolet;*/
+    }
+
+    .shoppingCart {
+        position: absolute;
+        top: 102%;
+        z-index: 1000;
+        padding: 30px;
+        max-width: 360px;
+        margin-left: 1300px;
+        color: green;
+        border: 2px solid black;
+        background-color: #f8f9fa; /* Justera bakgrundsf�rg */
+        border-radius: 10px; /* Runda kanterna p� kundvagnen */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* F�rb�ttra skuggan */
+    }
+
+    .productInCart {
+        border-bottom: 2px solid black;
+        margin-bottom: 13px;
+        font-weight: bold;
+    }
+
+    .success-button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 4.3s ease;
+        margin-bottom: 0px;
+    }
+
+        .success-button:hover {
+            background-color: #218838;
+        }
+
+    a:hover {
+        color: red; /* �ndra f�rg n�r musen �r �ver l�nken */
+    }
+}
