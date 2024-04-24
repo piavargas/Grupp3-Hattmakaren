@@ -106,8 +106,15 @@ namespace Grupp3Hattmakaren.Controllers
                 isInProgress = enquiryViewModel.isInProgress
 
             };
-
             _context.Enquiries.Add(newEnquiry);
+            _context.SaveChanges();
+
+            var customer = await _userManager.FindByNameAsync(User.Identity.Name);
+            var shoppingCartItems = _context.ProductShoppingCarts
+                .Where(item => item.shoppingCart.customerId == customer.Id)
+                .ToList();
+
+            _context.ProductShoppingCarts.RemoveRange(shoppingCartItems);
             _context.SaveChanges();
 
             return View("EnquiryConfirmationMessage", enquiryViewModel);
