@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/AdminMyPage.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
     <title>Customer Dashboard Panel</title>
 </head>
 <body>
@@ -38,32 +37,41 @@
     <section class="dashboard">
         <div class="dash-content">
             <div class="activity">
+
+
                 <div class="title">
+
+
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Order History</span>
+                    <span class="text">Old orders</span>
+
                 </div>
                 <div class="activity-data">
-                    <div class="data names">
+                    @foreach (var order in ViewBag.orderList)
+                    {
+                        if (order.isPayed)
+                        {
+                            <div class="data names">
                         <span class="data-title">Name</span>
-                        <span class="data-list">Prem Shahi</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Order placed</span>
-                        <span class="data-list">2022-02-12</span>
+                        <span class="data-list">@order.Customer.UserName</span>
                     </div>
                     <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">Special</span>
+                        <span class="data-title">Is Payed</span>
+                        <span class="data-list">@order.isPayed</span
                     </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Payed</span>
-                    </div>
+                    
+                        }
+                    }
+                   
+                    
                 </div>
             </div>
         </div>
-    </section>
 
+
+
+    </section>
     <script src="~/js/AdminMyPage.js"></script>
 </body>
 </html>
+
