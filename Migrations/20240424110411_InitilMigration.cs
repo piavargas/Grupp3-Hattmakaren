@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Grupp3Hattmakaren.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitilMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -208,12 +208,12 @@ namespace Grupp3Hattmakaren.Migrations
                 {
                     EnquiryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    headSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     consentHat = table.Column<bool>(type: "bit", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    fabricMaterial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     specialEffectMaterials = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     font = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     textOnHat = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     isInProgress = table.Column<bool>(type: "bit", nullable: false),
@@ -466,9 +466,9 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
                 values: new object[,]
                 {
-                    { "1", 0, "6847da9d-01a2-442b-a89e-1a3791be2cf4", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "7177edb7-02d2-47d7-975c-6265143393b2", false, "jonasmoll", "Jonas", "28cm", "Moll" },
-                    { "2", 0, "bee85c32-6c1f-43ff-a590-943f3906e142", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "804e413f-af64-415a-8620-0bd908a87727", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
-                    { "3", 0, "05428ac4-f18b-41cd-b680-5528fddfcd0f", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "2af503dd-5efe-4856-8792-b671190b3096", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
+                    { "1", 0, "2d9e56bb-ee6c-428f-814a-fe4944342881", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "fd093c7b-094b-4e23-b958-81c5a437638f", false, "jonasmoll", "Jonas", "28cm", "Moll" },
+                    { "2", 0, "551109c1-81ac-4447-a34a-43d4b6dfc66d", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "e7ba9bca-84a4-4f1d-b8f1-3305667926b9", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
+                    { "3", 0, "7851ecfa-0229-4e79-ba51-f93704f569bd", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "0426aafb-9010-4062-896d-f8587009af5e", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
                 });
 
             migrationBuilder.InsertData(

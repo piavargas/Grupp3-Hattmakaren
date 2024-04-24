@@ -21,6 +21,8 @@ namespace Grupp3Hattmakaren.Controllers
         [HttpGet]
         public IActionResult CustomerOrderForm()
         {
+            List<Material> materials = _context.Materials.ToList();
+            ViewBag.Materials = materials;
             return View(new EnquiryViewModel());
         }
 

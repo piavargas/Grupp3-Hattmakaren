@@ -84,7 +84,6 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("color")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("consentHat")
@@ -94,7 +93,6 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fabricMaterial")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("font")
@@ -104,7 +102,6 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("headSize")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isInProgress")
@@ -896,12 +893,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6847da9d-01a2-442b-a89e-1a3791be2cf4",
+                            ConcurrencyStamp = "2d9e56bb-ee6c-428f-814a-fe4944342881",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7177edb7-02d2-47d7-975c-6265143393b2",
+                            SecurityStamp = "fd093c7b-094b-4e23-b958-81c5a437638f",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
@@ -912,12 +909,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bee85c32-6c1f-43ff-a590-943f3906e142",
+                            ConcurrencyStamp = "551109c1-81ac-4447-a34a-43d4b6dfc66d",
                             Email = "tanjahavstorm@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "804e413f-af64-415a-8620-0bd908a87727",
+                            SecurityStamp = "e7ba9bca-84a4-4f1d-b8f1-3305667926b9",
                             TwoFactorEnabled = false,
                             UserName = "tanjahavstorm",
                             firstName = "Tanja",
@@ -928,12 +925,12 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05428ac4-f18b-41cd-b680-5528fddfcd0f",
+                            ConcurrencyStamp = "7851ecfa-0229-4e79-ba51-f93704f569bd",
                             Email = "icamaxi@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2af503dd-5efe-4856-8792-b671190b3096",
+                            SecurityStamp = "0426aafb-9010-4062-896d-f8587009af5e",
                             TwoFactorEnabled = false,
                             UserName = "maxmaxsson",
                             firstName = "Max",
