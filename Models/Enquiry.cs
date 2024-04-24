@@ -9,7 +9,7 @@ namespace Grupp3Hattmakaren.Models
         public int EnquiryId { get; set; }
 
         public string? headSize { get; set; }
-        public bool? consentHat { get; set; } //Samtycke att bygga vidare på en existerande hatt 
+        public bool consentHat { get; set; } //Samtycke att bygga vidare på en existerande hatt 
         public string? description { get; set; }
 
         public  string? fabricMaterial { get; set; } // Enquiry class
