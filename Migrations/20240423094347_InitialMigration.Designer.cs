@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Grupp3Hattmakaren.Migrations
 {
     [DbContext(typeof(HatContext))]
-    [Migration("20240416164248_init")]
-    partial class init
+    [Migration("20240423094347_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,14 +41,12 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("countryName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("streetName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("zipCode")
+                    b.Property<int?>("zipCode")
                         .HasColumnType("int");
 
                     b.HasKey("AddressId");
@@ -65,6 +63,14 @@ namespace Grupp3Hattmakaren.Migrations
                             countryName = "Countryland",
                             streetName = "123 Main Street",
                             zipCode = 12345
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            CustomerId = "2",
+                            countryName = "Sweden",
+                            streetName = "Potatisvägen",
+                            zipCode = 70284
                         });
                 });
 
@@ -80,11 +86,14 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("consentHat")
                         .HasColumnType("bit");
 
                     b.Property<string>("description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("fabricMaterial")
@@ -92,6 +101,12 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("font")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("getInStore")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("headSize")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -102,11 +117,9 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("specialEffectMaterials")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("textOnHat")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EnquiryId");
@@ -146,6 +159,200 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Materials");
+
+                    b.HasData(
+                        new
+                        {
+                            materialId = 1,
+                            name = "Rishalm",
+                            price = 599.0,
+                            quantity = 1000,
+                            supplier = "Temu"
+                        },
+                        new
+                        {
+                            materialId = 2,
+                            name = "Palmlöv",
+                            price = 749.0,
+                            quantity = 800,
+                            supplier = "Temu"
+                        },
+                        new
+                        {
+                            materialId = 3,
+                            name = "Majsblad",
+                            price = 625.0,
+                            quantity = 1200,
+                            supplier = "Wish"
+                        },
+                        new
+                        {
+                            materialId = 4,
+                            name = "Hampfibrer",
+                            price = 8.9900000000000002,
+                            quantity = 1500,
+                            supplier = "Shein"
+                        },
+                        new
+                        {
+                            materialId = 5,
+                            name = "Bomull",
+                            price = 499.0,
+                            quantity = 2000,
+                            supplier = "ICA Maxi Bogulundsängen"
+                        },
+                        new
+                        {
+                            materialId = 6,
+                            name = "Linne",
+                            price = 649.0,
+                            quantity = 1800,
+                            supplier = "Ikea"
+                        },
+                        new
+                        {
+                            materialId = 7,
+                            name = "Ull",
+                            price = 999.0,
+                            quantity = 1600,
+                            supplier = "Får I Närke AB"
+                        },
+                        new
+                        {
+                            materialId = 8,
+                            name = "Läder",
+                            price = 1299.0,
+                            quantity = 2200,
+                            supplier = "Läder Byxan AB"
+                        },
+                        new
+                        {
+                            materialId = 9,
+                            name = "Fjädrar från strutsar",
+                            price = 399.0,
+                            quantity = 300,
+                            supplier = "Lannas Strutsfarm"
+                        },
+                        new
+                        {
+                            materialId = 10,
+                            name = "Fjädrar från påfåglar",
+                            price = 549.0,
+                            quantity = 250,
+                            supplier = "Lannas Strutsfarm"
+                        },
+                        new
+                        {
+                            materialId = 11,
+                            name = "Fjädrar från höns",
+                            price = 299.0,
+                            quantity = 400,
+                            supplier = "Kronfågeln"
+                        },
+                        new
+                        {
+                            materialId = 12,
+                            name = "Tygblommor",
+                            price = 799.0,
+                            quantity = 500,
+                            supplier = "Majblomman"
+                        },
+                        new
+                        {
+                            materialId = 13,
+                            name = "Pärlor",
+                            price = 699.0,
+                            quantity = 600,
+                            supplier = "Förskolan Myrorna"
+                        },
+                        new
+                        {
+                            materialId = 14,
+                            name = "Spets",
+                            price = 849.0,
+                            quantity = 700,
+                            supplier = "Victoria Secret"
+                        },
+                        new
+                        {
+                            materialId = 15,
+                            name = "Lackerat papper",
+                            price = 599.0,
+                            quantity = 450,
+                            supplier = "Dunder Mifflin"
+                        },
+                        new
+                        {
+                            materialId = 16,
+                            name = "Lurextråd",
+                            price = 449.0,
+                            quantity = 550,
+                            supplier = "Närke Slakteri AB"
+                        },
+                        new
+                        {
+                            materialId = 17,
+                            name = "Fuskpäls",
+                            price = 1099.0,
+                            quantity = 350,
+                            supplier = "MotherLoad AB"
+                        },
+                        new
+                        {
+                            materialId = 18,
+                            name = "Kaninfilt",
+                            price = 105.0,
+                            quantity = 10,
+                            supplier = "Kaninens KooperationAB"
+                        },
+                        new
+                        {
+                            materialId = 19,
+                            name = "Ull",
+                            price = 200.0,
+                            quantity = 200,
+                            supplier = "Kaninens KooperationAB"
+                        },
+                        new
+                        {
+                            materialId = 20,
+                            name = "Toquillastrå",
+                            price = 3075.0,
+                            quantity = 300,
+                            supplier = "Ecuadour Finest AB"
+                        });
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"));
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("isRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Order", b =>
@@ -189,6 +396,24 @@ namespace Grupp3Hattmakaren.Migrations
                             ProductId = 1,
                             isPayed = true,
                             price = 150.0
+                        },
+                        new
+                        {
+                            OrderId = 2,
+                            AddressId = 1,
+                            CustomerId = "2",
+                            ProductId = 1,
+                            isPayed = true,
+                            price = 130.0
+                        },
+                        new
+                        {
+                            OrderId = 3,
+                            AddressId = 2,
+                            CustomerId = "3",
+                            ProductId = 1,
+                            isPayed = true,
+                            price = 330.0
                         });
                 });
 
@@ -234,11 +459,75 @@ namespace Grupp3Hattmakaren.Migrations
                         new
                         {
                             ProductId = 1,
-                            description = "Denna mysiga nalle tänds när du rör honom.",
+                            ImagePath = "/NewFolder/produkthatt.jpg",
+                            description = "A timeless bowler hat made from high-quality wool felt, perfect for both formal and casual occasions.",
                             price = 0.0,
-                            productName = "Magisk Nalle Natlampa",
-                            size = 350.0
+                            productName = "Classic Bowler Hat",
+                            size = 58.0
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            ImagePath = "/NewFolder/produkthatt2.png",
+                            description = "An elegant hat with a wide brim and a decorative silk ribbon. Ideal for sunny days or a stylish outing.",
+                            price = 0.0,
+                            productName = "Elegant Ladies' Hat",
+                            size = 56.0
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            ImagePath = "/NewFolder/produkthatt3.png",
+                            description = "Sturdy and ready for any adventure, this fedora is your faithful companion in all weathers.",
+                            price = 0.0,
+                            productName = "Adventurer's Fedora",
+                            size = 59.0
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            ImagePath = "/NewFolder/produkthatt4.jpg",
+                            description = "Relive the roaring 1920s with this authentic top hat, perfect for themed parties and gatherings.",
+                            price = 0.0,
+                            productName = "Vintage Top Hat",
+                            size = 60.0
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            ImagePath = "/NewFolder/produkthatt5.webp",
+                            description = "A chic beret made of 100% wool, available in various colors. Add a French touch to your wardrobe.",
+                            price = 0.0,
+                            productName = "Modern Beret",
+                            size = 57.0
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            ImagePath = "/NewFolder/produkthatt7.jpg",
+                            description = "Light and airy, this Panama hat provides sun protection while keeping you cool and stylish.",
+                            price = 0.0,
+                            productName = "Panama-style Sun Hat",
+                            size = 58.0
                         });
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.ProductShoppingCart", b =>
+                {
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("shoppingCartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("productId", "shoppingCartId");
+
+                    b.HasIndex("shoppingCartId");
+
+                    b.ToTable("ProductShoppingCarts");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product_Material", b =>
@@ -264,7 +553,7 @@ namespace Grupp3Hattmakaren.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShippingBillId"));
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<string>("productCode")
@@ -276,6 +565,49 @@ namespace Grupp3Hattmakaren.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("ShippingBills");
+
+                    b.HasData(
+                        new
+                        {
+                            ShippingBillId = 1,
+                            OrderId = 1,
+                            productCode = "SHB001"
+                        },
+                        new
+                        {
+                            ShippingBillId = 2,
+                            OrderId = 2,
+                            productCode = "SHB002"
+                        },
+                        new
+                        {
+                            ShippingBillId = 3,
+                            OrderId = 3,
+                            productCode = "SHB003"
+                        });
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("customerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("customerId")
+                        .IsUnique();
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Supplier", b =>
@@ -530,6 +862,21 @@ namespace Grupp3Hattmakaren.Migrations
                     b.ToTable("OrderProduct", (string)null);
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.Property<int>("ShoppingCartsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productsProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ShoppingCartsId", "productsProductId");
+
+                    b.HasIndex("productsProductId");
+
+                    b.ToTable("ProductShoppingCart");
+                });
+
             modelBuilder.Entity("Grupp3Hattmakaren.Models.SpecialProduct", b =>
                 {
                     b.HasBaseType("Grupp3Hattmakaren.Models.Product");
@@ -552,17 +899,49 @@ namespace Grupp3Hattmakaren.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fbeb8009-4bb0-4a15-b683-65a549c3034d",
+                            ConcurrencyStamp = "6847da9d-01a2-442b-a89e-1a3791be2cf4",
                             Email = "jonasmoll@outlook.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41b435b0-ccfe-4adb-866c-ea825091ef7a",
+                            SecurityStamp = "7177edb7-02d2-47d7-975c-6265143393b2",
                             TwoFactorEnabled = false,
                             UserName = "jonasmoll",
                             firstName = "Jonas",
                             lastName = "Moll",
                             headSize = "28cm"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bee85c32-6c1f-43ff-a590-943f3906e142",
+                            Email = "tanjahavstorm@outlook.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "804e413f-af64-415a-8620-0bd908a87727",
+                            TwoFactorEnabled = false,
+                            UserName = "tanjahavstorm",
+                            firstName = "Tanja",
+                            lastName = "Havstorm",
+                            headSize = "79cm"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "05428ac4-f18b-41cd-b680-5528fddfcd0f",
+                            Email = "icamaxi@outlook.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2af503dd-5efe-4856-8792-b671190b3096",
+                            TwoFactorEnabled = false,
+                            UserName = "maxmaxsson",
+                            firstName = "Max",
+                            lastName = "Maxsson",
+                            headSize = "21cm"
                         });
                 });
 
@@ -595,6 +974,15 @@ namespace Grupp3Hattmakaren.Migrations
                         .HasForeignKey("ProductId");
                 });
 
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.Message", b =>
+                {
+                    b.HasOne("Grupp3Hattmakaren.Models.User", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("Id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Order", b =>
                 {
                     b.HasOne("Grupp3Hattmakaren.Models.Address", "Address")
@@ -612,6 +1000,25 @@ namespace Grupp3Hattmakaren.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.ProductShoppingCart", b =>
+                {
+                    b.HasOne("Grupp3Hattmakaren.Models.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Grupp3Hattmakaren.Models.ShoppingCart", "shoppingCart")
+                        .WithMany()
+                        .HasForeignKey("shoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("product");
+
+                    b.Navigation("shoppingCart");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product_Material", b =>
@@ -636,12 +1043,21 @@ namespace Grupp3Hattmakaren.Migrations
             modelBuilder.Entity("Grupp3Hattmakaren.Models.ShippingBill", b =>
                 {
                     b.HasOne("Grupp3Hattmakaren.Models.Order", "order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
+                        .WithMany("ShippingBills")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("order");
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("Grupp3Hattmakaren.Models.Customer", "customer")
+                        .WithOne("cart")
+                        .HasForeignKey("Grupp3Hattmakaren.Models.ShoppingCart", "customerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("order");
+                    b.Navigation("customer");
                 });
 
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Supplier", b =>
@@ -721,14 +1137,42 @@ namespace Grupp3Hattmakaren.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductShoppingCart", b =>
+                {
+                    b.HasOne("Grupp3Hattmakaren.Models.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("ShoppingCartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Grupp3Hattmakaren.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("productsProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.Order", b =>
+                {
+                    b.Navigation("ShippingBills");
+                });
+
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Product", b =>
                 {
                     b.Navigation("materials");
                 });
 
+            modelBuilder.Entity("Grupp3Hattmakaren.Models.User", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("Grupp3Hattmakaren.Models.Customer", b =>
                 {
                     b.Navigation("addresses");
+
+                    b.Navigation("cart")
+                        .IsRequired();
 
                     b.Navigation("orders");
                 });

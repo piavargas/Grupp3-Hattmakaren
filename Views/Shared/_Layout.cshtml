@@ -8,15 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hattmakaren</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Grupp3Hattmakaren.styles.css" asp-append-version="true" />
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
     @* Following line to use usermanager *@
-    @inject UserManager<User> UserManager 
+    @inject UserManager<User> UserManager
+    @inject HatContext hatContext
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-1">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hattmakaren</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -31,6 +31,21 @@
 
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="LogOut" method="post">
+                                    <button type="submit" class="btn btn-link nav-link">Sign out</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Sign in</a>
+							</li>
+                        }
+                        <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             var user = await UserManager.FindByNameAsync(User.Identity.Name);
                             if (user != null)
                             {
@@ -43,13 +58,13 @@
                                 else if (await UserManager.IsInRoleAsync(user, "Customer"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="CustomerMessages">My CPage</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Message" asp-action="CustomerMessages">My Page</a>
                                     </li>
                                 }
                             }
                         }
-                    
                     </ul>
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         var user = await UserManager.FindByNameAsync(User.Identity.Name);
@@ -57,54 +72,87 @@
                         {
 
                             @if (await UserManager.IsInRoleAsync(user, "Admin"))
-                        
+
                             {
                                 <p class="navbar-text">Hello and welcome, @user.firstName @user.lastName</p>
                             }
                             else if (await UserManager.IsInRoleAsync(user, "Customer"))
                             {
                                 <p class="navbar-text">Hello, @user.firstName @user.lastName</p>
+                                <!--Knapp som visar och gömmer kundvagn-->
+                                <button onclick="toggleCart()" type="button" class="btn btn-outline-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                                    </svg>
+                                </button>
                             }
 
                         }
                         else
                         {
                             <p class="navbar-text">No user logged in</p>
-                           
+
                         }
-
                     }
+                    <!--Skapar kundvagnen för en kund-->
+                    <div class="shoppingCart" id="shoppingCart" hidden>
+                        <ul>
+                            @if (User.IsInRole("Customer"))
+                            {
+                                var customer = await UserManager.FindByNameAsync(User.Identity.Name);
+                                var produtShoppingCart = hatContext.ProductShoppingCarts.ToList();
 
+                                @foreach (var cartItem in produtShoppingCart)
+                                {
+                                    if (cartItem.shoppingCart.customerId == customer.Id)
+                                    {
+                                        <div class="productInCart">
+                                        <label>@cartItem.product.productName</label>
+                                        <p>Price: @cartItem.product.price kr</p>
+                                        <p>In cart: @cartItem.quantity</p>
+                                        </div>
 
+                                    }
+
+                                }
+                                <form asp-area="" asp-controller="Customer" asp-action="SummaryCart">
+                                    <button type="submit" class="summaryGO success-button">Go to summary</button>
+                                </form>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </nav>
     </header>
-    <div class="container">
+   
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form method="post" asp-area="" asp-controller="Account" asp-action="LogOut" class="logout-form">
-                    <button type="submit" class="btn btn-link">Logga ut</button>
-                </form>
-            }
-            else
-            {
-                <a asp-area="" asp-controller="Account" asp-action="LogIn" class="login-form">Logga in</a>
-            }
-        @* </div> *@
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        //Funktionen som visar och gömmer kundvagn
+        function toggleCart() 
+        { 
+            var shoppingCart = document.getElementById("shoppingCart");
+            if (shoppingCart.getAttribute("hidden") === "true") {
+                shoppingCart.removeAttribute("hidden");
+            }
+            else 
+            { 
+                shoppingCart.setAttribute("hidden", "true");
+            }
+            
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

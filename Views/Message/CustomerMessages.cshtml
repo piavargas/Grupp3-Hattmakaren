@@ -1,0 +1,314 @@
+﻿@model List<SendMessageViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/customerMessages.css">
+
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Customer Dashboard Panel</title>
+</head>
+<body>
+    <nav>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li>
+                    <a asp-area="" asp-controller="Message" asp-action="CustomerMessages">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Incoming messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Customer" asp-action="CustomerMyOrders">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">My orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Customer" asp-action="CustomerOrderHistory">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Order history</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class="dashboard" id="dashMes">
+        <div class="dash-content">
+            <div class="activity">
+                @if (TempData["PaymentMessage"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["PaymentMessage"]
+                    </div>
+                }
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Incoming Offers</span>
+                </div>
+                @if (Model.Count == 0)
+                {
+                    <div class="no-messages">
+                        <p>You have no messages.</p>
+                    </div>
+                }
+                else
+                {
+                    @foreach (var message in Model)
+                    {
+                        <div class="message-wrapper">
+                            <div class="message-container with-border">
+                                <div class="activity-data">
+                                    <div class="data names">
+                                        <span class="data-title">From</span>
+                                        <span class="data-list">@message.sender</span>
+                                    </div>
+                                    <div class="data message">
+                                        <span class="data-title">Message</span>
+                                        <span class="data-list">@message.messageText</span>
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="d-inline-block">
+                                            <button class="accept-button" onclick="scrollToPayment()">Accept Offer</button>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <form id="deleteMessageForm_@message.MessageId" asp-controller="Message" asp-action="DeclineOffer" method="post">
+                                                <input type="hidden" name="messageId" value="@message.MessageId" />
+                                                <button type="button" class="decline-button" onclick="confirmDelete('@message.MessageId')">Decline Offer</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="paymentSection">
+        <div class="row">
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box">
+                        <img src="https://www.freepnglogos.com/uploads/visa-logo-download-png-21.png" alt="">
+                    </div>
+                    <div class="number">
+                        <label class="fw-bold" for="">**** **** **** 1060</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box">
+                        <img src="https://www.freepnglogos.com/uploads/mastercard-png/file-mastercard-logo-svg-wikimedia-commons-4.png"
+                             alt="">
+                    </div>
+                    <div class="number">
+                        <label class="fw-bold">**** **** **** 1060</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-lg-0 mb-3">
+                <div class="card p-3">
+                    <div class="img-box">
+                        <img src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png"
+                             alt="">
+                    </div>
+                    <div class="number">
+                        <label class="fw-bold">**** **** **** 1060</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <small><span class="fw-bold">Expiry date:</span><span>10/16</span></small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class="card p-3">
+                    <p class="mb-0 fw-bold h4">Payment Methods</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card p-3">
+                    <div class="card-body border p-0">
+                        <p>
+                            <a class="btn btn-primary w-100 h-100 d-flex align-items-center justify-content-between"
+                               data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                               aria-controls="collapseExample">
+                                <span class="fw-bold">Invoice</span>
+                                <span class="fab fa-cc-paypal">
+                                </span>
+                            </a>
+                        </p>
+                        <div class="collapse p-3 pt-0" id="collapseExample">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p class="h4 mb-0">Invoice Details</p>
+                                    <p class="mb-0">
+                                        <span class="fw-bold">Dear customer,</span><span>
+                                            please enter your details to make a payment.
+                                            A confirmation will be sent to the given emailaddress.
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <form action="" class="form">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Your fullname</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">City/Town</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="password" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Zip code</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Email</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body border p-0">
+                        <p>
+                            <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
+                               data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                               aria-controls="collapseExample">
+                                <span class="fw-bold">Credit Card</span>
+                                <span class="">
+                                    <span class="fab fa-cc-amex"></span>
+                                    <span class="fab fa-cc-mastercard"></span>
+                                    <span class="fab fa-cc-discover"></span>
+                                </span>
+                            </a>
+                        </p>
+                        <div class="collapse show p-3 pt-0" id="collapseExample">
+                            <div class="row">
+                                <div class="col-lg-5 mb-lg-0 mb-3">
+                                    <p class="h4 mb-0">Credit Card Details</p>
+                                    <p class="mb-0">
+                                        <span class="fw-bold">Dear customer,</span><span>
+                                            please enter your card details to make a payment. If you have any questions,
+                                            feel free to contact our customer service at +4619948562. 
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <form action="" class="form">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Card Number</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">MM / yy</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="password" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">cvv code</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">name on the card</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form asp-controller="Message" asp-action="MakePayment" method="post">
+                <button type="submit" class="btn btn-primary payment">
+                    Make Payment
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        function scrollToPayment() {
+            var paymentSection = document.getElementById("paymentSection");
+            paymentSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function removeMessage(button) {
+            var messageContainer = button.closest('.message-container');
+            messageContainer.remove(); 
+        }
+
+        function confirmDelete(messageId) {
+            if (confirm("Are you sure you want to decline the offer? This will remove the message from your inbox.")) {
+                document.getElementById('deleteMessageForm_' + messageId).submit();
+            }
+        }
+    </script>
+
+
+
+    <script src="~/js/AdminMyPage.js"></script>
+</body>
+</html>
+
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to decline the offer? This will remove the message from your inbox.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmDelete">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>

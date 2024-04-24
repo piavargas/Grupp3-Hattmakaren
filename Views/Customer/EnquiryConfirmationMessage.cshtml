@@ -1,18 +1,25 @@
-﻿<p>Order confirmation message:</p>
-<br />
-<h1>Thank You!</h1>
-<h4>We will process your order as soon as possible!</h4>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<a asp-action="Index" asp-controller="Home" class="btn btn-primary">Home</a>
+﻿<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="text-left logo p-2 px-5">
+                    <img src="https://i.imgur.com/awiRAy9.png" width="50">
+                </div>
+                <div class="invoice p-5">
+                    <h5>Order confirmation message:</h5>
+                    <h1>Thank You!</h1>
+                    <span>
+                        <h4>We will process your order as soon as possible!</h4>
+                    </span>
+                    <p class="font-weight-bold mb-0">Thanks for choosing us!</p>
+                    <span>Otto and Judiths! </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8 text-center">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-dark btn-lg">Home</a>
+        </div>
+    </div>
+</div>
