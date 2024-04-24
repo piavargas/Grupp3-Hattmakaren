@@ -69,55 +69,59 @@
                                     <span class="data-title">Customer</span>
                                     @if (enquiry.Customer != null)
                                     {
-                                        <span class="data-list">
-                                            @enquiry.Customer.firstName @enquiry.Customer.lastName 
-                                        </span>
-                                        
-                                        @foreach (var address in enquiry.Customer.addresses)
-                                        {
-                                            <span>
-                                               Streetname: @address.streetName City: @address.countryName Zipcode: @address.zipCode</span>
-                                        }
+                                        <span class="data-list">@enquiry.Customer.firstName @enquiry.Customer.lastName</span>
                                     }
                                     else
                                     {
                                         <span class="data-list">No customer information available</span>
                                     }
+                                </div>
 
-                                    <div class="data-item">
-                                        <form method="post" action="@Url.Action("ChangeStatus", "Admin")">
-                                            <input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
+                         @*        <div class="data-item">
+                                    <span class="data-title">Status</span>
+                                    <span class="data-list">
+                                        @if (enquiry.isInProgress)
+                                        {
+                                            <text>In progress</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Not handled yet</text>
+                                        }
+                                    </span>
+                                </div>
+ *@
+                                <div class="data-item">
+                                    <span class="data-title">Type</span>
+                                    <span class="data-list">
+                                        @if (enquiry.isSpecial)
+                                        {
+                                            <text>Special</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Order</text>
+                                        }
+                                    </span>
+                                </div>
 
+                                <div class="data-item">
+                                    <form method="post" action="@Url.Action("ChangeStatus", "Admin")">
+                                        <input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
+                                        
                                             @if (enquiry.isInProgress)
                                             {
                                                 <text>In progress</text>
                                             }
                                             else
-
+                                           
                                             {
-                                                <button type="submit" name="status" value="toggle">
-                                                    <text>Mark as in progress</text>
-                                                </button>
+                                            <button type="submit" name="status" value="toggle">
+                                                <text>Mark as in progress</text>
+                                            </button>
 
                                             }
-                                        </form>
-                                    </div>
-                                    <!-- Knapp för att visa mer information -->
-                                    <button class="toggle-btn" type="button">View more enquiry information</button>
-                                    <!-- Extra information (initialt dold) -->
-                                    <div class="extra-info" style="display: none;">
-                                        @if (enquiry != null)
-                                        {
-                                            <p>Other information:</p>
-                                            <p>
-                                              Headsize: @enquiry.headSize
-                                                Font:  @enquiry.font Consent hat: @enquiry.consentHat Fabric Material: @enquiry.fabricMaterial Description: @enquiry.description Color: @enquiry.color 
-                                                Special effect materials: @enquiry.specialEffectMaterials
-                                                Text on hat: @enquiry.textOnHat Get in store: @enquiry.getInStore
-                                            </p>
-                                            <!-- Lägg till fler fält här om det behövs -->
-                                        }
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         }
@@ -127,21 +131,6 @@
         </div>
     </section>
 
-    <script>
-        // Lyssna på klick på alla knappar med klassen 'toggle-btn'
-        const toggleBtns = document.querySelectorAll('.toggle-btn');
-        toggleBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                // Hitta nästa syskon till knappen
-                const extraInfo = this.nextElementSibling;
-                // Toggle display av den extra informationen
-                if (extraInfo.style.display === 'none') {
-                    extraInfo.style.display = 'block';
-                } else {
-                    extraInfo.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="~/js/AdminMyPage.js"></script>
 </body>
 </html>

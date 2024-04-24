@@ -43,11 +43,6 @@ namespace Grupp3Hattmakaren.Models
                 .WithOne(e => e.Order)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Enquiry>()
-                .HasOne(e => e.Customer)
-                .WithMany(c => c.enquiries)
-                .OnDelete(DeleteBehavior.Restrict);
-
             //modelBuilder.Entity<Order>()
             //    .HasMany(o => o.products)
             //    .WithMany(p => p.orders)
@@ -89,8 +84,7 @@ namespace Grupp3Hattmakaren.Models
                     fabricMaterial = "",
                     specialEffectMaterials = "",
                     consentHat = true,
-                    CustomerId = "2",
-                    addressId = 1
+                    CustomerId = "2"
                 },
                 new Enquiry
                 {
@@ -106,8 +100,7 @@ namespace Grupp3Hattmakaren.Models
                     fabricMaterial = "",
                     specialEffectMaterials = "",
                     consentHat = true,
-                    CustomerId = "2",
-                    addressId = 2
+                    CustomerId = "2"
                 },
                 new Enquiry
                 {
@@ -123,8 +116,7 @@ namespace Grupp3Hattmakaren.Models
                     fabricMaterial = "",
                     specialEffectMaterials = "",
                     consentHat = true,
-                    CustomerId = "2",
-                    addressId = 3
+                    CustomerId = "2"
                 }
                 );
 
@@ -146,7 +138,7 @@ namespace Grupp3Hattmakaren.Models
                     price = 130.00,
                     CustomerId = "2",
                     isPayed = true,
-                    AddressId = 3,
+                    AddressId = 1,
                     ProductId = 1,
                     EnquiryId = 1788
                 },
@@ -175,14 +167,6 @@ namespace Grupp3Hattmakaren.Models
                   {
                       AddressId = 2,
                       CustomerId = "2", // Länka detta till en befintlig Customer                   
-                      streetName = "Potatisvägen",
-                      zipCode = 70284,
-                      countryName = "Sweden"
-                  },
-                  new Address
-                  {
-                      AddressId = 3,
-                      CustomerId = "3", // Länka detta till en befintlig Customer                   
                       streetName = "Potatisvägen",
                       zipCode = 70284,
                       countryName = "Sweden"

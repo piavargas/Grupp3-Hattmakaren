@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
-using Org.BouncyCastle.Bcpg;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Grupp3Hattmakaren.Controllers
@@ -28,17 +27,6 @@ namespace Grupp3Hattmakaren.Controllers
         [HttpPost]
         public async Task<IActionResult> CustomerOrderForm(EnquiryViewModel enquiryViewModel)
         {
-            string userId = _userManager.GetUserId(User);
-            var newAddress = new Address
-            {
-                streetName = enquiryViewModel.streetName,
-                zipCode = enquiryViewModel.zipCode,
-                countryName = enquiryViewModel.countryName,
-                CustomerId = userId
-            };
-
-            _context.Addresses.Add(newAddress);
-
             var newEnquiry = new Enquiry
             {
                 headSize = enquiryViewModel.headSize,
@@ -52,13 +40,21 @@ namespace Grupp3Hattmakaren.Controllers
                 specialEffectMaterials = enquiryViewModel.specialEffectMaterials,
                 getInStore = enquiryViewModel.getInStore,
                 color = enquiryViewModel.color,
-                CustomerId = userId,
-                addressId = newAddress.AddressId
+                CustomerId = _userManager.GetUserId(User)
             };
 
             _context.Enquiries.Add(newEnquiry);
+            _context.SaveChanges();
 
-            
+            var newAddress = new Address
+            {
+                streetName = enquiryViewModel.streetName,
+                zipCode = enquiryViewModel.zipCode,
+                countryName = enquiryViewModel.countryName,
+                CustomerId = _userManager.GetUserId(User)
+            };
+
+            _context.Addresses.Add(newAddress);
             _context.SaveChanges();
             return View("EnquiryConfirmationMessage", enquiryViewModel);
                 
