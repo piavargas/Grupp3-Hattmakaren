@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/AdminMyPage.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>Customer Dashboard Panel</title>
+</head>
+<body>
+    <nav>
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li>
+                    <a href="CustomerMessages">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Incoming messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="CustomerMyOrders">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">My orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="CustomerOrderHistory">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Order history</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="CustomerDelete">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Delete account</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="dash-content">
+            <form asp-action="DeleteAccount" method="post">
+                <h2>Delete Your Account</h2>
+                <p>Please enter your password to confirm:</p>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Enter Password" required />
+                </div>
+                <button type="submit" class="btn-delete">Delete Account</button>
+            </form>
+        </div>
+    </section>
+
+
+    <script src="~/js/AdminMyPage.js"></script>
+</body>
+</html>

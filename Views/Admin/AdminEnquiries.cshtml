@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/AdminMyPage.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
     <title>Admin Dashboard Panel</title>
 </head>
 <body>
@@ -26,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="Material" asp-action="Material">
+                    <a href="#">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Order materials</span>
                     </a>
@@ -38,24 +37,18 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
+                    <a href="#">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Print waybill</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="AdminOrderHistory">
                         <i class="uil uil-chart"></i>
-                        <span class="link-name">Old orders</span>
+                        <span class="link-name">Order history</span>
                     </a>
                 </li>
-                <li>
-                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Send offer</span>
-                    </a>
-                </li>
-                </ul>
+            </ul>
         </div>
     </nav>
 
@@ -69,61 +62,84 @@
                 <div class="activity-data">
                     @foreach (var enquiry in Model)
                     {
-                        <div class="data names">
-                            <span class="data-title">Customer</span>
-                            <span class="data-list">@enquiry.Customer.firstName @enquiry.Customer.lastName</span>
-                        </div>
-                        <div class="data email">
-                            <span class="data-title">Email</span>
-                            <span class="data-list">@enquiry.Customer.Email</span>
-                        </div>
-						<div class="data status">
-							<form method="post" action="@Url.Action("ChangeStatus", "Admin")">
-								<input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
-								<button type="submit" name="status" value="toggle">
-									@if (enquiry.isInProgress)
-									{
-										<text>Mark as not handled yet</text>
-									}
-									else
-									{
-										<text>Mark as in progress</text>
-									}
-								</button>
-							</form>
-                            <span class="data-title">Status</span>
-                            <span class="data-list">
-                                @if (enquiry.isInProgress)
-                                {
-                                    <text>In progress</text>
-                                }
-                                else
-                                {
-                                    <text>Not handled yet</text>
-                                }
-                            </span>
-                        </div>
-                       
+                        @if (enquiry != null && !enquiry.isInProgress)
+                        {
+                            <div class="data">
+                                <div class="data-item">
+                                    <span class="data-title">Customer</span>
+                                    @if (enquiry.Customer != null)
+                                    {
+                                        <span class="data-list">
+                                            @enquiry.Customer.firstName @enquiry.Customer.lastName
+                                        </span>
 
-                        <div class="data status">
-                            <span class="data-title">Type</span>
-                            <span class="data-list">
-                                @if (enquiry.isSpecial)
-                                {
-                                    <text>Special</text>
-                                }
-                                else
-                                {
-                                    <text>Order</text>
-                                }
-                            </span>
-                        </div>
+                                        @foreach (var address in enquiry.Customer.addresses)
+                                        {
+                                            <span>
+                                                Streetname: @address.streetName City: @address.countryName Zipcode: @address.zipCode
+                                            </span>
+                                        }
+                                    }
+                                </div>
+
+
+
+                                <div class="data-item">
+                                    <form method="post" action="@Url.Action("ChangeStatus", "Admin")">
+                                        <input type="hidden" name="enquiryId" value="@enquiry.EnquiryId" />
+
+                                        @if (enquiry.isInProgress)
+                                        {
+                                            <text>In progress</text>
+                                        }
+                                        else
+
+                                        {
+                                            <button type="submit" name="status" value="toggle">
+                                                <text>Mark as in progress</text>
+                                            </button>
+
+                                        }
+                                    </form>
+                                </div>
+
+                                <!-- Knapp för att visa mer information -->
+                                <button class="toggle-btn" type="button">View more enquiry information</button>
+                                <div class="extra-info" style="display: none;">
+                                    @if (enquiry != null)
+                                    {
+                                        <p>Other information:</p>
+                                        <p>
+                                            Headsize: @enquiry.headSize
+                                            Font:  @enquiry.font Consent hat: @enquiry.consentHat Fabric Material: @enquiry.fabricMaterial Description: @enquiry.description Color: @enquiry.color
+                                            Special effect materials: @enquiry.specialEffectMaterials
+                                            Text on hat: @enquiry.textOnHat Get in store: @enquiry.getInStore
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        }
                     }
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="~/js/AdminMyPage.js"></script>
+    <script>
+        // Lyssna på klick på alla knappar med klassen 'toggle-btn'
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Hitta nästa syskon till knappen
+                const extraInfo = this.nextElementSibling;
+                // Toggle display av den extra informationen
+                if (extraInfo.style.display === 'none') {
+                    extraInfo.style.display = 'block';
+                } else {
+                    extraInfo.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

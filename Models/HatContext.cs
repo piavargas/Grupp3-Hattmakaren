@@ -30,23 +30,30 @@ namespace Grupp3Hattmakaren.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Product_Material>()
-                .HasKey(pm => new { pm.ProductId, pm.MaterialId });
+                    .HasKey(pm => new { pm.ProductId, pm.MaterialId });
 
             modelBuilder.Entity<Order>()
-              .HasOne(o => o.Customer)
-              .WithMany(c => c.orders)
-              .HasForeignKey(o => o.CustomerId)
-              .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.orders)
+                .HasForeignKey(o => o.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.products)
                 .WithMany(p => p.orders)
                 .UsingEntity(j => j.ToTable("OrderProduct"));
 
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Enquiry)  // Add this line to configure the Enquiry relationship
+                .WithMany()
+                .HasForeignKey(o => o.EnquiryId)
+                .OnDelete(DeleteBehavior.NoAction);  // Specify ON DELETE NO ACTION
+
             modelBuilder.Entity<Product>()
                 .HasKey(p => p.ProductId);
+        
 
-            modelBuilder.Entity<Product>().HasData(
+        modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
                     ProductId = 1,
@@ -104,54 +111,54 @@ namespace Grupp3Hattmakaren.Models
             //    .HasOne(c => c.cart)
             //    .WithOne(sc => sc.customer);
 
-            modelBuilder.Entity<Order>().HasData(
-               new Order
-               {
-                   OrderId = 1,
-                   price = 150.00,
-                   CustomerId = "1",
-                   isPayed = true,
-                   AddressId = 1, 
-                   ProductId = 1 
-               },
-                new Order
-                {
-                    OrderId = 2,
-                    price = 130.00,
-                    CustomerId = "2",
-                    isPayed = true,
-                    AddressId = 1,
-                    ProductId = 1
-                },
-                 new Order
-                 {
-                     OrderId = 3,
-                     price = 330.00,
-                     CustomerId = "3",
-                     isPayed = true,
-                     AddressId = 2,
-                     ProductId = 1
-                 }
-            );
+            //modelBuilder.Entity<Order>().HasData(
+            //   new Order
+            //   {
+            //       OrderId = 1,
+            //       price = 150.00,
+            //       CustomerId = "1",
+            //       isPayed = true,
+            //       AddressId = 1, 
+            //       ProductId = 1 
+            //   },
+            //    new Order
+            //    {
+            //        OrderId = 2,
+            //        price = 130.00,
+            //        CustomerId = "2",
+            //        isPayed = true,
+            //        AddressId = 1,
+            //        ProductId = 1
+            //    },
+            //     new Order
+            //     {
+            //         OrderId = 3,
+            //         price = 330.00,
+            //         CustomerId = "3",
+            //         isPayed = true,
+            //         AddressId = 2,
+            //         ProductId = 1
+            //     }
+            //);
 
-            modelBuilder.Entity<Address>().HasData(
-                new Address
-                {
-                    AddressId = 1,
-                    CustomerId = "1", // Länka detta till en befintlig Customer                   
-                    streetName = "123 Main Street",
-                    zipCode = 12345,
-                    countryName = "Countryland"
-                },
-                  new Address
-                  {
-                      AddressId = 2,
-                      CustomerId = "2", // Länka detta till en befintlig Customer                   
-                      streetName = "Potatisvägen",
-                      zipCode = 70284,
-                      countryName = "Sweden"
-                  }
-            );
+            //modelBuilder.Entity<Address>().HasData(
+            //    new Address
+            //    {
+            //        AddressId = 1,
+            //        CustomerId = "1", // Länka detta till en befintlig Customer                   
+            //        streetName = "123 Main Street",
+            //        zipCode = 12345,
+            //        countryName = "Countryland"
+            //    },
+            //      new Address
+            //      {
+            //          AddressId = 2,
+            //          CustomerId = "2", // Länka detta till en befintlig Customer                   
+            //          streetName = "Potatisvägen",
+            //          zipCode = 70284,
+            //          countryName = "Sweden"
+            //      }
+            //);
 
             modelBuilder.Entity<Customer>().HasData(
                 new Customer
@@ -183,26 +190,26 @@ namespace Grupp3Hattmakaren.Models
                 }
             );
 
-            modelBuilder.Entity<ShippingBill>().HasData(
-    new ShippingBill
-    {
-        ShippingBillId = 1,
-        productCode = "SHB001",
-        OrderId = 1
-    },
-    new ShippingBill
-    {
-        ShippingBillId = 2,
-        productCode = "SHB002",
-        OrderId = 2
-    },
-    new ShippingBill
-    {
-        ShippingBillId = 3,
-        productCode = "SHB003",
-        OrderId = 3
-    }
-);
+//            modelBuilder.Entity<ShippingBill>().HasData(
+//    new ShippingBill
+//    {
+//        ShippingBillId = 1,
+//        productCode = "SHB001",
+//        OrderId = 1
+//    },
+//    new ShippingBill
+//    {
+//        ShippingBillId = 2,
+//        productCode = "SHB002",
+//        OrderId = 2
+//    },
+//    new ShippingBill
+//    {
+//        ShippingBillId = 3,
+//        productCode = "SHB003",
+//        OrderId = 3
+//    }
+//);
             modelBuilder.Entity<Material>().HasData(
               
                 // Stråhattar
