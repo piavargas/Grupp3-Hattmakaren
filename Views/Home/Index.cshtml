@@ -17,14 +17,56 @@
             <div class="admin-panel">
                 <a href="Product/AddProduct" class="btn btn-primary">Add a new product</a>
             </div>
-        }
-        @if (User.IsInRole("Customer"))
-        {
-            <tr>
-                <a href="Customer/CustomerOrderForm">Place special hat order</a>
-            </tr>
-        }
-    </div>
+
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    @foreach (var prod in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="product-card">
+                                <img src="@prod.ImagePath" alt="Product Image" class="product-image">
+                                <div class="product-details">
+                                    <h2 class="product-name">@prod.productName</h2>
+                                    <p class="product-description">@prod.description</p>
+                                    <p class="product-price">@prod.price SEK</p>
+                                </div>
+                                <div class="text-center">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <form asp-controller="Product" asp-action="Delete" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@prod.ProductId" />
+                                            <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                                        </form>
+                                        <a href="Product/EditProduct/@prod.ProductId" class="btn btn-primary">Edit</a>
+                                    }
+                                    @if (User.IsInRole("Customer"))
+                                    {
+                                        @using (Html.BeginForm("AddToCart", "Product", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="productId" id="productId" value="@prod.ProductId" />
+                                            <input type="submit" value="Buy" class="btn btn-success" />
+                                        }
+                                    }
+                                    @if (!User.Identity.IsAuthenticated || (!User.IsInRole("Admin") && !User.IsInRole("Customer")))
+                                    {
+                                        <p>Hi! To buy this product, you need to be a registered customer. Please create an account!</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
 
 
     <div class="row">
