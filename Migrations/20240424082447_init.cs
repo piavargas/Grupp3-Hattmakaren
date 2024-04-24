@@ -451,9 +451,9 @@ namespace Grupp3Hattmakaren.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "firstName", "headSize", "lastName" },
                 values: new object[,]
                 {
-                    { "1", 0, "0dc3031b-191f-4177-99bf-92101f8bd862", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "02b50fa7-7492-4f84-b6b6-cdf85af8f4ef", false, "jonasmoll", "Jonas", "28cm", "Moll" },
-                    { "2", 0, "e0959edc-921b-473f-92e1-8768813751d3", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "42f4f7aa-917a-4aa8-9b06-8d8536d9c0de", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
-                    { "3", 0, "ef891183-185f-401c-bf8c-3b946990f25a", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "4f10b067-3fc6-412d-ac43-2feaee910bc5", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
+                    { "1", 0, "925639a8-82b7-4932-914c-099f73e01481", "Customer", "jonasmoll@outlook.com", false, false, null, null, null, null, null, false, "ad1f1008-1c83-4c3b-b26d-82e0cd1fa546", false, "jonasmoll", "Jonas", "28cm", "Moll" },
+                    { "2", 0, "97246906-d4e1-4fe8-aa8f-d05be8f192a4", "Customer", "tanjahavstorm@outlook.com", false, false, null, null, null, null, null, false, "d6e7dd6c-f2da-42b8-a86a-b7466ff9426d", false, "tanjahavstorm", "Tanja", "79cm", "Havstorm" },
+                    { "3", 0, "3afc6569-5a0d-4157-a894-43409620e942", "Customer", "icamaxi@outlook.com", false, false, null, null, null, null, null, false, "c738eb7c-67c7-4176-ab03-22683cc21df8", false, "maxmaxsson", "Max", "21cm", "Maxsson" }
                 });
 
             migrationBuilder.InsertData(
