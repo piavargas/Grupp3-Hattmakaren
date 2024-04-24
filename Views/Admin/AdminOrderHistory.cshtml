@@ -59,12 +59,12 @@
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Orders in progress</span>
+                    <span class="text">Order History</span>
                 </div>
                 <div class="activity-data">
                     @foreach (var order in ViewBag.oldOrderList)
                     {
-                        if (!order.isPayed)
+                        if (order.isPayed)
                         {
                             <div class="data">
                                 <div class="data-item">

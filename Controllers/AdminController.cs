@@ -101,7 +101,7 @@ namespace Grupp3Hattmakaren.Controllers
             return RedirectToAction("AdminOrders");
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult AdminOrderHistory()
         {
