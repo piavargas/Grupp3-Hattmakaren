@@ -24,7 +24,7 @@ namespace Grupp3Hattmakaren.Models
         public string? description { get; set; } // Enquiry class
 
         //public string referenceImageFile { get; set; } // Enquiry class
-        public bool? consentHat { get; set; } // Enquiry class
+        public bool consentHat { get; set; } // Enquiry class
         public string firstName { get; set; }  // Customer class
         public string lastName { get; set; } // Customer class
 

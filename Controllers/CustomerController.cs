@@ -103,7 +103,9 @@ namespace Grupp3Hattmakaren.Controllers
             var newEnquiry = new Enquiry
             {
                 CustomerId = _userManager.GetUserId(User),
-                isInProgress = enquiryViewModel.isInProgress
+                isInProgress = enquiryViewModel.isInProgress,
+                getInStore = true
+
 
             };
             _context.Enquiries.Add(newEnquiry);
@@ -178,20 +180,39 @@ namespace Grupp3Hattmakaren.Controllers
         [Authorize(Roles = "Customer")]
         public IActionResult CustomerMyOrders()
         {
-            var userId = _userManager.GetUserId(User);
-
-            var orders = _context.Orders
-                .Where(o => o.CustomerId == userId)
-                .ToList();
-
-            return View(orders);
+            {
+                var userId = _userManager.GetUserId(User);
+                List<Enquiry> enquirys = new List<Enquiry>();
+                foreach (var enquiry in _context.Enquiries.ToList())
+                {
+                    if (enquiry.CustomerId == userId)
+                    {
+                        enquirys.Add(enquiry);
+                    }
+                }
+                ViewBag.enquiryList = _context.Enquiries.ToList();
+                return View();
+            }
         }
+
 
         [Authorize(Roles = "Customer")]
             public IActionResult CustomerOrderHistory()
             {
+                var userId = _userManager.GetUserId(User);
+                 List<Order> orders = new List<Order>();
+                foreach (var order in _context.Orders.ToList())
+            {
+                if (order.CustomerId == userId)
+                {
+                    orders.Add(order);
+                }
+            }
+                ViewBag.orderList = _context.Orders.ToList();
                 return View();
             }
+
+
         [HttpPost]
         public IActionResult RemoveProductFromCart(int productId)
         {

@@ -116,7 +116,7 @@ namespace Grupp3Hattmakaren.Controllers
                 price = 5,
                 isPayed = false,
                 CustomerId = enquiry.CustomerId,
-                AddressId = address.AddressId,
+                //AddressId = address.AddressId,
                 //ProductId = product.ProductId, // Använd den nya produkten
                 EnquiryId = enquiryId
             };
