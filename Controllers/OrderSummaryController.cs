@@ -24,17 +24,19 @@ namespace Grupp3Hattmakaren.Controllers
         }
 
 
-        public IActionResult PrintOrderSummary(int enquiryId)
+        public IActionResult PrintOrderSummary(int orderId)
         {
             // Hämta enquiry och tillhörande data
-            var enquiry = _context.Enquiries
+            var order = _context.Orders
+            //var enquiry = _context.Enquiries
+            .Include(o => o.Enquiry)
             // Avkommentera om vi ska ha information om kunden i ordersummary:
             //.Include(e => e.Customer)
             //.Include(o => o.Address)
 
-            .FirstOrDefault(e => e.EnquiryId == enquiryId);
+            .FirstOrDefault(e => e.OrderId == orderId);
 
-            if (enquiry == null)
+            if (order == null)
             {
                 return NotFound();
             }
@@ -48,14 +50,14 @@ namespace Grupp3Hattmakaren.Controllers
 
                 // Lägg till orderinformation i PDF-filen
                 //doc.Add(new Paragraph($"Enquiry ID: {enquiry.EnquiryId}"));
-                doc.Add(new Paragraph($"Head Size: {enquiry.headSize}"));
+                doc.Add(new Paragraph($"Head Size: {order.Enquiry.headSize}"));
                 //doc.Add(new Paragraph($"Consent to Modify Existing Hat: {(enquiry.consentHat ? "Yes" : "No")}"));
-                doc.Add(new Paragraph($"Description: {enquiry.description}"));
-                doc.Add(new Paragraph($"Fabric Material: {enquiry.fabricMaterial}"));
-                doc.Add(new Paragraph($"Special Effect Materials: {enquiry.specialEffectMaterials}"));
-                doc.Add(new Paragraph($"Color: {enquiry.color}"));
-                doc.Add(new Paragraph($"Text on Hat: {enquiry.textOnHat}"));
-                doc.Add(new Paragraph($"Font: {enquiry.font}"));
+                doc.Add(new Paragraph($"Description: {order.Enquiry.description}"));
+                doc.Add(new Paragraph($"Fabric Material: {order.Enquiry.fabricMaterial}"));
+                doc.Add(new Paragraph($"Special Effect Materials: {order.Enquiry.specialEffectMaterials}"));
+                doc.Add(new Paragraph($"Color: {order.Enquiry.color}"));
+                doc.Add(new Paragraph($"Text on Hat: {order.Enquiry.textOnHat}"));
+                doc.Add(new Paragraph($"Font: {order.Enquiry.font}"));
 
                 doc.Close();
 
