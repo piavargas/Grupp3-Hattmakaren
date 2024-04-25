@@ -75,9 +75,11 @@
                                         <input type="hidden" name="orderId" value="@order.OrderId" />
                                         @if (!order.isPayed)
                                         {
-                                            <button type="submit" name="status" value="toggle">
+@*                                             <button type="submit" name="status" value="toggle">
                                                 <text>Mark as paid </text>
-                                            </button>
+                                            </button> *@
+                                            <button type="submit" name="status" value="toggle" class="custom-button">Mark as paids</button>
+
                                         }
                                         else
                                         {

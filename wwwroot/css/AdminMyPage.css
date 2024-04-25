@@ -279,10 +279,13 @@ nav.close ~ .dashboard .top {
 
 .dash-content .activity .activity-data {
     display: flex;
+    flex-direction: column; /* Lägg till denna egenskap för att stapla elementen vertikalt */
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    /*align-items: center;*/
+    width: 40%;
+    border-radius: 12px black;
 }
+
 
 .activity .activity-data {
     display: flex;
@@ -330,6 +333,54 @@ nav.close ~ .dashboard .top {
     background-color: #4CAF50;
 }
 
-.decline-button {
+.decline-button { 
     background-color: #f44336;
+}
+.custom-button {
+    background-color: #4CAF50; /* Grön färg */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.custom-button {
+    background-color: dodgerblue; /* Grön färg */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-weight: bolder
+}
+.toggle-btn {
+    background-color: saddlebrown; /* Grön färg */
+    border: none;
+    color: beige;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-weight: bolder
+
 }
