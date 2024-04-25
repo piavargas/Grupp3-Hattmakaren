@@ -25,7 +25,6 @@ namespace Grupp3Hattmakaren.Controllers
             Message message = new Message();
             users = _context.Users.ToList();
             ViewBag.Users = users;
-
             return View();
         }
 
@@ -84,24 +83,34 @@ namespace Grupp3Hattmakaren.Controllers
             return _logger;
         }
 
+
         public IActionResult MakePayment()
         {
             TempData["PaymentMessage"] = "Thank you for your payment. We will process your order as soon as possible.";
+            TempData["Message"] = "The customer has accepted the offer, please handle the order as soon as possible.";
             return RedirectToAction("CustomerMessages", "Message");
         }
 
-        [HttpPost]
-        public IActionResult DeclineOffer(int messageId)
+        public IActionResult DeclineOffer()
         {
-            var messageToRemove = _context.Messages.FirstOrDefault(m => m.MessageId == messageId);
-            if (messageToRemove != null)
-            {
-                _context.Messages.Remove(messageToRemove);
-                _context.SaveChanges();
-            }
-
-            return RedirectToAction("CustomerMessages");
+            TempData["OfferDeclined"] = "Thank you for your time! Not satisfied? Make a new enquiry!";
+            TempData["DeclineMessage"] = "The customer has declined the offer. ";
+            return RedirectToAction("CustomerMessages", "Message");
         }
+
+
+        //[HttpPost]
+        //public IActionResult DeclineOffer(int messageId)
+        //{
+        //    var messageToRemove = _context.Messages.FirstOrDefault(m => m.MessageId == messageId);
+        //    if (messageToRemove != null)
+        //    {
+        //        _context.Messages.Remove(messageToRemove);
+        //        _context.SaveChanges();
+        //    }
+
+        //    return RedirectToAction("CustomerMessages");
+        //}
 
 
     }

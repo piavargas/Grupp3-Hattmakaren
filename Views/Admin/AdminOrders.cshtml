@@ -9,7 +9,7 @@
     <title>Admin Dashboard Panel</title>
 </head>
 <body>
-    <nav>
+      <nav>
         <div class="menu-items">
             <ul class="nav-links">
                 <li>
@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="Material" asp-action="Material">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Order materials</span>
                     </a>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Print waybill</span>
                     </a>
@@ -46,6 +46,12 @@
                     <a href="AdminOrderHistory">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Order history</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Send offer</span>
                     </a>
                 </li>
             </ul>

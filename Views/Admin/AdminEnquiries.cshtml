@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="Material" asp-action="Material">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Order materials</span>
                     </a>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
                         <i class="uil uil-chart"></i>
                         <span class="link-name">Print waybill</span>
                     </a>
@@ -48,10 +48,36 @@
                         <span class="link-name">Order history</span>
                     </a>
                 </li>
+                <li>
+                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
+                        <i class="uil uil-chart"></i>
+                        <span class="link-name">Send offer</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
+    @{
+        var message = TempData["Message"] as string;
+    }
 
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert alert-info" role="alert">
+            @message
+        </div>
+    }
+
+    @{
+        var himessage = TempData["DeclineMessage"] as string;
+    }
+
+    @if (!string.IsNullOrEmpty(himessage))
+    {
+        <div class="alert alert-info" role="alert">
+            @himessage
+        </div>
+    }
     <section class="dashboard">
         <div class="dash-content">
             <div class="activity">

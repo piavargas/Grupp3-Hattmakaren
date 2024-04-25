@@ -48,6 +48,12 @@
                         @TempData["PaymentMessage"]
                     </div>
                 }
+                @if (TempData["OfferDeclined"] != null)
+                {
+                    <div class="alert alert-success" role="alert">
+                        @TempData["OfferDeclined"]
+                    </div>
+                }
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
                     <span class="text">Incoming Offers</span>
@@ -153,6 +159,7 @@
                                 </span>
                             </a>
                         </p>
+
                         <div class="collapse p-3 pt-0" id="collapseExample">
                             <div class="row">
                                 <div class="col-8">
@@ -258,6 +265,66 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-body border p-0">
+                        <p>
+                            <a class="btn btn-primary p-2 w-100 h-100 d-flex align-items-center justify-content-between"
+                               data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true"
+                               aria-controls="collapseExample">
+                                <span class="fw-bold">Pay in store</span>
+                                <span class="">
+                                    <span class="fab fa-cc-amex"></span>
+                                    <span class="fab fa-cc-mastercard"></span>
+                                    <span class="fab fa-cc-discover"></span>
+                                </span>
+                            </a>
+                        </p>
+                        <div class="collapse show p-3 pt-0" id="collapseExample">
+                            <div class="row">
+                                <div class="col-lg-5 mb-lg-0 mb-3">
+                                    <p class="h4 mb-0">Contact info</p>
+                                    <p class="mb-0">
+                                        <span class="fw-bold">Dear customer,</span><span>
+                                            please enter your contact info for us to contact you when your
+                                            order is ready for pickup. If you have any questions, feel free to 
+                                            contact our customer service at +4619948562.
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-7">
+                                    <form action="" class="form">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Full name</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Zip code</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="form__div">
+                                                    <input type="password" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">City/Town</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form__div">
+                                                    <input type="text" class="form-control" placeholder=" ">
+                                                    <label for="" class="form__label">Country</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <form asp-controller="Message" asp-action="MakePayment" method="post">
@@ -281,7 +348,7 @@
         }
 
         function confirmDelete(messageId) {
-            if (confirm("Are you sure you want to decline the offer? This will remove the message from your inbox.")) {
+            if (confirm("Are you sure you want to decline the offer? You can not handle the offer again")) {
                 document.getElementById('deleteMessageForm_' + messageId).submit();
             }
         }
