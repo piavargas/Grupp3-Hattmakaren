@@ -2,6 +2,7 @@
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #ddd;
+    margin-left: 240px;
 }
 
 th, td {
@@ -12,6 +13,11 @@ th, td {
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+.btn-material {
+    margin-left: 245px;
+    color: black;
 }
 
 th {
@@ -27,18 +33,31 @@ button {
     cursor: pointer;
     border-radius: 4px;
 }
+
     button:hover {
         background-color: #45a049;
     }
+
     button.delete {
         background-color: #f44336;
     }
 
-    
-    button.delete:hover {
-        background-color: #d32f2f; 
-    }
-    .list-wrapper {
-    max-height: 350px; /* Justera höjden efter behov */
-    overflow-y: auto; /* Lägg till ett scrollhjul när innehållet är för långt */
+
+        button.delete:hover {
+            background-color: #d32f2f;
+        }
+
+.list-wrapper {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    nav {
+        display: none; / Gömmer navigeringsmenyn när maxbredden är 600px (för telefoner) 
+}
+
+table {
+    margin-left: 0px;
+}
 }

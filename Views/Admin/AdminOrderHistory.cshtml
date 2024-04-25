@@ -11,52 +11,46 @@
 <html>
 <body>
     <nav>
-        <div class="menu-items">
-            <ul class="nav-links">
-                <li>
-                    <a href="AdminEnquiries">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="link-name">Enquiries</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="AdminOrders">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="link-name">Orders</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Material" asp-action="Material">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Order materials</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Order summation</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Print waybill</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="AdminOrderHistory">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Order history</span>
-                    </a>
-                </li>
-                <li>
-                    <a asp-area="" asp-controller="Message" asp-action="SendOffer">
-                        <i class="uil uil-chart"></i>
-                        <span class="link-name">Send offer</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="menu-items">
+        <ul class="nav-links">
+            <li>
+                <a asp-area="" asp-controller="Admin" asp-action="AdminEnquiries">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Enquiries</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Admin" asp-action="AdminOrders">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">Orders</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Material" asp-action="Material">
+                    <i class="uil uil-chart"></i>
+                    <span class="link-name">Order materials</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="ShippingBill" asp-action="OrderList">
+                    <i class="uil uil-chart"></i>
+                    <span class="link-name">Print waybill</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Admin" asp-action="AdminOrderHistory">
+                    <i class="uil uil-chart"></i>
+                    <span class="link-name">Order history</span>
+                </a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Message" asp-action="SendOffer">
+                    <i class="uil uil-chart"></i>
+                    <span class="link-name">Send offer</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     </nav>
 
     <section class="dashboard">
