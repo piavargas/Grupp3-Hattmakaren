@@ -26,9 +26,6 @@
                     <!-- Print Shipping bill -->
                     <a asp-action="PrintShippingBill" asp-controller="ShippingBill" asp-route-id="@order.OrderId" class="btn btn-primary">Print Waybill</a>
                 </td>
-                <td>
-                    <!-- Print Order Summary -->
-                    <a asp-action="PrintOrderSummary" asp-controller="OrderSummary" asp-route-id="@order.OrderId" class="btn btn-primary">Print Order Summary</a>
-                </td>
+             
             </tr>
         } </tbody> </table>

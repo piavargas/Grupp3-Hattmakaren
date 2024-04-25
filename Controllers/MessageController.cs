@@ -87,14 +87,14 @@ namespace Grupp3Hattmakaren.Controllers
         public IActionResult MakePayment()
         {
             TempData["PaymentMessage"] = "Thank you for your payment. We will process your order as soon as possible.";
-            TempData["Message"] = "The customer has accepted the offer, please handle the order as soon as possible.";
+            TempData["Message"] = "A customer has accepted the offer, please handle the order as soon as possible.";
             return RedirectToAction("CustomerMessages", "Message");
         }
 
         public IActionResult DeclineOffer()
         {
             TempData["OfferDeclined"] = "Thank you for your time! Not satisfied? Make a new enquiry!";
-            TempData["DeclineMessage"] = "The customer has declined the offer. ";
+            TempData["DeclineMessage"] = "A customer has declined the offer. ";
             return RedirectToAction("CustomerMessages", "Message");
         }
 

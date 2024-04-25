@@ -2,7 +2,6 @@
 @inject UserManager<User> UserManager
 @inject HatContext hatContext
 @model EnquiryViewModel
-<form asp-action="DefaultCustomerOrderForm" method="post">
 
 <!DOCTYPE html>
 <html lang="sv">
@@ -76,7 +75,7 @@
     </style>
 </head>
 <body>
-
+    <form asp-action="DefaultCustomerOrderForm" method="post">
     <div class="container">
         <h1>Order summary:</h1>
         <!--Skapar sammanställning för en kund-->
@@ -97,11 +96,11 @@
                                 <p>Price: @cartItem.product.price kr</p>
                                 <p>In cart: @cartItem.quantity</p>
 
-                                @using (Html.BeginForm("RemoveProductFromCart", "Customer", FormMethod.Post))
-                                {
-                                    <input type="hidden" name="productId" id="productId" value="@cartItem.product.ProductId" />
-                                    <input type="submit" value="Remove from cart" class="delete-button" />
-                                }
+                                    @using (Html.BeginForm("RemoveProductFromCart", "Customer", FormMethod.Post))
+                                    {
+                                        <input type="hidden" name="productId" id="productId" value="@cartItem.product.ProductId" />
+                                        <input type="submit" value="Remove from cart" class="delete-button" />
+                                    }
 
                             </li>
                             
@@ -121,7 +120,7 @@
                 <input type="submit" value="Send Request" class="button" />
             </div>
     </div>
-
+</form>
 </body>
 </html>
-</form>
+
