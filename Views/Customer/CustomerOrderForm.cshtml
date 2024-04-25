@@ -124,23 +124,22 @@
                                         
                                     </div>
                                 </div>
-
-                                <div class="col-sm-6 mt-2 ps-sm-0">
+                                @inject HatContext _context;
+                                 <div class="col-sm-6 mt-2 ps-sm-0">
                                     <div data-mdb-input-init class="form-outline">
                                         <label asp-for="fabricMaterial" class="form-label">Hat fabric material</label>
-                                        <select asp-for="fabricMaterial" id="form200" class="form-control order-form-input">
+                                        <select asp-for="fabricMaterial" id="form200" asp-validation-for="fabricMaterial" class="form-control order-form-input">
                                             <option value="">Choose hat fabric...</option>
-                                            <option value="Bomull">Bomull</option>
-                                            <option value="Linne">Linne</option>
-                                            <option value="Ull">Ull</option>
-                                            <option value="Silke">Silke</option>
-                                            <option value="Satin">Satin</option>
-                                            <option value="Tweed">Tweed</option>
-                                            <option value="Polyester">Polyester</option>
-                                            
+                                            @foreach (var material in _context.Materials.ToList())
+                                            {
+                                                <option value="@material.name">@material.name</option>
+
+                                            }
+                                           
+
                                         </select>
+                                        <span asp-validation-for="fabricMaterial" class="text-danger"></span>
                                     </div>
-                                    <span asp-validation-for="fabricMaterial" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-sm-6 mt-2 ps-sm-0">
@@ -216,9 +215,10 @@
                                         }
                                         else
                                         {
-                                            <input class="form-check-input" asp-for="consentHat" type="checkbox" id="flexCheckDefault" />
-                                        } *@
-                                        <label asp-for="consentHat" class="form-check-label">Building upon a finished product?</label>
+                                            <input class="form-check-input" asp-for="consentHat" value="true" type="checkbox" id="flexCheckDefault" />
+                                        }
+                                        <label  class="form-check-label">Building upon a finished product?</label>
+
                                     </div>
 
                         
@@ -227,7 +227,7 @@
                             <div class="col-12">
                                 <div class="form-check">
                                     <input class="form-check-input" asp-for="getInStore" type="checkbox" id="getInStoreCheckbox" />
-                                    <label asp-for="consentHat" class="form-check-label">Get hat in store?</label>
+                                    <label  class="form-check-label">Get hat in store?</label>
                                 </div>
                             </div>
 
