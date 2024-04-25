@@ -80,9 +80,8 @@
                                         <input type="hidden" name="orderId" value="@order.OrderId" />
                                         @if (!order.isPayed)
                                         {
-                                            <button type="submit" name="status" value="toggle">
-                                                <text>Mark as paid </text>
-                                            </button>
+                                            <button type="submit" name="status" value="toggle" class="custom-button">Mark as paid</button>
+
                                         }
                                         else
                                         {
@@ -93,7 +92,7 @@
                                 <div class="data-item">
                                     <!-- Skriv ut ordersammanfattning - Knapp -->
                                     @* <a asp-action="PrintOrderSummary" asp-controller="OrderSummary" asp-route-id="@order.OrderId" class="btn btn-primary">Print Order Summary</a> *@
-                                    <a asp-action="PrintOrderSummary" asp-controller="OrderSummary" asp-route-orderId="@order.OrderId" class="btn btn-primary">Print Order Summary</a>
+                                    <a asp-action="PrintOrderSummary" asp-controller="OrderSummary" asp-route-orderId="@order.OrderId" class="toggle-btn">Print Order Summary</a>
 
                                 </div>
                             </div>
